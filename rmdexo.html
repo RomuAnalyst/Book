@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 5 R Markdown: un exercice pour créer son premier document | Résumé des cours et TP - DU Dataviz</title>
+  <meta name="description" content="Support à destination des R-newbies" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 5 R Markdown: un exercice pour créer son premier document | Résumé des cours et TP - DU Dataviz" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Support à destination des R-newbies" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 5 R Markdown: un exercice pour créer son premier document | Résumé des cours et TP - DU Dataviz" />
+  
+  <meta name="twitter:description" content="Support à destination des R-newbies" />
+  
+
+<meta name="author" content="Romuald ZAMI" />
+<meta name="author" content="et contributeurs" />
+
+
+<meta name="date" content="2022-06-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="rmd.html"/>
+<link rel="next" href="fonctions.html"/>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+<link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+<link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+<script>
+function unrolltab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Romuald ZAMI - DU Dataviz</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Préface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributeurs"><i class="fa fa-check"></i>Contributeurs <i class="far fa-user-secret"></i></a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#utilisation-des-icônes"><i class="fa fa-check"></i>Utilisation des icônes</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Objectif de la formation</a></li>
+<li class="chapter" data-level="2" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html"><i class="fa fa-check"></i><b>2</b> Présentation de R et de son environnement</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#quest-ce-que"><i class="fa fa-check"></i><b>2.1</b> Qu’est-ce que <i class="fab fa-r-project"></i> ?</a></li>
+<li class="chapter" data-level="2.2" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#prise-en-main-de-r-studio"><i class="fa fa-check"></i><b>2.2</b> Prise en main de <strong>R-studio</strong></a></li>
+<li class="chapter" data-level="2.3" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#laide-en-ligne"><i class="fa fa-check"></i><b>2.3</b> L’aide en ligne</a></li>
+<li class="chapter" data-level="2.4" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#packages"><i class="fa fa-check"></i><b>2.4</b> Packages</a></li>
+<li class="chapter" data-level="2.5" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#objectifs-du-document"><i class="fa fa-check"></i><b>2.5</b> Objectifs du document</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>3</b> Utiliser <code>GIT</code> avec <i class="fab fa-r-project"></i></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="git.html"><a href="git.html#pourquoi-utiliser-la-gestion-de-version"><i class="fa fa-check"></i><b>3.1</b> Pourquoi utiliser la gestion de version ?</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="git.html"><a href="git.html#conserver-et-archiver-du-code"><i class="fa fa-check"></i><b>3.1.1</b> Conserver et archiver du code</a></li>
+<li class="chapter" data-level="3.1.2" data-path="git.html"><a href="git.html#travailler-efficacement-en-équipe"><i class="fa fa-check"></i><b>3.1.2</b> Travailler efficacement en équipe</a></li>
+<li class="chapter" data-level="3.1.3" data-path="git.html"><a href="git.html#améliorer-la-qualité-des-codes"><i class="fa fa-check"></i><b>3.1.3</b> Améliorer la qualité des codes</a></li>
+<li class="chapter" data-level="3.1.4" data-path="git.html"><a href="git.html#usage-quotidien-un-exemple-avec-le-modèle-ines"><i class="fa fa-check"></i><b>3.1.4</b> Usage quotidien : un exemple avec le modèle Ines</a></li>
+<li class="chapter" data-level="3.1.5" data-path="git.html"><a href="git.html#avec-ou-sans-gestion-de-versions"><i class="fa fa-check"></i><b>3.1.5</b> Avec ou sans gestion de versions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="git.html"><a href="git.html#configurer-un-projet-git-avec-rstudio-à-linsee"><i class="fa fa-check"></i><b>3.2</b> Configurer un projet <code>GIT</code> avec RStudio à l’Insee</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="git.html"><a href="git.html#la-première-fois"><i class="fa fa-check"></i><b>3.2.1</b> La première fois</a></li>
+<li class="chapter" data-level="3.2.2" data-path="git.html"><a href="git.html#au-lancement-de-chaque-projet-cloner-depuis-gitlab.insee.fr"><i class="fa fa-check"></i><b>3.2.2</b> Au lancement de chaque projet, cloner depuis <code>gitlab.insee.fr</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="git.html"><a href="git.html#des-bases-de-git"><i class="fa fa-check"></i><b>3.3</b> Des bases de GIT <i class="fas fa-code-branch"></i></a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="git.html"><a href="git.html#le-b.a-ba"><i class="fa fa-check"></i><b>3.3.1</b> Le B.A-BA</a></li>
+<li class="chapter" data-level="3.3.2" data-path="git.html"><a href="git.html#gitlocal"><i class="fa fa-check"></i><b>3.3.2</b> Exercice 1: Premiers pas avec <code>git</code> en local</a></li>
+<li class="chapter" data-level="3.3.3" data-path="git.html"><a href="git.html#les-branches-principes"><i class="fa fa-check"></i><b>3.3.3</b> Les branches : principes</a></li>
+<li class="chapter" data-level="3.3.4" data-path="git.html"><a href="git.html#branches-et-lien-avec-master"><i class="fa fa-check"></i><b>3.3.4</b> Branches et lien avec <code>master</code></a></li>
+<li class="chapter" data-level="3.3.5" data-path="git.html"><a href="git.html#quelques-compléments-de-git"><i class="fa fa-check"></i><b>3.3.5</b> Quelques compléments de GIT</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="git.html"><a href="git.html#gitlab"><i class="fa fa-check"></i><b>3.4</b> <code>GitLab</code> <i class="fab fa-gitlab"></i>, aperçu de la plateforme de partage de code</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="git.html"><a href="git.html#repository"><i class="fa fa-check"></i><b>3.4.1</b> <code>Repository</code></a></li>
+<li class="chapter" data-level="3.4.2" data-path="git.html"><a href="git.html#issues"><i class="fa fa-check"></i><b>3.4.2</b> <code>Issues</code></a></li>
+<li class="chapter" data-level="3.4.3" data-path="git.html"><a href="git.html#exercice-4-ouvrir-et-organiser-les-issues"><i class="fa fa-check"></i><b>3.4.3</b> Exercice 4 : Ouvrir et organiser les <em>issues</em></a></li>
+<li class="chapter" data-level="3.4.4" data-path="git.html"><a href="git.html#merge-requests-mr"><i class="fa fa-check"></i><b>3.4.4</b> Merge requests (MR)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="git.html"><a href="git.html#exercice-4-fusionner-les-travaux-avec-des-merge-requests"><i class="fa fa-check"></i><b>3.4.5</b> Exercice 4 : Fusionner les travaux avec des <code>Merge Requests</code></a></li>
+<li class="chapter" data-level="3.4.6" data-path="git.html"><a href="git.html#les-groupes"><i class="fa fa-check"></i><b>3.4.6</b> Les groupes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="git.html"><a href="git.html#orgagit"><i class="fa fa-check"></i><b>3.5</b> Organiser le travail collaboratif</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="git.html"><a href="git.html#créer-une-branche"><i class="fa fa-check"></i><b>3.5.1</b> Créer une branche</a></li>
+<li class="chapter" data-level="3.5.2" data-path="git.html"><a href="git.html#modifier-et-valider-ces-changements"><i class="fa fa-check"></i><b>3.5.2</b> Modifier et valider ces changements</a></li>
+<li class="chapter" data-level="3.5.3" data-path="git.html"><a href="git.html#ouvrir-une-demande-de-fusion"><i class="fa fa-check"></i><b>3.5.3</b> Ouvrir une demande de fusion</a></li>
+<li class="chapter" data-level="3.5.4" data-path="git.html"><a href="git.html#échanger-entre-collaborateurs-et-vérifier-le-code"><i class="fa fa-check"></i><b>3.5.4</b> Échanger entre collaborateurs et vérifier le code</a></li>
+<li class="chapter" data-level="3.5.5" data-path="git.html"><a href="git.html#fusionner-la-branche-avec-master"><i class="fa fa-check"></i><b>3.5.5</b> Fusionner la branche avec <code>master</code></a></li>
+<li class="chapter" data-level="3.5.6" data-path="git.html"><a href="git.html#exercice-5-résoudre-les-conflits-cest-facile."><i class="fa fa-check"></i><b>3.5.6</b> Exercice 5 : Résoudre les conflits, c’est facile.</a></li>
+<li class="chapter" data-level="3.5.7" data-path="git.html"><a href="git.html#exercice-6-contribuer-à-un-dépôt-sans-droits-sur-master"><i class="fa fa-check"></i><b>3.5.7</b> Exercice 6 : Contribuer à un dépôt sans droits sur <code>master</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="rmd.html"><a href="rmd.html"><i class="fa fa-check"></i><b>4</b> <code>R Markdown</code></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="rmd.html"><a href="rmd.html#présentation-générale-de-r-markdown"><i class="fa fa-check"></i><b>4.1</b> Présentation générale de <code>R Markdown</code></a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="rmd.html"><a href="rmd.html#de-markdown-à-r-markdown"><i class="fa fa-check"></i><b>4.1.1</b> De <code>Markdown</code> à <code>R Markdown</code></a></li>
+<li class="chapter" data-level="4.1.2" data-path="rmd.html"><a href="rmd.html#que-peut-produire-r-markdown"><i class="fa fa-check"></i><b>4.1.2</b> Que peut produire <code>R Markdown</code> ?</a></li>
+<li class="chapter" data-level="4.1.3" data-path="rmd.html"><a href="rmd.html#pourquoi-utiliser-r-markdown"><i class="fa fa-check"></i><b>4.1.3</b> Pourquoi utiliser <code>R Markdown</code>?</a></li>
+<li class="chapter" data-level="4.1.4" data-path="rmd.html"><a href="rmd.html#comment-fonctionne-r-markdown"><i class="fa fa-check"></i><b>4.1.4</b> Comment fonctionne <code>R Markdown</code> ?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="rmd.html"><a href="rmd.html#avant-de-commencer"><i class="fa fa-check"></i><b>4.2</b> Avant de commencer</a></li>
+<li class="chapter" data-level="4.3" data-path="rmd.html"><a href="rmd.html#comment-construire-un-document-r-markdown"><i class="fa fa-check"></i><b>4.3</b> Comment construire un document <code>R Markdown</code>?</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="rmd.html"><a href="rmd.html#anatomie-de-la-structure-dun-document-r-markdown"><i class="fa fa-check"></i><b>4.3.1</b> Anatomie de la structure d’un document <code>R Markdown</code></a></li>
+<li class="chapter" data-level="4.3.2" data-path="rmd.html"><a href="rmd.html#ecrire-des-blocs-de-texte-en-r-markdown"><i class="fa fa-check"></i><b>4.3.2</b> Ecrire des blocs de texte en <code>R Markdown</code></a></li>
+<li class="chapter" data-level="4.3.3" data-path="rmd.html"><a href="rmd.html#insérer-un-résultat-r-dans-du-texte"><i class="fa fa-check"></i><b>4.3.3</b> Insérer un résultat <code>R</code> dans du texte</a></li>
+<li class="chapter" data-level="4.3.4" data-path="rmd.html"><a href="rmd.html#ecrire-des-blocs-de-code"><i class="fa fa-check"></i><b>4.3.4</b> Ecrire des blocs de code</a></li>
+<li class="chapter" data-level="4.3.5" data-path="rmd.html"><a href="rmd.html#insérer-de-beaux-tableaux"><i class="fa fa-check"></i><b>4.3.5</b> Insérer de beaux tableaux</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="rmd.html"><a href="rmd.html#conclusion"><i class="fa fa-check"></i><b>4.4</b> Conclusion</a></li>
+<li class="chapter" data-level="4.5" data-path="rmd.html"><a href="rmd.html#pour-aller-plus-loin"><i class="fa fa-check"></i><b>4.5</b> Pour aller plus loin</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rmdexo.html"><a href="rmdexo.html"><i class="fa fa-check"></i><b>5</b> <code>R Markdown</code>: un exercice pour créer son premier document</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rmdexo.html"><a href="rmdexo.html#quelques-éléments-dexplication"><i class="fa fa-check"></i><b>5.1</b> Quelques éléments d’explication</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="rmdexo.html"><a href="rmdexo.html#objectif"><i class="fa fa-check"></i><b>5.1.1</b> Objectif</a></li>
+<li class="chapter" data-level="5.1.2" data-path="rmdexo.html"><a href="rmdexo.html#le-produit-attendu"><i class="fa fa-check"></i><b>5.1.2</b> Le produit attendu</a></li>
+<li class="chapter" data-level="5.1.3" data-path="rmdexo.html"><a href="rmdexo.html#besoins"><i class="fa fa-check"></i><b>5.1.3</b> Expression des besoins</a></li>
+<li class="chapter" data-level="5.1.4" data-path="rmdexo.html"><a href="rmdexo.html#données-mobilisées"><i class="fa fa-check"></i><b>5.1.4</b> Données mobilisées</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="rmdexo.html"><a href="rmdexo.html#organisation-de-léquipe-projet"><i class="fa fa-check"></i><b>5.2</b> Organisation de l’équipe projet</a>
+<ul>
+<li class="chapter" data-level="" data-path="rmdexo.html"><a href="rmdexo.html#comment-sorganiser"><i class="fa fa-check"></i>Comment s’organiser ?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="rmdexo.html"><a href="rmdexo.html#demande-de-modifications"><i class="fa fa-check"></i><b>5.3</b> Demande de modifications</a>
+<ul>
+<li class="chapter" data-level="" data-path="rmdexo.html"><a href="rmdexo.html#cas-dune-demande-damélioration"><i class="fa fa-check"></i>Cas d’une demande d’amélioration</a></li>
+<li class="chapter" data-level="" data-path="rmdexo.html"><a href="rmdexo.html#cas-dune-demande-dévolution"><i class="fa fa-check"></i>Cas d’une demande d’évolution</a></li>
+<li class="chapter" data-level="" data-path="rmdexo.html"><a href="rmdexo.html#cas-dune-demande-de-modification"><i class="fa fa-check"></i>Cas d’une demande de modification</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="fonctions.html"><a href="fonctions.html"><i class="fa fa-check"></i><b>6</b> Programmation fonctionnelle avec <code>R</code> et <code>Rstudio</code></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="fonctions.html"><a href="fonctions.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="fonctions.html"><a href="fonctions.html#rappels-sur-les-objets-en-r"><i class="fa fa-check"></i><b>6.2</b> Rappels sur les objets en <code>R</code></a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="fonctions.html"><a href="fonctions.html#distinguer-noms-et-valeurs"><i class="fa fa-check"></i><b>6.2.1</b> Distinguer noms et valeurs</a></li>
+<li class="chapter" data-level="6.2.2" data-path="fonctions.html"><a href="fonctions.html#copier-des-objets-en-r"><i class="fa fa-check"></i><b>6.2.2</b> Copier des objets en <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="fonctions.html"><a href="fonctions.html#rappels-sur-les-fonctions"><i class="fa fa-check"></i><b>6.3</b> Rappels sur les fonctions</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="fonctions.html"><a href="fonctions.html#portée-scoping-dune-fonction"><i class="fa fa-check"></i><b>6.3.1</b> Portée (<em>scoping</em>) d’une fonction</a></li>
+<li class="chapter" data-level="6.3.2" data-path="fonctions.html"><a href="fonctions.html#noms-masqués"><i class="fa fa-check"></i><b>6.3.2</b> Noms masqués</a></li>
+<li class="chapter" data-level="6.3.3" data-path="fonctions.html"><a href="fonctions.html#portée-et-évaluation-paresseuse"><i class="fa fa-check"></i><b>6.3.3</b> Portée et évaluation paresseuse</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="fonctions.html"><a href="fonctions.html#définir-des-fonctions-en-r"><i class="fa fa-check"></i><b>6.4</b> Définir des fonctions en <code>R</code></a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="fonctions.html"><a href="fonctions.html#un-exemple-simple-pour-commencer"><i class="fa fa-check"></i><b>6.4.1</b> Un exemple simple pour commencer</a></li>
+<li class="chapter" data-level="6.4.2" data-path="fonctions.html"><a href="fonctions.html#créer-des-fonctions-complexes"><i class="fa fa-check"></i><b>6.4.2</b> Créer des fonctions complexes</a></li>
+<li class="chapter" data-level="6.4.3" data-path="fonctions.html"><a href="fonctions.html#créer-une-fonction-vraiment-complexe"><i class="fa fa-check"></i><b>6.4.3</b> Créer une fonction vraiment complexe</a></li>
+<li class="chapter" data-level="6.4.4" data-path="fonctions.html"><a href="fonctions.html#avancé-méthodes-alternatives"><i class="fa fa-check"></i><b>6.4.4</b> [Avancé] Méthodes alternatives</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="fonctions.html"><a href="fonctions.html#utiliser-les-outils-de-débuggage-de-rstudio"><i class="fa fa-check"></i><b>6.5</b> Utiliser les outils de débuggage de <code>Rstudio</code></a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="fonctions.html"><a href="fonctions.html#toutes-les-erreurs-ne-se-valent-pas"><i class="fa fa-check"></i><b>6.5.1</b> Toutes les erreurs ne se valent pas!</a></li>
+<li class="chapter" data-level="6.5.2" data-path="fonctions.html"><a href="fonctions.html#show-traceback"><i class="fa fa-check"></i><b>6.5.2</b> <code>Show Traceback</code></a></li>
+<li class="chapter" data-level="6.5.3" data-path="fonctions.html"><a href="fonctions.html#rerun-with-debug"><i class="fa fa-check"></i><b>6.5.3</b> <code>Rerun with debug</code></a></li>
+<li class="chapter" data-level="6.5.4" data-path="fonctions.html"><a href="fonctions.html#breakpoint"><i class="fa fa-check"></i><b>6.5.4</b> <code>Breakpoint</code></a></li>
+<li class="chapter" data-level="6.5.5" data-path="fonctions.html"><a href="fonctions.html#la-famille-des-fonctions-try"><i class="fa fa-check"></i><b>6.5.5</b> La famille des fonctions <code>try</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="fonctions.html"><a href="fonctions.html#documenter-des-fonctions"><i class="fa fa-check"></i><b>6.6</b> Documenter des fonctions</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="fonctions.html"><a href="fonctions.html#documenter-les-fonctions-avec-roxygen2"><i class="fa fa-check"></i><b>6.6.1</b> Documenter les fonctions avec <code>roxygen2</code></a></li>
+<li class="chapter" data-level="6.6.2" data-path="fonctions.html"><a href="fonctions.html#le-format-roxygen"><i class="fa fa-check"></i><b>6.6.2</b> Le format <code>roxygen</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="fonctions.html"><a href="fonctions.html#comprendre-les-environnements"><i class="fa fa-check"></i><b>6.7</b> Comprendre les environnements</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="fonctions.html"><a href="fonctions.html#notions-sur-les-environnements"><i class="fa fa-check"></i><b>6.7.1</b> Notions sur les environnements</a></li>
+<li class="chapter" data-level="6.7.2" data-path="fonctions.html"><a href="fonctions.html#lenvironnement-des-packages-et-le-chemin-de-recherche-search-path"><i class="fa fa-check"></i><b>6.7.2</b> L’environnement des packages et le chemin de recherche (<em>search path</em>)</a></li>
+<li class="chapter" data-level="6.7.3" data-path="fonctions.html"><a href="fonctions.html#un-exemple-de-problème-denvironnement-avec-les-packages"><i class="fa fa-check"></i><b>6.7.3</b> Un exemple de problème d’environnement avec les <em>packages</em></a></li>
+<li class="chapter" data-level="6.7.4" data-path="fonctions.html"><a href="fonctions.html#comment-bien-utiliser-les-packages"><i class="fa fa-check"></i><b>6.7.4</b> Comment bien utiliser les <em>packages</em>?</a></li>
+<li class="chapter" data-level="6.7.5" data-path="fonctions.html"><a href="fonctions.html#les-namespaces"><i class="fa fa-check"></i><b>6.7.5</b> Les <em>Namespaces</em></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="package.html"><a href="package.html"><i class="fa fa-check"></i><b>7</b> Créer un <em>package</em> <code>R</code> par la pratique</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="package.html"><a href="package.html#introduction-1"><i class="fa fa-check"></i><b>7.0.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.0.2" data-path="package.html"><a href="package.html#mapping"><i class="fa fa-check"></i><b>7.0.2</b> Le <em>mapping</em> et l’utilisation d’<code>aes()</code></a></li>
+<li class="chapter" data-level="7.0.3" data-path="package.html"><a href="package.html#les-formes-géométriques"><i class="fa fa-check"></i><b>7.0.3</b> Les formes géométriques</a></li>
+<li class="chapter" data-level="7.0.4" data-path="package.html"><a href="package.html#combiner-plusieurs-formes-géométriques"><i class="fa fa-check"></i><b>7.0.4</b> Combiner plusieurs formes géométriques</a></li>
+<li class="chapter" data-level="7.0.5" data-path="package.html"><a href="package.html#créer-un-graphique-par-modalité-dune-variable"><i class="fa fa-check"></i><b>7.0.5</b> Créer un graphique par modalité d’une variable</a></li>
+<li class="chapter" data-level="7.1" data-path="package.html"><a href="package.html#comment-personnaliser-un-graphique"><i class="fa fa-check"></i><b>7.1</b> Comment personnaliser un graphique</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="package.html"><a href="package.html#les-options-des-graphiques"><i class="fa fa-check"></i><b>7.1.1</b> Les options des graphiques</a></li>
+<li class="chapter" data-level="7.1.2" data-path="package.html"><a href="package.html#utiliser-un-thème"><i class="fa fa-check"></i><b>7.1.2</b> Utiliser un thème</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="package.html"><a href="package.html#exporter-un-graphique"><i class="fa fa-check"></i><b>7.2</b> Exporter un graphique</a></li>
+<li class="chapter" data-level="7.3" data-path="package.html"><a href="package.html#ggplot2Ressources"><i class="fa fa-check"></i><b>7.3</b> Pour en savoir plus</a>
+<ul>
+<li class="chapter" data-level="" data-path="package.html"><a href="package.html#feuille-de-route-pour-créer-un-package"><i class="fa fa-check"></i>Feuille de route pour créer un <em>package</em></a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="package.html"><a href="package.html#initier-un-package"><i class="fa fa-check"></i><b>7.4</b> Initier un <em>package</em></a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="package.html"><a href="package.html#choisir-un-nom"><i class="fa fa-check"></i><b>7.4.1</b> Choisir un nom</a></li>
+<li class="chapter" data-level="7.4.2" data-path="package.html"><a href="package.html#créer-un-projet-rstudio-de-type-package"><i class="fa fa-check"></i><b>7.4.2</b> Créer un projet RStudio de type “package”</a></li>
+<li class="chapter" data-level="7.4.3" data-path="package.html"><a href="package.html#renseigner-les-méta-données-du-package-le-fichier-description"><i class="fa fa-check"></i><b>7.4.3</b> Renseigner les méta-données du <em>package</em> : le fichier <code>DESCRIPTION</code></a></li>
+<li class="chapter" data-level="" data-path="package.html"><a href="package.html#champ-license"><i class="fa fa-check"></i>Champ <code>License</code></a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="package.html"><a href="package.html#configurer-les-outils-de-développement"><i class="fa fa-check"></i><b>7.5</b> Configurer les outils de développement</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="package.html"><a href="package.html#créer-un-dépôt-vide-dans-gitlab"><i class="fa fa-check"></i><b>7.5.1</b> Créer un dépôt vide dans GitLab</a></li>
+<li class="chapter" data-level="7.5.2" data-path="package.html"><a href="package.html#utiliser-git-dans-le-projet-rstudio"><i class="fa fa-check"></i><b>7.5.2</b> Utiliser git dans le projet RStudio</a></li>
+<li class="chapter" data-level="7.5.3" data-path="package.html"><a href="package.html#créer-le-lien-entre-le-dépôt-gitlab-et-le-projet-rstudio"><i class="fa fa-check"></i><b>7.5.3</b> Créer le lien entre le dépôt GitLab et le projet RStudio</a></li>
+<li class="chapter" data-level="7.5.4" data-path="package.html"><a href="package.html#utiliser-testthat-pour-les-tests"><i class="fa fa-check"></i><b>7.5.4</b> Utiliser <code>testthat</code> pour les tests</a></li>
+<li class="chapter" data-level="7.5.5" data-path="package.html"><a href="package.html#utiliser-lintégration-continue-de-gitlab"><i class="fa fa-check"></i><b>7.5.5</b> Utiliser l’intégration continue de GitLab</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="package.html"><a href="package.html#développer-un-package"><i class="fa fa-check"></i><b>7.6</b> Développer un <em>package</em></a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="package.html"><a href="package.html#inclure-du-code-le-documenter-et-le-tester"><i class="fa fa-check"></i><b>7.6.1</b> Inclure du code, le documenter et le tester</a></li>
+<li class="chapter" data-level="7.6.2" data-path="package.html"><a href="package.html#déclarer-une-dépendance"><i class="fa fa-check"></i><b>7.6.2</b> Déclarer une dépendance</a></li>
+<li class="chapter" data-level="7.6.3" data-path="package.html"><a href="package.html#charger-lensemble-des-fonctions-de-son-package"><i class="fa fa-check"></i><b>7.6.3</b> Charger l’ensemble des fonctions de son <em>package</em></a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="package.html"><a href="package.html#installer-le-package"><i class="fa fa-check"></i><b>7.7</b> Installer le <em>package</em></a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="package.html"><a href="package.html#installer-sur-sa-machine"><i class="fa fa-check"></i><b>7.7.1</b> Installer sur sa machine</a></li>
+<li class="chapter" data-level="7.7.2" data-path="package.html"><a href="package.html#générer-le-fichier-compressé"><i class="fa fa-check"></i><b>7.7.2</b> Générer le fichier compressé</a></li>
+</ul></li>
+<li class="chapter" data-level="7.8" data-path="package.html"><a href="package.html#documenter-un-package"><i class="fa fa-check"></i><b>7.8</b> Documenter un <em>package</em></a>
+<ul>
+<li class="chapter" data-level="7.8.1" data-path="package.html"><a href="package.html#créer-un-fichier-readme-obligatoire"><i class="fa fa-check"></i><b>7.8.1</b> Créer un fichier <code>README</code> (obligatoire)</a></li>
+<li class="chapter" data-level="7.8.2" data-path="package.html"><a href="package.html#créer-une-vignette-recommandé"><i class="fa fa-check"></i><b>7.8.2</b> Créer une vignette (recommandé)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="package.html"><a href="package.html#créer-un-modèle-de-document-r-markdown"><i class="fa fa-check"></i><b>7.9</b> Créer un modèle de document R Markdown</a></li>
+<li class="chapter" data-level="7.10" data-path="package.html"><a href="package.html#bonnes-pratiques"><i class="fa fa-check"></i><b>7.10</b> Bonnes pratiques</a>
+<ul>
+<li class="chapter" data-level="7.10.1" data-path="package.html"><a href="package.html#créer-un-changelog"><i class="fa fa-check"></i><b>7.10.1</b> Créer un changelog</a></li>
+<li class="chapter" data-level="7.10.2" data-path="package.html"><a href="package.html#gérer-les-numéros-de-version"><i class="fa fa-check"></i><b>7.10.2</b> Gérer les numéros de version</a></li>
+</ul></li>
+<li class="chapter" data-level="7.11" data-path="package.html"><a href="package.html#conclusion---pour-aller-plus-loin"><i class="fa fa-check"></i><b>7.11</b> Conclusion - Pour aller plus loin</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="./">Collaboration IUT Paris-rives Seine</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Résumé des cours et TP - DU Dataviz</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="rmdexo" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapitre 5</span> <code>R Markdown</code>: un exercice pour créer son premier document<a href="rmdexo.html#rmdexo" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="quelques-éléments-dexplication" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Quelques éléments d’explication<a href="rmdexo.html#quelques-éléments-dexplication" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="objectif" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Objectif<a href="rmdexo.html#objectif" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>L’objectif est d’exploiter et analyser les données sur les naissances 2017.
+L’analyse sera centrée sur les 3 axes définis dans
+l’expression des besoins <a href="rmdexo.html#besoins">ici</a>.
+Le travail sera réalisé en mode collaboratif par des équipes de personnes
+(les mêmes que pour la <a href="git.html#git">partie Git</a>).</p>
+<ul>
+<li>Un premier temps sera consacré à la production d’une première version de document</li>
+<li>Un second temps sera consacré aux modifications (amélioration, évolution, modifications).</li>
+</ul>
+</div>
+<div id="le-produit-attendu" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Le produit attendu<a href="rmdexo.html#le-produit-attendu" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Un rapport au format <code>html</code> centralisant les résutats attendus. Ce rapport sera généré par un fichier <code>.Rmd</code></li>
+<li>Le rapport final ainsi que les fichiers constitutifs du projet seront contenus dans un projet <code>monprojet.Rproj</code>.</li>
+<li>Ce projet sera d’une part stocké sur <code>Gitlab</code>, d’autre part accédé via <code>R Studio</code> par chaque contributeur.</li>
+</ul>
+</div>
+<div id="besoins" class="section level3 hasAnchor" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> Expression des besoins<a href="rmdexo.html#besoins" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>L’étude sera réalisée sur une région au choix.</p>
+<p>Elle devra comporter les éléments suivants :</p>
+<ul>
+<li>Un rapide descriptif de la source ;</li>
+<li>Revenu médian des communes dans la région choisie et comparaison avec les autres régions de France hexagonale.
+Cette comparaison doit comporter un tableau et un graphique;</li>
+<li>Une analyse d’au moins une autre variable économique ou démographique lorsque cette information est disponible;</li>
+<li>Si vous avez le temps, une carte en utilisant un fonds de carte communal de 2016 disponible sur <a href="https://geoservices.ign.fr/documentation/diffusion/telechargement-donnees-libres.html#les-bases-de-donn%C3%A9es-au-format-vectoriel">le site de l’IGN</a> ou, en interne à l’Insee, <a href="https://creacartes.insee.fr/accueil">sur creacartes</a>.</li>
+</ul>
+<p>Les 3 derniers parties devront intégrer des illustrations de votre choix ou celles proposées.
+Le texte devra contenir au moins un résulat d’une instruction <code>R</code>.</p>
+</div>
+<div id="données-mobilisées" class="section level3 hasAnchor" number="5.1.4">
+<h3><span class="header-section-number">5.1.4</span> Données mobilisées<a href="rmdexo.html#données-mobilisées" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour cet exercice, on utilise les données de revenu au niveau communal issues
+de Filosofi 2016. Grâce à Pierre Lamarche, il existe deux packages <code>R</code> qui
+facilitent l’accès à ces données disponibles sur insee.fr: <code>doremifasol</code> et
+<code>doremifasolData</code>. Ils sont disponibles sur la page Github
+<a href="https://github.com/InseeFrLab">InseeFrLab</a>. En l’occurrence, nous allons
+utiliser <code>doremifasolData</code> qui ne nécessite pas, une fois installé, de connexion
+internet pour accéder aux données. Pour l’installer:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="rmdexo.html#cb26-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&#39;inseeFrLab/doremifasoldata&#39;</span>, <span class="at">ref =</span> <span class="st">&quot;main&quot;</span>)</span></code></pre></div>
+<div class="conseil">
+<p>Sur <code>AUS</code>, cette commande ne fonctionnera pas. Il faut aller chercher le
+package sur un dépôt nexus:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="rmdexo.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;doremifasolData&quot;</span>, <span class="at">repos =</span> <span class="st">&quot;https://nexus.insee.fr/repository/r-local&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="organisation-de-léquipe-projet" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Organisation de l’équipe projet<a href="rmdexo.html#organisation-de-léquipe-projet" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="comment-sorganiser" class="section level3 unnumbered hasAnchor">
+<h3>Comment s’organiser ?<a href="rmdexo.html#comment-sorganiser" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Voici des propositions pour l’organisation (cliquer sur chaque item pour
+dérouler):</p>
+<details>
+<summary>
+<strong>Se mettre d’accord sur la trame qui sera le squelette du rapport</strong>
+</summary>
+<ol style="list-style-type: decimal">
+<li>Champs et définitions : quelle région, quelle(s) variable(s), etc.</li>
+<li>Quelle information représenter ?
+<ul>
+<li>quelles statistiques ?</li>
+<li>quel tableau ?</li>
+<li>quelle visualisation ?</li>
+</ul></li>
+<li>Comment présenter l’information ?</li>
+</ol>
+</details>
+<details>
+<summary>
+<strong>Identifier les tâches</strong>
+</summary>
+<ul>
+<li>Créer le projet</li>
+<li>Initier le document Rmardown avec le squelette de la trame de travail</li>
+<li>récupérer et vérifier les données &amp;#8594 <em>coeur de l’instruction R dans un chunk ou dans un script R ?</em></li>
+<li>quels packages choisir ?</li>
+<li>préparer les données &amp;#8594 <em>même question </em></li>
+<li>construire les statistiques &amp;#8594 <em>même question </em></li>
+<li>peut-on modulariser ?</li>
+<li>Lors de cette étape penser :
+<ul>
+<li>reproductibilité.</li>
+<li>quelles instructions externaliser du fichier Rmd ?`</li>
+</ul></li>
+</ul>
+</details>
+<details>
+<summary>
+<strong>Se mettre d’accord sur l’organisation des fichiers et les branches à créer</strong>
+</summary>
+<ul>
+<li><p>Un exemple d’arborescence de projet</p>
+<p><img src="pics/04_markdown/exple_arborescence.png" /></p>
+<ul>
+<li>Créer une branche par partie</li>
+</ul></li>
+</ul>
+</details>
+<details>
+<summary>
+<strong>Affecter les tâches</strong>
+</summary>
+<ul>
+<li>Si nécessaire, prioriser les tâches</li>
+<li>Ouvrir des <em>issues</em> sur <code>Gitlab</code> et éventuellement utiliser les <em>Milestones</em></li>
+<li>Possibilité de le faire sur Trello si l’ensemble de l’équipe est d’accord</li>
+</ul>
+</details>
+<details>
+<summary>
+<strong>Intégrer les éléments dans le document squelette Rmd</strong>
+</summary>
+<ul>
+<li>quelles instructions R externaliser du fichier R Markdown</li>
+<li>commiter via Git depuis RStudio (n’oubliez pas les conseils de prudence du chapitre <a href="git.html#git">Git</a>)</li>
+<li>mettre à jour le dépôt via Git depuis RStudio et Gitlab</li>
+</ul>
+</details>
+<div class="conseil">
+<p>Ne pas oublier les bonnes pratiques évoquées précédemment et celles, plus génériques, évoquées dans la documentation <a href="https://www.book.utilitr.org/">utilitR</a>.</p>
+</div>
+<div class="exo">
+<p><strong>Exercice 3</strong></p>
+<p>Réaliser ce premier document qui contiendra à la fois résultats et commentaires associés.</p>
+<p>A vous de jouer !</p>
+<p><img src="pics/04_markdown/partonsalaventure.gif" /></p>
+</div>
+<!---
+Une petite correction à faire
+---->
+</div>
+</div>
+<div id="demande-de-modifications" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Demande de modifications<a href="rmdexo.html#demande-de-modifications" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>L’un des avantages de <code>R Mardown</code> est la mise à jour dynamique de
+document. Nous allons voir comment intégrer facilement :</p>
+<ul>
+<li>d’évolution</li>
+<li>amélioration</li>
+<li>modification</li>
+</ul>
+<div id="cas-dune-demande-damélioration" class="section level3 unnumbered hasAnchor">
+<h3>Cas d’une demande d’amélioration<a href="rmdexo.html#cas-dune-demande-damélioration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il est peu coûteux de changer des paramètres de mise en forme avec <code>R Markdown</code></p>
+<div class="exo">
+<ol style="list-style-type: decimal">
+<li>Imaginons qu’on vous demande finalement de numéroter les sections. Faire la modification</li>
+<li>On vous demande de revoir le thème <code>ggplot</code> pour utiliser le thème <code>theme_bw</code> sur tous les graphiques</li>
+</ol>
+</div>
+</div>
+<div id="cas-dune-demande-dévolution" class="section level3 unnumbered hasAnchor">
+<h3>Cas d’une demande d’évolution<a href="rmdexo.html#cas-dune-demande-dévolution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="exo">
+<p>Reproduire le même rapport avec les données 2015 : avez-vous fait un programme reproductible ?</p>
+</div>
+</div>
+<div id="cas-dune-demande-de-modification" class="section level3 unnumbered hasAnchor">
+<h3>Cas d’une demande de modification<a href="rmdexo.html#cas-dune-demande-de-modification" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="exo">
+<p>Ajouter une partie sur l’évolution entre 2015 et 2016 du revenu de chaque commune</p>
+</div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="rmd.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fonctions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

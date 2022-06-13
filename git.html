@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 3 Utiliser GIT avec  | Résumé des cours et TP - DU Dataviz</title>
+  <meta name="description" content="Support à destination des R-newbies" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 3 Utiliser GIT avec  | Résumé des cours et TP - DU Dataviz" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Support à destination des R-newbies" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 3 Utiliser GIT avec  | Résumé des cours et TP - DU Dataviz" />
+  
+  <meta name="twitter:description" content="Support à destination des R-newbies" />
+  
+
+<meta name="author" content="Romuald ZAMI" />
+<meta name="author" content="et contributeurs" />
+
+
+<meta name="date" content="2022-06-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="présentation-de-r-et-de-son-environnement.html"/>
+<link rel="next" href="rmd.html"/>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+<link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+<link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+<script>
+function unrolltab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Romuald ZAMI - DU Dataviz</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Préface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributeurs"><i class="fa fa-check"></i>Contributeurs <i class="far fa-user-secret"></i></a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#utilisation-des-icônes"><i class="fa fa-check"></i>Utilisation des icônes</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Objectif de la formation</a></li>
+<li class="chapter" data-level="2" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html"><i class="fa fa-check"></i><b>2</b> Présentation de R et de son environnement</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#quest-ce-que"><i class="fa fa-check"></i><b>2.1</b> Qu’est-ce que <i class="fab fa-r-project"></i> ?</a></li>
+<li class="chapter" data-level="2.2" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#prise-en-main-de-r-studio"><i class="fa fa-check"></i><b>2.2</b> Prise en main de <strong>R-studio</strong></a></li>
+<li class="chapter" data-level="2.3" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#laide-en-ligne"><i class="fa fa-check"></i><b>2.3</b> L’aide en ligne</a></li>
+<li class="chapter" data-level="2.4" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#packages"><i class="fa fa-check"></i><b>2.4</b> Packages</a></li>
+<li class="chapter" data-level="2.5" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#objectifs-du-document"><i class="fa fa-check"></i><b>2.5</b> Objectifs du document</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>3</b> Utiliser <code>GIT</code> avec <i class="fab fa-r-project"></i></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="git.html"><a href="git.html#pourquoi-utiliser-la-gestion-de-version"><i class="fa fa-check"></i><b>3.1</b> Pourquoi utiliser la gestion de version ?</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="git.html"><a href="git.html#conserver-et-archiver-du-code"><i class="fa fa-check"></i><b>3.1.1</b> Conserver et archiver du code</a></li>
+<li class="chapter" data-level="3.1.2" data-path="git.html"><a href="git.html#travailler-efficacement-en-équipe"><i class="fa fa-check"></i><b>3.1.2</b> Travailler efficacement en équipe</a></li>
+<li class="chapter" data-level="3.1.3" data-path="git.html"><a href="git.html#améliorer-la-qualité-des-codes"><i class="fa fa-check"></i><b>3.1.3</b> Améliorer la qualité des codes</a></li>
+<li class="chapter" data-level="3.1.4" data-path="git.html"><a href="git.html#usage-quotidien-un-exemple-avec-le-modèle-ines"><i class="fa fa-check"></i><b>3.1.4</b> Usage quotidien : un exemple avec le modèle Ines</a></li>
+<li class="chapter" data-level="3.1.5" data-path="git.html"><a href="git.html#avec-ou-sans-gestion-de-versions"><i class="fa fa-check"></i><b>3.1.5</b> Avec ou sans gestion de versions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="git.html"><a href="git.html#configurer-un-projet-git-avec-rstudio-à-linsee"><i class="fa fa-check"></i><b>3.2</b> Configurer un projet <code>GIT</code> avec RStudio à l’Insee</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="git.html"><a href="git.html#la-première-fois"><i class="fa fa-check"></i><b>3.2.1</b> La première fois</a></li>
+<li class="chapter" data-level="3.2.2" data-path="git.html"><a href="git.html#au-lancement-de-chaque-projet-cloner-depuis-gitlab.insee.fr"><i class="fa fa-check"></i><b>3.2.2</b> Au lancement de chaque projet, cloner depuis <code>gitlab.insee.fr</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="git.html"><a href="git.html#des-bases-de-git"><i class="fa fa-check"></i><b>3.3</b> Des bases de GIT <i class="fas fa-code-branch"></i></a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="git.html"><a href="git.html#le-b.a-ba"><i class="fa fa-check"></i><b>3.3.1</b> Le B.A-BA</a></li>
+<li class="chapter" data-level="3.3.2" data-path="git.html"><a href="git.html#gitlocal"><i class="fa fa-check"></i><b>3.3.2</b> Exercice 1: Premiers pas avec <code>git</code> en local</a></li>
+<li class="chapter" data-level="3.3.3" data-path="git.html"><a href="git.html#les-branches-principes"><i class="fa fa-check"></i><b>3.3.3</b> Les branches : principes</a></li>
+<li class="chapter" data-level="3.3.4" data-path="git.html"><a href="git.html#branches-et-lien-avec-master"><i class="fa fa-check"></i><b>3.3.4</b> Branches et lien avec <code>master</code></a></li>
+<li class="chapter" data-level="3.3.5" data-path="git.html"><a href="git.html#quelques-compléments-de-git"><i class="fa fa-check"></i><b>3.3.5</b> Quelques compléments de GIT</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="git.html"><a href="git.html#gitlab"><i class="fa fa-check"></i><b>3.4</b> <code>GitLab</code> <i class="fab fa-gitlab"></i>, aperçu de la plateforme de partage de code</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="git.html"><a href="git.html#repository"><i class="fa fa-check"></i><b>3.4.1</b> <code>Repository</code></a></li>
+<li class="chapter" data-level="3.4.2" data-path="git.html"><a href="git.html#issues"><i class="fa fa-check"></i><b>3.4.2</b> <code>Issues</code></a></li>
+<li class="chapter" data-level="3.4.3" data-path="git.html"><a href="git.html#exercice-4-ouvrir-et-organiser-les-issues"><i class="fa fa-check"></i><b>3.4.3</b> Exercice 4 : Ouvrir et organiser les <em>issues</em></a></li>
+<li class="chapter" data-level="3.4.4" data-path="git.html"><a href="git.html#merge-requests-mr"><i class="fa fa-check"></i><b>3.4.4</b> Merge requests (MR)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="git.html"><a href="git.html#exercice-4-fusionner-les-travaux-avec-des-merge-requests"><i class="fa fa-check"></i><b>3.4.5</b> Exercice 4 : Fusionner les travaux avec des <code>Merge Requests</code></a></li>
+<li class="chapter" data-level="3.4.6" data-path="git.html"><a href="git.html#les-groupes"><i class="fa fa-check"></i><b>3.4.6</b> Les groupes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="git.html"><a href="git.html#orgagit"><i class="fa fa-check"></i><b>3.5</b> Organiser le travail collaboratif</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="git.html"><a href="git.html#créer-une-branche"><i class="fa fa-check"></i><b>3.5.1</b> Créer une branche</a></li>
+<li class="chapter" data-level="3.5.2" data-path="git.html"><a href="git.html#modifier-et-valider-ces-changements"><i class="fa fa-check"></i><b>3.5.2</b> Modifier et valider ces changements</a></li>
+<li class="chapter" data-level="3.5.3" data-path="git.html"><a href="git.html#ouvrir-une-demande-de-fusion"><i class="fa fa-check"></i><b>3.5.3</b> Ouvrir une demande de fusion</a></li>
+<li class="chapter" data-level="3.5.4" data-path="git.html"><a href="git.html#échanger-entre-collaborateurs-et-vérifier-le-code"><i class="fa fa-check"></i><b>3.5.4</b> Échanger entre collaborateurs et vérifier le code</a></li>
+<li class="chapter" data-level="3.5.5" data-path="git.html"><a href="git.html#fusionner-la-branche-avec-master"><i class="fa fa-check"></i><b>3.5.5</b> Fusionner la branche avec <code>master</code></a></li>
+<li class="chapter" data-level="3.5.6" data-path="git.html"><a href="git.html#exercice-5-résoudre-les-conflits-cest-facile."><i class="fa fa-check"></i><b>3.5.6</b> Exercice 5 : Résoudre les conflits, c’est facile.</a></li>
+<li class="chapter" data-level="3.5.7" data-path="git.html"><a href="git.html#exercice-6-contribuer-à-un-dépôt-sans-droits-sur-master"><i class="fa fa-check"></i><b>3.5.7</b> Exercice 6 : Contribuer à un dépôt sans droits sur <code>master</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="rmd.html"><a href="rmd.html"><i class="fa fa-check"></i><b>4</b> <code>R Markdown</code></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="rmd.html"><a href="rmd.html#présentation-générale-de-r-markdown"><i class="fa fa-check"></i><b>4.1</b> Présentation générale de <code>R Markdown</code></a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="rmd.html"><a href="rmd.html#de-markdown-à-r-markdown"><i class="fa fa-check"></i><b>4.1.1</b> De <code>Markdown</code> à <code>R Markdown</code></a></li>
+<li class="chapter" data-level="4.1.2" data-path="rmd.html"><a href="rmd.html#que-peut-produire-r-markdown"><i class="fa fa-check"></i><b>4.1.2</b> Que peut produire <code>R Markdown</code> ?</a></li>
+<li class="chapter" data-level="4.1.3" data-path="rmd.html"><a href="rmd.html#pourquoi-utiliser-r-markdown"><i class="fa fa-check"></i><b>4.1.3</b> Pourquoi utiliser <code>R Markdown</code>?</a></li>
+<li class="chapter" data-level="4.1.4" data-path="rmd.html"><a href="rmd.html#comment-fonctionne-r-markdown"><i class="fa fa-check"></i><b>4.1.4</b> Comment fonctionne <code>R Markdown</code> ?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="rmd.html"><a href="rmd.html#avant-de-commencer"><i class="fa fa-check"></i><b>4.2</b> Avant de commencer</a></li>
+<li class="chapter" data-level="4.3" data-path="rmd.html"><a href="rmd.html#comment-construire-un-document-r-markdown"><i class="fa fa-check"></i><b>4.3</b> Comment construire un document <code>R Markdown</code>?</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="rmd.html"><a href="rmd.html#anatomie-de-la-structure-dun-document-r-markdown"><i class="fa fa-check"></i><b>4.3.1</b> Anatomie de la structure d’un document <code>R Markdown</code></a></li>
+<li class="chapter" data-level="4.3.2" data-path="rmd.html"><a href="rmd.html#ecrire-des-blocs-de-texte-en-r-markdown"><i class="fa fa-check"></i><b>4.3.2</b> Ecrire des blocs de texte en <code>R Markdown</code></a></li>
+<li class="chapter" data-level="4.3.3" data-path="rmd.html"><a href="rmd.html#insérer-un-résultat-r-dans-du-texte"><i class="fa fa-check"></i><b>4.3.3</b> Insérer un résultat <code>R</code> dans du texte</a></li>
+<li class="chapter" data-level="4.3.4" data-path="rmd.html"><a href="rmd.html#ecrire-des-blocs-de-code"><i class="fa fa-check"></i><b>4.3.4</b> Ecrire des blocs de code</a></li>
+<li class="chapter" data-level="4.3.5" data-path="rmd.html"><a href="rmd.html#insérer-de-beaux-tableaux"><i class="fa fa-check"></i><b>4.3.5</b> Insérer de beaux tableaux</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="rmd.html"><a href="rmd.html#conclusion"><i class="fa fa-check"></i><b>4.4</b> Conclusion</a></li>
+<li class="chapter" data-level="4.5" data-path="rmd.html"><a href="rmd.html#pour-aller-plus-loin"><i class="fa fa-check"></i><b>4.5</b> Pour aller plus loin</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rmdexo.html"><a href="rmdexo.html"><i class="fa fa-check"></i><b>5</b> <code>R Markdown</code>: un exercice pour créer son premier document</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rmdexo.html"><a href="rmdexo.html#quelques-éléments-dexplication"><i class="fa fa-check"></i><b>5.1</b> Quelques éléments d’explication</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="rmdexo.html"><a href="rmdexo.html#objectif"><i class="fa fa-check"></i><b>5.1.1</b> Objectif</a></li>
+<li class="chapter" data-level="5.1.2" data-path="rmdexo.html"><a href="rmdexo.html#le-produit-attendu"><i class="fa fa-check"></i><b>5.1.2</b> Le produit attendu</a></li>
+<li class="chapter" data-level="5.1.3" data-path="rmdexo.html"><a href="rmdexo.html#besoins"><i class="fa fa-check"></i><b>5.1.3</b> Expression des besoins</a></li>
+<li class="chapter" data-level="5.1.4" data-path="rmdexo.html"><a href="rmdexo.html#données-mobilisées"><i class="fa fa-check"></i><b>5.1.4</b> Données mobilisées</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="rmdexo.html"><a href="rmdexo.html#organisation-de-léquipe-projet"><i class="fa fa-check"></i><b>5.2</b> Organisation de l’équipe projet</a>
+<ul>
+<li class="chapter" data-level="" data-path="rmdexo.html"><a href="rmdexo.html#comment-sorganiser"><i class="fa fa-check"></i>Comment s’organiser ?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="rmdexo.html"><a href="rmdexo.html#demande-de-modifications"><i class="fa fa-check"></i><b>5.3</b> Demande de modifications</a>
+<ul>
+<li class="chapter" data-level="" data-path="rmdexo.html"><a href="rmdexo.html#cas-dune-demande-damélioration"><i class="fa fa-check"></i>Cas d’une demande d’amélioration</a></li>
+<li class="chapter" data-level="" data-path="rmdexo.html"><a href="rmdexo.html#cas-dune-demande-dévolution"><i class="fa fa-check"></i>Cas d’une demande d’évolution</a></li>
+<li class="chapter" data-level="" data-path="rmdexo.html"><a href="rmdexo.html#cas-dune-demande-de-modification"><i class="fa fa-check"></i>Cas d’une demande de modification</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="fonctions.html"><a href="fonctions.html"><i class="fa fa-check"></i><b>6</b> Programmation fonctionnelle avec <code>R</code> et <code>Rstudio</code></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="fonctions.html"><a href="fonctions.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="fonctions.html"><a href="fonctions.html#rappels-sur-les-objets-en-r"><i class="fa fa-check"></i><b>6.2</b> Rappels sur les objets en <code>R</code></a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="fonctions.html"><a href="fonctions.html#distinguer-noms-et-valeurs"><i class="fa fa-check"></i><b>6.2.1</b> Distinguer noms et valeurs</a></li>
+<li class="chapter" data-level="6.2.2" data-path="fonctions.html"><a href="fonctions.html#copier-des-objets-en-r"><i class="fa fa-check"></i><b>6.2.2</b> Copier des objets en <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="fonctions.html"><a href="fonctions.html#rappels-sur-les-fonctions"><i class="fa fa-check"></i><b>6.3</b> Rappels sur les fonctions</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="fonctions.html"><a href="fonctions.html#portée-scoping-dune-fonction"><i class="fa fa-check"></i><b>6.3.1</b> Portée (<em>scoping</em>) d’une fonction</a></li>
+<li class="chapter" data-level="6.3.2" data-path="fonctions.html"><a href="fonctions.html#noms-masqués"><i class="fa fa-check"></i><b>6.3.2</b> Noms masqués</a></li>
+<li class="chapter" data-level="6.3.3" data-path="fonctions.html"><a href="fonctions.html#portée-et-évaluation-paresseuse"><i class="fa fa-check"></i><b>6.3.3</b> Portée et évaluation paresseuse</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="fonctions.html"><a href="fonctions.html#définir-des-fonctions-en-r"><i class="fa fa-check"></i><b>6.4</b> Définir des fonctions en <code>R</code></a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="fonctions.html"><a href="fonctions.html#un-exemple-simple-pour-commencer"><i class="fa fa-check"></i><b>6.4.1</b> Un exemple simple pour commencer</a></li>
+<li class="chapter" data-level="6.4.2" data-path="fonctions.html"><a href="fonctions.html#créer-des-fonctions-complexes"><i class="fa fa-check"></i><b>6.4.2</b> Créer des fonctions complexes</a></li>
+<li class="chapter" data-level="6.4.3" data-path="fonctions.html"><a href="fonctions.html#créer-une-fonction-vraiment-complexe"><i class="fa fa-check"></i><b>6.4.3</b> Créer une fonction vraiment complexe</a></li>
+<li class="chapter" data-level="6.4.4" data-path="fonctions.html"><a href="fonctions.html#avancé-méthodes-alternatives"><i class="fa fa-check"></i><b>6.4.4</b> [Avancé] Méthodes alternatives</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="fonctions.html"><a href="fonctions.html#utiliser-les-outils-de-débuggage-de-rstudio"><i class="fa fa-check"></i><b>6.5</b> Utiliser les outils de débuggage de <code>Rstudio</code></a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="fonctions.html"><a href="fonctions.html#toutes-les-erreurs-ne-se-valent-pas"><i class="fa fa-check"></i><b>6.5.1</b> Toutes les erreurs ne se valent pas!</a></li>
+<li class="chapter" data-level="6.5.2" data-path="fonctions.html"><a href="fonctions.html#show-traceback"><i class="fa fa-check"></i><b>6.5.2</b> <code>Show Traceback</code></a></li>
+<li class="chapter" data-level="6.5.3" data-path="fonctions.html"><a href="fonctions.html#rerun-with-debug"><i class="fa fa-check"></i><b>6.5.3</b> <code>Rerun with debug</code></a></li>
+<li class="chapter" data-level="6.5.4" data-path="fonctions.html"><a href="fonctions.html#breakpoint"><i class="fa fa-check"></i><b>6.5.4</b> <code>Breakpoint</code></a></li>
+<li class="chapter" data-level="6.5.5" data-path="fonctions.html"><a href="fonctions.html#la-famille-des-fonctions-try"><i class="fa fa-check"></i><b>6.5.5</b> La famille des fonctions <code>try</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="fonctions.html"><a href="fonctions.html#documenter-des-fonctions"><i class="fa fa-check"></i><b>6.6</b> Documenter des fonctions</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="fonctions.html"><a href="fonctions.html#documenter-les-fonctions-avec-roxygen2"><i class="fa fa-check"></i><b>6.6.1</b> Documenter les fonctions avec <code>roxygen2</code></a></li>
+<li class="chapter" data-level="6.6.2" data-path="fonctions.html"><a href="fonctions.html#le-format-roxygen"><i class="fa fa-check"></i><b>6.6.2</b> Le format <code>roxygen</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="fonctions.html"><a href="fonctions.html#comprendre-les-environnements"><i class="fa fa-check"></i><b>6.7</b> Comprendre les environnements</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="fonctions.html"><a href="fonctions.html#notions-sur-les-environnements"><i class="fa fa-check"></i><b>6.7.1</b> Notions sur les environnements</a></li>
+<li class="chapter" data-level="6.7.2" data-path="fonctions.html"><a href="fonctions.html#lenvironnement-des-packages-et-le-chemin-de-recherche-search-path"><i class="fa fa-check"></i><b>6.7.2</b> L’environnement des packages et le chemin de recherche (<em>search path</em>)</a></li>
+<li class="chapter" data-level="6.7.3" data-path="fonctions.html"><a href="fonctions.html#un-exemple-de-problème-denvironnement-avec-les-packages"><i class="fa fa-check"></i><b>6.7.3</b> Un exemple de problème d’environnement avec les <em>packages</em></a></li>
+<li class="chapter" data-level="6.7.4" data-path="fonctions.html"><a href="fonctions.html#comment-bien-utiliser-les-packages"><i class="fa fa-check"></i><b>6.7.4</b> Comment bien utiliser les <em>packages</em>?</a></li>
+<li class="chapter" data-level="6.7.5" data-path="fonctions.html"><a href="fonctions.html#les-namespaces"><i class="fa fa-check"></i><b>6.7.5</b> Les <em>Namespaces</em></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="package.html"><a href="package.html"><i class="fa fa-check"></i><b>7</b> Créer un <em>package</em> <code>R</code> par la pratique</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="package.html"><a href="package.html#introduction-1"><i class="fa fa-check"></i><b>7.0.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.0.2" data-path="package.html"><a href="package.html#mapping"><i class="fa fa-check"></i><b>7.0.2</b> Le <em>mapping</em> et l’utilisation d’<code>aes()</code></a></li>
+<li class="chapter" data-level="7.0.3" data-path="package.html"><a href="package.html#les-formes-géométriques"><i class="fa fa-check"></i><b>7.0.3</b> Les formes géométriques</a></li>
+<li class="chapter" data-level="7.0.4" data-path="package.html"><a href="package.html#combiner-plusieurs-formes-géométriques"><i class="fa fa-check"></i><b>7.0.4</b> Combiner plusieurs formes géométriques</a></li>
+<li class="chapter" data-level="7.0.5" data-path="package.html"><a href="package.html#créer-un-graphique-par-modalité-dune-variable"><i class="fa fa-check"></i><b>7.0.5</b> Créer un graphique par modalité d’une variable</a></li>
+<li class="chapter" data-level="7.1" data-path="package.html"><a href="package.html#comment-personnaliser-un-graphique"><i class="fa fa-check"></i><b>7.1</b> Comment personnaliser un graphique</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="package.html"><a href="package.html#les-options-des-graphiques"><i class="fa fa-check"></i><b>7.1.1</b> Les options des graphiques</a></li>
+<li class="chapter" data-level="7.1.2" data-path="package.html"><a href="package.html#utiliser-un-thème"><i class="fa fa-check"></i><b>7.1.2</b> Utiliser un thème</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="package.html"><a href="package.html#exporter-un-graphique"><i class="fa fa-check"></i><b>7.2</b> Exporter un graphique</a></li>
+<li class="chapter" data-level="7.3" data-path="package.html"><a href="package.html#ggplot2Ressources"><i class="fa fa-check"></i><b>7.3</b> Pour en savoir plus</a>
+<ul>
+<li class="chapter" data-level="" data-path="package.html"><a href="package.html#feuille-de-route-pour-créer-un-package"><i class="fa fa-check"></i>Feuille de route pour créer un <em>package</em></a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="package.html"><a href="package.html#initier-un-package"><i class="fa fa-check"></i><b>7.4</b> Initier un <em>package</em></a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="package.html"><a href="package.html#choisir-un-nom"><i class="fa fa-check"></i><b>7.4.1</b> Choisir un nom</a></li>
+<li class="chapter" data-level="7.4.2" data-path="package.html"><a href="package.html#créer-un-projet-rstudio-de-type-package"><i class="fa fa-check"></i><b>7.4.2</b> Créer un projet RStudio de type “package”</a></li>
+<li class="chapter" data-level="7.4.3" data-path="package.html"><a href="package.html#renseigner-les-méta-données-du-package-le-fichier-description"><i class="fa fa-check"></i><b>7.4.3</b> Renseigner les méta-données du <em>package</em> : le fichier <code>DESCRIPTION</code></a></li>
+<li class="chapter" data-level="" data-path="package.html"><a href="package.html#champ-license"><i class="fa fa-check"></i>Champ <code>License</code></a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="package.html"><a href="package.html#configurer-les-outils-de-développement"><i class="fa fa-check"></i><b>7.5</b> Configurer les outils de développement</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="package.html"><a href="package.html#créer-un-dépôt-vide-dans-gitlab"><i class="fa fa-check"></i><b>7.5.1</b> Créer un dépôt vide dans GitLab</a></li>
+<li class="chapter" data-level="7.5.2" data-path="package.html"><a href="package.html#utiliser-git-dans-le-projet-rstudio"><i class="fa fa-check"></i><b>7.5.2</b> Utiliser git dans le projet RStudio</a></li>
+<li class="chapter" data-level="7.5.3" data-path="package.html"><a href="package.html#créer-le-lien-entre-le-dépôt-gitlab-et-le-projet-rstudio"><i class="fa fa-check"></i><b>7.5.3</b> Créer le lien entre le dépôt GitLab et le projet RStudio</a></li>
+<li class="chapter" data-level="7.5.4" data-path="package.html"><a href="package.html#utiliser-testthat-pour-les-tests"><i class="fa fa-check"></i><b>7.5.4</b> Utiliser <code>testthat</code> pour les tests</a></li>
+<li class="chapter" data-level="7.5.5" data-path="package.html"><a href="package.html#utiliser-lintégration-continue-de-gitlab"><i class="fa fa-check"></i><b>7.5.5</b> Utiliser l’intégration continue de GitLab</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="package.html"><a href="package.html#développer-un-package"><i class="fa fa-check"></i><b>7.6</b> Développer un <em>package</em></a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="package.html"><a href="package.html#inclure-du-code-le-documenter-et-le-tester"><i class="fa fa-check"></i><b>7.6.1</b> Inclure du code, le documenter et le tester</a></li>
+<li class="chapter" data-level="7.6.2" data-path="package.html"><a href="package.html#déclarer-une-dépendance"><i class="fa fa-check"></i><b>7.6.2</b> Déclarer une dépendance</a></li>
+<li class="chapter" data-level="7.6.3" data-path="package.html"><a href="package.html#charger-lensemble-des-fonctions-de-son-package"><i class="fa fa-check"></i><b>7.6.3</b> Charger l’ensemble des fonctions de son <em>package</em></a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="package.html"><a href="package.html#installer-le-package"><i class="fa fa-check"></i><b>7.7</b> Installer le <em>package</em></a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="package.html"><a href="package.html#installer-sur-sa-machine"><i class="fa fa-check"></i><b>7.7.1</b> Installer sur sa machine</a></li>
+<li class="chapter" data-level="7.7.2" data-path="package.html"><a href="package.html#générer-le-fichier-compressé"><i class="fa fa-check"></i><b>7.7.2</b> Générer le fichier compressé</a></li>
+</ul></li>
+<li class="chapter" data-level="7.8" data-path="package.html"><a href="package.html#documenter-un-package"><i class="fa fa-check"></i><b>7.8</b> Documenter un <em>package</em></a>
+<ul>
+<li class="chapter" data-level="7.8.1" data-path="package.html"><a href="package.html#créer-un-fichier-readme-obligatoire"><i class="fa fa-check"></i><b>7.8.1</b> Créer un fichier <code>README</code> (obligatoire)</a></li>
+<li class="chapter" data-level="7.8.2" data-path="package.html"><a href="package.html#créer-une-vignette-recommandé"><i class="fa fa-check"></i><b>7.8.2</b> Créer une vignette (recommandé)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="package.html"><a href="package.html#créer-un-modèle-de-document-r-markdown"><i class="fa fa-check"></i><b>7.9</b> Créer un modèle de document R Markdown</a></li>
+<li class="chapter" data-level="7.10" data-path="package.html"><a href="package.html#bonnes-pratiques"><i class="fa fa-check"></i><b>7.10</b> Bonnes pratiques</a>
+<ul>
+<li class="chapter" data-level="7.10.1" data-path="package.html"><a href="package.html#créer-un-changelog"><i class="fa fa-check"></i><b>7.10.1</b> Créer un changelog</a></li>
+<li class="chapter" data-level="7.10.2" data-path="package.html"><a href="package.html#gérer-les-numéros-de-version"><i class="fa fa-check"></i><b>7.10.2</b> Gérer les numéros de version</a></li>
+</ul></li>
+<li class="chapter" data-level="7.11" data-path="package.html"><a href="package.html#conclusion---pour-aller-plus-loin"><i class="fa fa-check"></i><b>7.11</b> Conclusion - Pour aller plus loin</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="./">Collaboration IUT Paris-rives Seine</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Résumé des cours et TP - DU Dataviz</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="git" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapitre 3</span> Utiliser <code>GIT</code> avec <i class="fab fa-r-project"></i><a href="git.html#git" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Cette formation ne nécessite pas de connaissances avancées en <code>R</code>, voire aucune car elle s’appuie uniquement sur les fonctionnalités de <code>RStudio</code>. À toute fin utile, la documentation <a href="www.book.utilitr.org">utilitR</a> constitue une ressource
+qu’il peut être intéressant de consulter en complément.</p>
+<div id="pourquoi-utiliser-la-gestion-de-version" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Pourquoi utiliser la gestion de version ?<a href="git.html#pourquoi-utiliser-la-gestion-de-version" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Nos travaux statistiques évoluent constamment (productions annuelles, nouvelles enquêtes, etc.) et nous travaillons souvent à plusieurs. En outre, le maintien de la qualité de nos chaînes de traitement nécessite un archivage détaillé et facilement accessible.</p>
+<p>Tous les statisticiens se sont déjà demandé (ou à leurs collègues) :</p>
+<ul>
+<li>quelle était la bonne version d’un programme</li>
+<li>qui était l’auteur d’un bout de code en particulier</li>
+<li>si un changement était important ou juste un essai</li>
+<li>comment fusionner des programmes</li>
+<li>etc.</li>
+</ul>
+<p>Souvent l’organisation des programmes partagés est une gageure et ressemble à une longue liste d’archivages manuels et arbitraires.</p>
+<p><strong>Exemple d’une organisation de fichiers à l’ancienne</strong>
+<img src="pics/03_git/fichiers_multiples.png" style="width:100.0%" /></p>
+<p>Pourtant, il existe un outil informatique puissant afin de répondre à tous ces besoins : la gestion de version (<em>version control system</em> (VCS) en anglais). Ses avantages sont incontestables et permettent de facilement :</p>
+<ul>
+<li>enregistrer l’historique des modifications d’un ensemble de fichiers</li>
+<li>revenir à des versions précédentes d’un ou plusieurs fichiers</li>
+<li>rechercher les modifications qui ont pu créer des erreurs</li>
+<li>partager ses modifications et récupérer celles des autres</li>
+<li>proposer des modifications, les discuter, sans pour autant modifier la dernière version existante</li>
+<li>identifier les auteurs et la date des modifications</li>
+</ul>
+<p>En outre, ces outils fonctionnent avec tous les langages informatiques (texte, R, Python, SAS, <span class="math inline">\(\LaTeX\)</span>, Java, etc.) car reposent sur la comparaison des lignes et des caractères des programmes, indépendamment du langage.</p>
+<p>En bref, c’est <strong>LA</strong> bonne manière pour partager des codes et travailler à plusieurs sur un projet statistique (études ou production).</p>
+<div id="conserver-et-archiver-du-code" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Conserver et archiver du code<a href="git.html#conserver-et-archiver-du-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Une des principales fonctionnalités de la gestion de version est conserver l’ensemble des fichiers de façon sécurisée et de proposer un archivage structuré des codes. Les fichiers sont stockés dans un <strong>dépôt</strong>, qui correspond au projet (par exemple, le modèle Ines). C’est là où sont stockéees toutes les informations utiles au partage des codes.</p>
+<p>Dans la gestion de version, tout repose dans la comparaison des changements dans les programmes et la présentation de l’historique de ces modifications. Chaque modification (ajout, suppression ou changement) sur un ou plusieurs fichiers est identifiée par son auteur, sa date et un bref descriptif<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Chaque changement est donc unique et aisément identifiable quand ils sont classés par ordre chronologique par exemple. Les modifications transmises au dépôt commun sont appelées <strong>commit</strong>. Cette étape joue un rôle central et sera détaillée plus loin.</p>
+<p><strong>Un exemple d’historique d’un projet sur GitLab issu du projet <a href="https://gitlab.com/linogaliana/documentationR/-/commits/master/">utilitR</a></strong>
+<img src="pics/03_git/historique_gitlab.png" style="width:100.0%" alt="histoGIT" /></p>
+<p><strong>Un exemple d’historique d’un projet via RStudio</strong>
+<img src="pics/03_git/historique_Rstudio.png" style="width:100.0%" alt="histR" /></p>
+<p>Avec la gestion de version, sur son poste de travail, les dizaines (centaines ?) de programmes organisés à la main n’existent plus. Tout est regroupé dans un seul dossier, rassemblant les éléments du dépôt à une date donnée, généralement la plus récente. Au sein du dépôt, tout l’historique est stocké et accessible rapidement. Si l’on souhaite travailler sur la dernière version des programmes (ou sur une ancienne version spécifique), il n’y a plus besoin de conserver les autres fichiers car ils sont dans l’historique du projet. Il est alors possible de choisir sur quelle version on veut travailler (la dernière commune à tout le monde, la sienne en train d’être développée, celle de l’année dernière, etc.).</p>
+</div>
+<div id="travailler-efficacement-en-équipe" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Travailler efficacement en équipe<a href="git.html#travailler-efficacement-en-équipe" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le deuxième avantage de la gestion de version représente une amélioration notable du travail en équipe sur des codes en commun. Que ce soit au sein d’un modèle cogéré (Ines, Destinie, etc.), de gros projets (Nautile) ou de chaînes de traitement récurrentes (enquête emploi, comptes trimestriels, etc.), la collaboration est courante lors des travaux statistiques. La gestion de version permet de collaborer simplement et avec méthode. De façon organisée, elle permet de:</p>
+<ul>
+<li>travailler en parallèle et fusionner facilement du code</li>
+<li>partager une documentation des programmes grâce :
+<ul>
+<li>aux commentaires des modifications</li>
+<li>à la possibilité d’une documentation commune et collaborative</li>
+</ul></li>
+<li>trouver rapidement des erreurs et en diffuser rapidement la
+correction</li>
+</ul>
+<p><strong>Exemple de détails d’une modification</strong>
+<img src="pics/03_git/commit_Rstudio.png" style="width:100.0%" /></p>
+<div class="remarque">
+<p>L’usage individuel, c’est-à-dire seul sur son projet, permet aussi de “travailler en équipe avec soi même” car il permet de retrouver des mois plus tard le contenu et le contexte des modifications. Cela est notamment précieux lors des changements de poste ou des travaux réguliers mais espacés dans le temps (par exemple, un mois par an chaque année).</p>
+<p>Même en travaillant seul sur un projet, on collabore avec un <em>moi</em> futur (qui aura vraisemblablement oublié le contenu ou la raison de la modification des fichiers). Donc il est également recommandé de travailler en gestion de version sur un projet individuel.</p>
+</div>
+</div>
+<div id="améliorer-la-qualité-des-codes" class="section level3 hasAnchor" number="3.1.3">
+<h3><span class="header-section-number">3.1.3</span> Améliorer la qualité des codes<a href="git.html#améliorer-la-qualité-des-codes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le fonctionnement de la gestion de version, reposant sur l’archivage structuré des modifications et les commentaires les accompagnant, renforce la qualité des programmes informatiques. Ils sont plus documentés, plus riches et mieux structurés. C’est pour cette raison que le contrôle de version est un outil puissant pour toute production statistique : toute personne travaillant sur des programmes, <code>SAS</code> y compris, gagne à utiliser du contrôle de version.</p>
+<p>Quand il s’agit de modèles statistiques, ou de chaînes de traitement statistique, constitués de nombreux programmes, la gestion de version permet :</p>
+<ul>
+<li>l’amélioration de la qualité des modèles par des méta-données riches,</li>
+<li>un gain de place pour stocker les historiques,</li>
+<li>leur diffusion simplifiée et harmonisée.</li>
+</ul>
+<p>En outre, lors de l’ouverture des modèles au format <em>open source</em> par exemple, leur diffusion publique correspond aux standards des communautés de logiciels libres et aux usages recommandés pour documenter des programmes informatiques. Cela permet aux utilisateurs ou aux agents découvrant des chaînes de traitement de mieux s’approprier les programmes.</p>
+</div>
+<div id="usage-quotidien-un-exemple-avec-le-modèle-ines" class="section level3 hasAnchor" number="3.1.4">
+<h3><span class="header-section-number">3.1.4</span> Usage quotidien : un exemple avec le modèle Ines<a href="git.html#usage-quotidien-un-exemple-avec-le-modèle-ines" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le modèle Ines est co-développé par l’Insee et la Drees ainsi que la Cnaf depuis 2018. Sous licence libre, il est disponible en <em>open-source</em>. Il est organisé dans une <em>forge</em> qui regroupe le code, un wiki, une documentation, un forum et différents outils collaboratifs (ces éléments seront présentés <a href="git.html#gitlab">plus loin</a>). Les utilisateurs y ont accès via la <a href="https://adullact.net/projects/ines-libre">plateforme Adullact</a>. Le dépôt regroupe donc les programmes, l’historique des modifications et les archives des différentes versions (‘Ines 2018’ par exemple). Les chargés d’étude ont une copie locale du projet sur leur poste de travail. Les changements sont mis à jour et disponibles en temps réel.</p>
+<p><strong>Envoi d’une modification avec TortoiseSVN : commit</strong></p>
+<p><img src="pics/03_git/commit_Ines.png" style="width:100.0%" /></p>
+<p><strong>Historique d’un fichier ou dossier : log</strong>
+<img src="pics/03_git/historique_Ines.png" style="width:100.0%" /></p>
+<p><strong>Recherche efficace une erreur : blame</strong>
+<img src="pics/03_git/blame_ines.png" style="width:100.0%" /></p>
+<p>D’une manière générale, il existe plusieurs manières d’utiliser le contrôle de version :</p>
+<ul>
+<li>en ligne de commande, via <a href="https://gitforwindows.org/">git bash</a>, par exemple ;</li>
+<li>avec une interface graphique spécialisée, par exemple <a href="https://tortoisegit.org/">tortoise git</a> ou <a href="https://desktop.github.com/">GitHub Desktop</a> ;</li>
+<li>avec un logiciel de développement : la plupart des logiciels de développement (<a href="https://rstudio.com/">RStudio</a> pour <code>R</code>, <a href="https://www.jetbrains.com/fr-fr/pycharm/">PyCharm</a> ou <a href="https://jupyter.org/">jupyter</a> pour <code>python</code>, <a href="https://atom.io/">atom</a>, etc.) proposent tous des modules graphiques facilitant l’usage de <code>git</code> dont les fonctionnalités sont très proches.</li>
+</ul>
+<p>Dans ce support, nous présentons le contrôle de version via <code>RStudio</code>, la solution que nous recommandons en raison de sa simplicité. Elle rend le recours à la ligne de commande marginal voire inutile. Elle est également plus rapide et facilement implémentable à l’Insee.</p>
+</div>
+<div id="avec-ou-sans-gestion-de-versions" class="section level3 hasAnchor" number="3.1.5">
+<h3><span class="header-section-number">3.1.5</span> Avec ou sans gestion de versions<a href="git.html#avec-ou-sans-gestion-de-versions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le tableau suivant compare les usages au temps (pré-historique ?) de la programmation sans gestion de version avec les modes de travail si on y a recours :</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Avant</th>
+<th align="right">Gestion de version</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Archivage</td>
+<td align="right">à la main</td>
+<td align="right">automatique</td>
+</tr>
+<tr class="even">
+<td align="left">Envoi de modification</td>
+<td align="right">mail, dossier partagé</td>
+<td align="right">code partagé</td>
+</tr>
+<tr class="odd">
+<td align="left">Fusion de code</td>
+<td align="right">copié-collé</td>
+<td align="right">simple, sûr</td>
+</tr>
+<tr class="even">
+<td align="left">Versions du modèle</td>
+<td align="right">dossiers archivés</td>
+<td align="right">historique riche</td>
+</tr>
+<tr class="odd">
+<td align="left">Gestion des erreurs</td>
+<td align="right">à la main</td>
+<td align="right">méthodique</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>Beaucoup de supports existent en ligne, il faut parfois s’en méfier car les usages peuvent différer et sont souvent spécifiques aux usages et aux installations (cf. <em>infra</em>). Cette présentation <a href="https://speakerdeck.com/alicebartlett/git-for-humans"><em>Git for humans</em></a> didactique courte mais en anglais présente les avantages de l’usage de <code>GIT</code>.</p>
+<p>En conclusion, que ce soit au sein d’un travail collaboratif en équipe ou sur ses propres projets individuels, notre temps est consacré à la programmation réellement utile. Plus de temps perdu ! L’organisation du travail est efficace grâce :</p>
+<ul>
+<li>aux améliorations rapides des codes</li>
+<li>au partage efficace des tâches</li>
+<li>à la recherche puissante des erreurs</li>
+<li>à un archivage géré automatiquement avec des méta-données</li>
+<li>à des outils généralisés et documentés en ligne.</li>
+</ul>
+<p>La gestion de version est donc le meilleur moyen de partager du code (entre équipes internes,
+lors des changements de poste, pour l’archivage, lors de l’ouverture au libre, etc.). Ces outils viennent du développement informatique et de la création des logiciels et applications. Les traitements statistiques sont également des chaînes informatiques et sont donc pleinement adaptés pour s’appuyer sur les outils de gestion de version.</p>
+</div>
+</div>
+<div id="configurer-un-projet-git-avec-rstudio-à-linsee" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Configurer un projet <code>GIT</code> avec RStudio à l’Insee<a href="git.html#configurer-un-projet-git-avec-rstudio-à-linsee" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Dans une configuration classique, la première étape consisterait à installer le logiciel <code>GIT</code> sur son poste. C’est par exemple le cas sur son ordinateur personnel ou sur son poste de travail local. Cependant, cette formation adopte un cadre de travail sécurisé et partagé, permettant à la fois d’utiliser la version de <code>RStudio</code> recommandée et d’avoir accès aux coffres. Elle peut se dérouler sur le serveur de calcul AUS interne à l’Insee ou sur le <a href="https://datalab.sspcloud.fr">datalab du SSP</a>. C’est aussi certainement le cadre de travail classique sur des projets collaboratifs avec d’autres collègues. Ce support présente la configuration spécifique à AUS comme cadre par défaut mais fournit également des éléments pour le cas d’un projet sur poste local.</p>
+<p>La seconde brique afin de pouvoir travailler sur un projet partagé est le choix de la plateforme où est stocké le <code>repository</code>. Cela peut être sur <code>github.com</code>, <code>gitlab.com</code> ou une autre forge en ligne. À l’Insee, il est recommandé de s’appuyer sur le <a href="https://gitlab.insee.fr"><code>GitLab</code> interne</a>.</p>
+<p>Que ce soit sur les sites externes de type <code>gitlab.com</code> ou la plateforme innovation, il est d’abord nécessaire de créer son accès puis ensuite de configurer l’acccès au <code>GitLab</code>. Ces manipulations sont à faire une et une seule fois pour un poste de travail donné, ce sont les étapes de configuration. Ensuite, les manipulations pour accéder à un projet déjà existant sont plus simples et automatisées.</p>
+<div id="la-première-fois" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> La première fois<a href="git.html#la-première-fois" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La section qui suit présente l’étape fondamentale pour pouvoir lire et modifier un dossier partagé sur un dépôt commun stocké sur un <code>GitLab</code>. Cette plateforme est un outil de stockage et de gestion des projets mis en commun via <code>Git</code>.</p>
+<div id="accéder-au-gitlab-de-linsee" class="section level4 hasAnchor" number="3.2.1.1">
+<h4><span class="header-section-number">3.2.1.1</span> Accéder au <code>GitLab</code> de l’Insee<a href="git.html#accéder-au-gitlab-de-linsee" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Une version interne de <code>GitLab</code> est disponible à l’Insee sur <a href="https://gitlab.insee.fr">gitlab.insee.fr</a>. Pour accéder à son profil sur le <code>GitLab</code> de l’Insee, il est nécessaire de se connecter avec son profil individuel. Pour y accéder, il suffit de cliquer sur <code>Sign In</code> en haut à droite:</p>
+<p><img src="pics/03_git/sign_in_gitlab.png" style="width:100.0%" /></p>
+</div>
+<div id="recommandation-concernant-lauthentification-https-vs-ssh" class="section level4 hasAnchor" number="3.2.1.2">
+<h4><span class="header-section-number">3.2.1.2</span> Recommandation concernant l’authentification HTTPS vs SSH<a href="git.html#recommandation-concernant-lauthentification-https-vs-ssh" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>L’étape suivante de configuration est de créer un lien sécurisé entre le profil utilisateur distant et le poste de travail (local ou AUS). Pour cela, il existe deux possibilités l’authentification via <code>HTTPS</code> ou via <code>SSH</code>.</p>
+<p>En dehors des infrastructures Insee, il est généralement plus simple d’utiliser l’authentification <code>HTTPS</code> que <code>SSH</code>, notamment lorsqu’on interagit avec <code>Gitlab.com</code> car il suffit de rentrer <code>login/password</code> lorsqu’on interagit avec un dépôt. La fiche <a href="https://www.book.utilitr.org/git-config.html">utilitR</a> présente avec plus de détails ces concepts et des recommandations de sécurité adaptées, par exemple sur la manière d’enregistrer un jeton <code>HTTPS</code> pour ne pas avoir à le fournir à chaque authentification ou pour utiliser l’authentification SSH.</p>
+<p>À l’Insee, le <a href="https://gitlab.insee.fr/infrastructure/lss/ausv3/documentation-utilisateurs/-/wikis/Logiciels/Git">wiki d’<code>AUSV3</code></a> décrit toutes les étapes (à suivre à la lettre et pas à pas) pour configurer l’utilisation de <code>Git</code> avec AUS par l’intermédiaire <code>SSH</code>. Cette manipulation tient lieu d’installation pour pouvoir échanger avec le dépôt distant et est donc à faire une seule fois par poste (local, AUS ou personnel en dehors des projets Insee).</p>
+</div>
+</div>
+<div id="au-lancement-de-chaque-projet-cloner-depuis-gitlab.insee.fr" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Au lancement de chaque projet, cloner depuis <code>gitlab.insee.fr</code><a href="git.html#au-lancement-de-chaque-projet-cloner-depuis-gitlab.insee.fr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour pouvoir récupérer un projet disponible sur un dépôt afin de le modifier en local, la première étape consister à récupérer le chemin du dossier partagé, afin de le copier dans son espace de travail (dit local). Il est disponible via le bouton <code>clone</code> du projet.</p>
+<p>Prenons l’exemple du support de cette formation, créé avec <code>RStudio</code> et <code>GIT</code> sur la plateforme innovation. Pour récupérer (<strong><abbr title="Serveur distant ayant une copie de repository"><b>clone</b></abbr></strong> en vocabulaire <code>GIT</code>) le dossier partagé, il suffit copier l’adresse indiquée sous la boîte <em>Clone with SSH</em> avec l’icône entourée.</p>
+<p><img src="pics/03_git/clone_ssh.png" /></p>
+<p>Ensuite, il est nécessaire d’indiquer à <code>RStudio</code> comment se connecter à ce dépôt distant (stocké sur le <code>Gitlab</code>). Dans “File / New Project”, sélectionner <code>Version control</code> puis <code>GIT</code> :</p>
+<p><img src="pics/03_git/Rproj.png" /></p>
+<p>Il suffit ensuite de remplir les trois paramètres :</p>
+<ul>
+<li><em>Repository URL</em> : coller l’adresse <code>SSH</code> copiée depuis le <code>GitLab</code></li>
+<li><em>Projet directory name</em> : le nom du dossier où va sera la copie locale du <code>repository</code>, c’est là où vous allez modifier les programmes et où se situera votre code</li>
+<li><em>Create project as subdirectory of</em> : le chemin physique où se situera le projet, par exemple <code>D:/idep</code> dans le cas d’un projet local.</li>
+</ul>
+<p>Cliquer sur <code>Create project</code> copier les fichiers du dossier partagé et vous permet de travailler sur <code>RStudio</code> avec l’interface <code>GIT</code> qui va être décrite dans la partie suivante.</p>
+<p>Il est également possible de cloner des dépôts en externe via <code>https</code> par exemple. Si vous rencontrez des problèmes pour configurer un dépôt, une <a href="http://formation-git-sndi-lille.pages.innovation.insee.eu/installation-git/">vidéo d’installation</a> a été produite par le SNDI ainsi qu’une <a href="https://git.stable.innovation.insee.eu/formation-git-sndi-lille/installation-git">documentation de configuration</a>.</p>
+</div>
+</div>
+<div id="des-bases-de-git" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Des bases de GIT <i class="fas fa-code-branch"></i><a href="git.html#des-bases-de-git" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Les deux outils de gestion de version les plus répandus sont GIT et SVN (pour Subversion). L’Insee a utilisé SVN pendant un temps mais privilégie GIT maintenant en raison de plusieurs avantages, comme le travail hors ligne plus stable, une meilleure flexibilité et une plus grande vitesse (cf. infra).</p>
+<p>GIT est un logiciel qui est installé sur son poste et celui de ses collaborateurs. Il est open source, gratuit et très répandu. Ainsi, une vaste documentation est disponible en ligne ou les forums d’entraide de type <code>stackoverflow</code> (voir par exemple le tag <a href="https://stackoverflow.com/questions/tagged/git">‘GIT’</a> ). Sur la plateforme <code>GitHub</code>, la <a href="http://try.github.io/">page de tutoriel</a> regroupe différents supports. Des vidéos pédagogiques sont fournies sur <a href="https://git-scm.com/videos">git-scm.com</a>.</p>
+<div class="conseil">
+<p>Face au foisonnement des pratiques et des ressources en ligne, il est recommandé d’adopter et suivre les bonnes pratiques pour chaque projet, et de prendre avec vigilance ce qui est trouvé en ligne. Les configurations et les habitudes diffèrent et une solution proposée sur un forum ou dans un livre peut ne pas être adaptée dans votre cas précis.</p>
+<p>C’est l’objectif de ce support de rassembler les pratiques les plus courantes et présenter l’utilisation recommandée de la gestion de version avec RStudio à l’Insee.</p>
+</div>
+<p>La genèse de Git correspond au noyau du système d’exploitation Linux qui gérait les patchs et les archives pendant les années 1990. À partir de 2005, Linus Torvalds, aussi inventeur de Linux, développe un successeur avec pour objectifs, la vitesse, la simplicité, la possibilité de développements en parallèle (les futures <strong><abbr title="Ligne de développement parallèle au sein du dossier"><b>branche</b></abbr>s</strong>), le tout avec un usage compact des données. Depuis, son usage a largement dépassé celui de SVN.</p>
+<div class="remarque">
+<p>SVN est dit centralisé alors que GIT est dit distribué. Cela signifie notamment que chaque collaborateur possède une copie en propre de l’ensemble du projet sur son poste de travail. Cela implique un avantage important de GIT en terme de sécurité des codes (qui risquent beaucoup moins d’être perdus) et la rapidité des partages des modifications.</p>
+<p>En outre, contrairement à SVN pour lequel il faut être connecté à un serveur, il n’est pas besoin d’être connecté avec GIT et on peut travailler en local. Ainsi, on transmet ses modifications quand on le souhaite ou peut et cela facilite le travail distant.</p>
+</div>
+<p>Enfin, un des grands avantages pratiques de <code>GIT</code> est son intégration native dans l’interface <code>RStudio</code> (et réciproquement) ainsi que dans les plateformes <code>GitHub</code> et <code>GitLab</code> (voir parties ci-après). À l’origine utilisé en ligne de commandes (et utilisé comme tel par les développeurs), les interfaces graphiques actuelles permettent de s’en passer dans l’immense majorité des situations.</p>
+<div id="le-b.a-ba" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Le B.A-BA<a href="git.html#le-b.a-ba" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les programmes s’organisent sur un répertoire distant commun
+(dépôt ou <abbr title="Dossier partagé qui contient toutes les informations"><b>repository</b></abbr>) et sont manipulés sur les postes indidivuels dans des
+dossiers locaux (<strong>working directory</strong>). Le dépôt distant peut par exemple être hébergé sur une plateforme de type <strong>GitLab</strong> <i class="fab fa-gitlab"></i> ou <strong>GitHub</strong> <i class="fab fa-github"></i>.</p>
+<div class="remarque">
+<p><strong>GitHub, GitLab, quesaquo ?</strong></p>
+<p>Le travail collaboratif avec <code>Git</code> s’organise autour d’un serveur auquel chaque contributeur transmet ses modifications et depuis lequel les différents contributeurs récupèrent le travail des collègues.</p>
+<p>Comme tout serveur, ceux-ci peuvent être accessibles sur un réseau interne ou être accessibles sur internet. Sur ces serveurs, on installe un logiciel qui offre une interface utilisateur. Il existe différents types d’interface utilisateur, les deux plus populaires s’appelant “GitHub” ou “GitLab”.</p>
+<p>Dans le contexte de travail de l’Insee, vous pourrez être amenés à travailler avec différents serveurs que nous différencions ici grâce à leurs adresses web :</p>
+<ul>
+<li><a href="https://gitlab.insee.fr">gitlab.insee.fr</a> : serveur interne au réseau de l’Insee avec une interface utilisateur de type “GitLab” maintenu par la DSI de l’Insee (projet SOFA)</li>
+<li><a href="https://git.lab.sspcloud.fr">git.lab.sspcloud.fr</a> : serveur du SSP Cloud exposé sur internet avec une interface utilisateur de type “GitLab” maintenu par la division innovation</li>
+<li><a href="https://github.com">github.com</a> : serveur public exposé sur internet avec une interface utilisateur de type “GitHub” maintenu par Microsoft</li>
+<li><a href="https://gitlab.com">gitlab.com</a> : serveur public exposé sur internet avec une interface utilisateur de type “GitLab” maintenu par l’entreprise GitLab</li>
+</ul>
+<p>Tous les serveurs <code>Git</code> connaissent une structure similaire :</p>
+<ul>
+<li>chaque utilisateur possède un espace personnel pour stocker ses projets. Par exemple, sur le serveur GitLab de l’Insee, chaque agent a un espace accessible à l’adresse <a href="https://gitlab.insee.fr/IDEP" class="uri">https://gitlab.insee.fr/IDEP</a></li>
+<li>il est possible de créer des espaces communs pour une structure ou pour un projet donné. Par exemple, l’Insee dispose d’un espace institutionnel sur GitHub nommé <a href="https://github.com/InseeFr" class="uri">https://github.com/InseeFr</a> qui héberge des projets open source de l’Insee utilisés en production ainsi qu’un espace pour les projets open source expérimentaux nommé <a href="https://github.com/InseeFrLab" class="uri">https://github.com/InseeFrLab</a></li>
+</ul>
+</div>
+<p>Les trois manipulations les plus courantes sont les suivantes et représentées sur le diagramme ci-après :</p>
+<ul>
+<li><abbr title="Récupération des nouveaux commits en local depuis le remote"><b>pull</b></abbr> : je récupère la dernière version des codes du dépôt distant</li>
+<li><abbr title="Modification validée à un instant donné, par extension état du projet à cet instant"><b>commit</b></abbr> : je valide mes modifications avec un message qui les expliquent</li>
+<li><abbr title="Envoi de ses nouveaux commit vers le remote"><b>push</b></abbr> : je transmets mes modifications validées au dépôt distant</li>
+</ul>
+<p><img src="pics/03_git/push_pull_Drees.png" style="width:100.0%" /></p>
+<p>De manière plus précise, il y a trois étapes avant d’envoyer les modifications validées (<abbr title="Modification validée à un instant donné, par extension état du projet à cet instant"><b>commit</b></abbr>) au dépôt. Elles se définissent en fonction des commandes qui permet de les appliquer quand Git est utilisé en ligne de commandes :</p>
+<ul>
+<li><code>diff</code> : inspection des modifications. Cela permet de comparer les fichiers modifiés et de distinguer les fichiers ajoutés ou supprimés</li>
+<li><code>staging area</code> : sélection des modifications.</li>
+<li><abbr title="Modification validée à un instant donné, par extension état du projet à cet instant"><b>commit</b></abbr> : validation des modifications sélectionnées (avec commentaire).</li>
+</ul>
+<p>L’un des intérêts de <code>git</code> est que le choix des modifications à soumettre est très fin: il est possible de découper les modifications d’un fichier en plusieurs morceaux cohérents.</p>
+<p>Les deux diagrammes ci-dessous représentent ces différences étapes et les commandes qui permet de passer d’un état à l’autre.</p>
+<p><img src="pics/03_git/trois_%C3%A9tats_fichier.png" style="width:100.0%" /></p>
+<p><img src="pics/03_git/statut_fichiers.png" style="width:100.0%" /></p>
+<p>Lors d’un <abbr title="Modification validée à un instant donné, par extension état du projet à cet instant"><b>commit</b></abbr>, le message de validation est très important:</p>
+<ul>
+<li>il décrit brièvement les modifications contenues dans le commit</li>
+<li>il s’adresse aux autres et doit donc être intelligible</li>
+</ul>
+<p>Chaque commit doit rassembler des modifications homogènes. Il ne faut donc pas hésiter à séparer les changements qui ne sont pas directement reliés car il est plus facile de rechercher au sein de plusieurs modifications différentes qu’une seule trop vaste.</p>
+<p>Chaque <abbr title="Modification validée à un instant donné, par extension état du projet à cet instant"><b>commit</b></abbr> est identifié de façon unique par un <abbr title="Identifiant unique pour chaque commit, contenant notamment un horodatage"><b>hash</b></abbr> (ex: <code>441300764de91c376</code>), un numéro peu intelligible pour un humain mais qui permet au système de contrôle de version de gérer proprement chaque modification.</p>
+<p>Ensuite, les deux fonctions <abbr title="Envoi de ses nouveaux commit vers le remote"><b>push</b></abbr> et <abbr title="Récupération des nouveaux commits en local depuis le remote"><b>pull</b></abbr> permettent la mise à jour du projet local par rapport au distant et réciproquement. C’est donc avec un <abbr title="Envoi de ses nouveaux commit vers le remote"><b>push</b></abbr> qu’on envoie les modifications qui ont été sélectionnées puis validées.</p>
+<p>Lors des étapes de push et pull, des <strong>conflits</strong> peuvent apparaître, par exemple lorsque deux personnes ont modifié le même programme simultanément.</p>
+<p>Tout d’abord, il est possible de minimiser l’apparition de conflits en amont en validant souvent les modifications (<code>commit</code>) :</p>
+<ul>
+<li>en commençant par mettre à jour sa copie locale régulièrement via <abbr title="Récupération des nouveaux commits en local depuis le remote"><b>pull</b></abbr> ou <abbr title="Mise à jour du dépôt local par rapport à l'état du dépôt distant, sans procéder à la fusion"><b>fetch</b></abbr>, voire dès qu’on commencer à travailler sur un projet</li>
+<li>en regroupant les commit par petits lots homogènes et en préférant peu de fichiers</li>
+<li>en communiquant avec les autres membres de l’équipe en disant sur quoi on travaille et en prévenant en cas de grosse modification</li>
+</ul>
+<div class="recommandation">
+<p>De manière générale, <strong>il ne faut pas avoir peur des conflits</strong>. Les outils sont faits pour les gérer avec rigueur et méthode (voir <a href="#gitexo">les exercices</a>). Avec GIT, il est très rare de faire des bêtises et on peut toujours réparer <strong>à condition de s’en tenir aux commandes de base</strong> (<abbr title="Modification validée à un instant donné, par extension état du projet à cet instant"><b>commit</b></abbr>, <abbr title="Envoi de ses nouveaux commit vers le remote"><b>push</b></abbr>, <abbr title="Récupération des nouveaux commits en local depuis le remote"><b>pull</b></abbr> et <abbr title="Fusion de une ou plusieurs branches"><b>merge</b></abbr>).</p>
+<p>Cependant, <strong>il existe des commandes qui peuvent définitivement endommager votre projet</strong>, la plus destructrice étant <code>git push --force</code> que vous ne devriez jamais utiliser. Faites très attention en lisant des tutoriels en ligne car certains sont à destination d’utilisateurs avancés et recommandent ces commandes “à risque”.</p>
+</div>
+</div>
+<div id="gitlocal" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Exercice 1: Premiers pas avec <code>git</code> en local<a href="git.html#gitlocal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dans le cadre de cette formation, un projet d’exemple a été créé pour vous. L’idée est de former des groupes de deux, chaque groupe représentant une équipe. Vous allez donc travailler en binôme avec votre voisin (ou avec une personne de la visio si la formation n’a pas lieu en présentiel).</p>
+<p>Dans cette partie, nous allons adopter un fil rouge en créant un document collaboratif commun et en pratiquant par des exercices les principales situations d’un statisticien qui travaille avec <code>R</code> et <code>GIT</code> via <code>RStudio</code> et <code>GitLab</code>.</p>
+<div class="recommandation">
+<p><strong>Préliminaire: forker le projet</strong> Même si c’est techniquement possible, être plus de 10
+à faire des modifications en simultané sur la branche <code>master</code> est périlleux. Il convient
+donc d’éviter d’être tous en même temps sur le même projet.</p>
+<p>Pour cela, dans chaque équipe
+de 2, une personne doit faire un <abbr title="Copie d'un projet disponible sur un dépôt distant permettant de modifier un projet sans affecter le dépôt d'origine"><b>fork</b></abbr> qui revient à dupliquer le projet pour chacune des équipes. Pour cela, il faut cliquer en haut à droite du projet exemple, qui sert de base à l’exercice.</p>
+<p>La personne qui a initié le <code>fork</code> (pas besoin d’être deux à le faire) doit
+ensuite donner des droits à son/sa binôme (dans <code>members</code> du menu à gauche ). Accorder le droit de <code>maintainer</code> pour commencer.</p>
+</div>
+<div class="exo">
+<p>Exercice 1 : Git en local</p>
+<p>⚠️ N’oubliez pas qu’il faut avoir fait un <code>fork</code> du projet.</p>
+<p>Pour commencer, tout se passe dans l’onglet <code>git</code> de <code>RStudio</code> (en haut à droite) :
+<img src="pics/03_git/onglet_git.png" /></p>
+<p><strong>Question a.</strong> <em><code>clone</code> et modification du fichier<code>.gitignore</code></em></p>
+<p>Clôner le dossier de votre projet d’équipe avec <code>RStudio</code> via le lien <code>SSH</code> du projet sur <code>Gitlab</code>. Ensuite, modifier le fichier <code>.gitignore</code> en y ajoutant les fichiers <code>.pdf</code> et au <code>.html</code>. Penser à sauvegarder le fichier.</p>
+<p><strong>Question b.</strong> <em><code>staging</code></em></p>
+<p>Créer un fichier <code>votre_idep.md</code> et y écrire une phrase au format, sujet-verbe-complément mais majuscule ni ponctuation. Observer le statut du fichier dans l’onglet <code>git</code>.</p>
+<p><strong>Question c.</strong> <em><code>commit</code></em></p>
+<p>Valider cet ajout via le bouton <code>commit</code> en ajoutant un message clair mais bref.</p>
+<p><strong>Question d.</strong> <em><code>push</code></em></p>
+<p>Envoyer cette modification au projet partagé via le bouton <code>push</code> (flèche verte montante).
+:boom: Un des deux membres du groupe (celui qui a été moins rapide) devrait avoir un rejet
+du <code>push</code>. Pas de problème, passer à l’étape suivante (<code>pull</code>) puis refaire cette étape (<code>push</code>)</p>
+<p><strong>Question e.</strong> <em><code>pull</code></em></p>
+<p>Récupérer les modifications du dépôt commun (= le fichier de votre voisin à ce stade) via le bouton <code>pull</code> (flèche bleue descendante).</p>
+<p><strong>Question f.</strong> <em><code>commit-push-pull</code></em></p>
+<p>Recommencer les mêmes opérations modifiant cette fois-ci le fichier de votre voisin. Compléter le texte par une autre phrase.</p>
+</div>
+</div>
+<div id="les-branches-principes" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Les branches : principes<a href="git.html#les-branches-principes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>C’est une des fonctionnalités les plus pratiques de la gestion de version. La création de dans un projet (qui devient ainsi un arbre) permet de développer en parallèle des correctifs ou une nouvelle fonctionnalité sans modifier le dépôt commun. Cela permet de séparer le nouveau développement et de faire cohabiter plusieurs versions, pouvant évoluer séparément ou pouvant être facilement rassemblées. Git est optimisé pour le travail sur les branches.</p>
+<blockquote class="twitter-tweet">
+<p lang="fr" dir="ltr">
+Petite révélation du jour : <a href="https://twitter.com/hashtag/git?src=hash&amp;ref_src=twsrc%5Etfw">#git</a>, c'est le meilleur outil pour te rappeler que nous sommes proches des singes : si t'es pas sur une branche, t'es dans la merde
+</p>
+— Nicolas Delsaux (@riduidel) <a href="https://twitter.com/riduidel/status/1229768054109855747?ref_src=twsrc%5Etfw">February 18, 2020</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>Les branches peuvent avoir des durées de vie plus ou moins longues selon leurs objectifs : nouvelle fonctionnalité, résolution de bugs, environnement de développement ou de production, etc.</p>
+<p>Trois principales fonctionnalités existent, définies par leur nom de commande :</p>
+<ul>
+<li><code>git branch</code> : création d’une branche</li>
+<li><code>git checkout</code> : pour changer de branche</li>
+<li><code>git merge</code> : fusion de branche</li>
+</ul>
+<p>Dans un projet collaboratif, une branche dite <strong>master</strong> joue le rôle du tronc. C’est autour d’elle que vont pousser ou se greffer les branches comme le montre l’exemple ci-dessous.</p>
+<p><img src="pics/03_git/branches_tree.png" style="width:100.0%" /></p>
+</div>
+<div id="branches-et-lien-avec-master" class="section level3 hasAnchor" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> Branches et lien avec <code>master</code><a href="git.html#branches-et-lien-avec-master" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La branche <code>master</code> est la branche principale. Elle se doit d’être “propre”.
+On ne pousse pas des travaux non aboutis sur <code>master</code>, c’est assez mal vu et sources de futurs problèmes.</p>
+<p>Peut-on pousser directement sur <code>master</code> ? Oui, pour des petites corrections, des modifications mineures dont vous êtes certains qu’elles vont fonctionner. Mais sachez que dans le cadre de projets sensibles, c’est strictement interdit. Il y a justement des meilleurs outils pour proposer des changements substantiels. Dans votre organisation, n’ayez pas peur de fixer comme règle l’interdiction de pousser sur <code>master</code>
+(cf. <a href="git.html#orgagit">section précédente</a>), cela obligera l’équipe
+projet à travailler avec rigueur.</p>
+<p>Au moindre doute, créez une branche ! Les branches sont utilisées pour des travaux significatifs :</p>
+<ul>
+<li>vous travaillez seul sur une tâche qui va vous prendre plusieurs heures ou jours de travail (vous ne devez pas pousser sur <code>master</code> des travaux non aboutis);</li>
+<li>vous travaillez sur une fonctionnalité nouvelle et vous souhaiteriez recueillir l’avis de vos collègues avant de modifier <code>master</code>;</li>
+<li>vous n’êtes pas certain de réussir vos modifications du premier coup et préférez faire des tests en parallèle.</li>
+</ul>
+<div class="recommandation">
+<p>⛔ Les branches ne sont pas personnelles : <strong>Toutes les branches sont publiées, le <abbr title="Déplacement des commits d'une branche vers une autre. C'est une pratique dangereuse, à éviter !"><b>rebase</b></abbr> est interdit. Le <abbr title="Envoi de ses nouveaux commit vers le remote"><b>push</b></abbr> force est également interdit.</strong></p>
+<p>⛔ <strong>Tous les merges dans <code>master</code> doivent se faire par l’intermédiaire d’une merge request dans <code>GitLab</code></strong>. En effet, il est très mal vu de merger une branche dans master localement.</p>
+</div>
+<p>Comment nommer les branches ? Là encore, il y a énormément de conventions différentes. Une fréquemment observée est :</p>
+<ul>
+<li>pour les nouvelles fonctionnalités : <code>feature/nouvelle-fonctionnalite</code> où <code>nouvelle-fontionnalite</code> est un nom court résumant la fonctionnalité</li>
+<li>pour les corrections de bug : <code>issue-num</code> où <code>num</code> est le numéro de l’issue</li>
+<li>pour les branches liées à une issue: <code>num-blabla</code> où <code>num</code> est le numéro de l’issue et <code>blabla</code> un titre permettant de comprendre l’objet de la merge request.</li>
+</ul>
+<p>N’hésitez pas à aller encore plus loin dans la normalisation !</p>
+<p>Jusqu’à présent, vous ne travailliez pas simultanément sur un fichier. Les conflits
+étaient donc limités. A partir de maintenant, vous allez découvrir l’une des
+forces de <code>Git</code>: on peut travailler sur le même fichier en même temps.</p>
+<div class="exo">
+<p>Exercice 2 : Cadavre exquis</p>
+<p><strong>Question a.</strong> <em>Création d’une branche locale</em></p>
+<p>Placez-vous sur la branche <code>master</code> dans votre dépôt local.
+Créez une branche dans le dépôt local, en lui donnant un nom comportant votre prénom.</p>
+<p><strong>Question b.</strong> <em>Modification au sein d’une branche</em></p>
+<p>Ouvrez (ou créez) le fichier <code>cadavre_exquis.md</code> dans le dépôt local, et ajoutez-y deux phrases sans aucune ponctuation. Sauvegardez cette modification en faisant un <code>commit</code>. N’oubliez pas de rédiger un message le plus clair possible.</p>
+<p><strong>Question c.</strong> <em>Publication d’une branche</em></p>
+<p>Poussez votre branche vers le dépôt commun (avec <code>push</code>).</p>
+<p><strong>Question d.</strong> <em>Récupération de la branche créée par votre voisin</em></p>
+<p>Récupérez la branche créée par votre voisin (avec <code>pull</code>).</p>
+<p><strong>Question e.</strong> <em>Modifier une autre branche</em></p>
+<p>Placez-vous sur la branche créée par votre voisin. Ouvrez le fichier <code>cadavre_exquis.md</code> figurant dans votre dépôt local. Vous devez normalement voir les deux phrases écrites par votre voisin. Ajoutez la ponctuation à ces deux phrases. Sauvegardez cette modification en faisant un <code>commit</code>. N’oubliez pas de rédiger un message le plus clair possible. Publiez cette modification sur le dépôt distant (avec <code>push</code>).</p>
+<p><strong>Question f.</strong> <em>Récupération des corrections de l’autre personne du binôme</em></p>
+<p>Placez-vous sur la branche que vous avez créée à la question <code>a</code>. Récupérer les modifications apportées à cette branche (avec <code>pull</code>). Ouvrez le fichier <code>cadavre_exquis.md</code>. Vous devez normalement constater que les deux phrases que vous avez écrites ont maintenant une ponctuation correcte.</p>
+</div>
+</div>
+<div id="quelques-compléments-de-git" class="section level3 hasAnchor" number="3.3.5">
+<h3><span class="header-section-number">3.3.5</span> Quelques compléments de GIT<a href="git.html#quelques-compléments-de-git" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>L’outil <code>GIT</code> permet un grand nombre de fonctionnalités avancées. Les manipulations les plus complexes ne peuvent être effectuées qu’en ligne de commande, mode de fonctionnement privilégié des développeurs avancés. Mais pour les statisticiens, il est possible d’effectuer des commandes avancées de façon intégrée à RStudio.</p>
+<p>Une des commandes les plus utiles pour un travail collaboratif pour les statisticiens permet de ne pas partager les bases de données ou tout type de fichier, soit trop volumineux, soit confidentiel :</p>
+<ul>
+<li><code>git ignore</code> : modifier le fichier permet de conserver des fichiers en privé, c’est-à-dire qu’ils n’apparaissent pas dans le dossier partagé.</li>
+</ul>
+<p>Ainsi, <strong>il est crucial de ne pas partager les données</strong> et exclure les fichiers de la forme <code>*.csv</code> ainsi que tous les fichiers de sortie, notamment au format <code>*.html</code> ou <code>*.pdf</code>. Les fichiers à exclure du contrôle de version sont listées dans un fichier nommé <strong><code>.gitignore</code></strong> ( <a href="https://gitlab.com/linogaliana/collaboratif/-/blob/master/.gitignore">exemple ici</a>). Il est normalement créé par défaut dans le répertoire du dépôt. Il suffit alors de le modifier en ajoutant à la ligne les fichiers que l’on souhaite ignorer, par exemple “mon_graphique.pdf” ou alors tous les fichiers au format xls en ajoutant “*.xls”.</p>
+<p>Si le dossier de travail ne comporte pas ce fichier et que vous désirez exclure un type de fichier, par exemple <code>csv</code>, pour le créer et y ajouter les fichiers <code>*.csv</code> par exemple, vous pouvez utiliser le package <code>usethis</code> avec lequel vous deviendrez familier dans la <a href="package.html#package">Partie Package</a> :</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="git.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Taper dans la console RStudio</span></span>
+<span id="cb7-2"><a href="git.html#cb7-2" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_git_ignore</span>(<span class="st">&quot;*.csv&quot;</span>)</span></code></pre></div>
+<div class="recommandation">
+<p>On ne met sous contrôle de version avec git que les fichiers de programmes, semblables à des fichiers texte ( <code>.Sas</code>, <code>.R</code>). Il est important d’exclure les fichiers volumineux (données ou résultats) et bien sûr, les fichiers confidentiels.</p>
+<p>En particulier, il ne faut pas mettre sous contrôle de version, c’est-à-dire qu’il faut inclure dans le fichier <code>.gitignore</code> :</p>
+<ul>
+<li>les données (<code>.csv</code>, <code>.xlsx</code>, <code>.sas7bdat</code>, <code>.Rdata</code>, etc.)</li>
+<li>les fichiers produits grâce au code source (<code>.pdf</code>, <code>.html</code>, <code>.odt</code>, <code>.docx</code>, <code>.xlsx</code>, etc.)</li>
+</ul>
+<p>En particulier, il faut être <strong>extrêmement vigilant</strong> à <strong>ne jamais</strong> mettre sous contrôle de version <strong>des mots de passe</strong> ou des <strong>jetons d’accès</strong> à des API.</p>
+</div>
+<p>La CNIL fournit des conseils aux développeurs pour compléter ces bonnes pratiques (<a href="https://linpricnil.github.io/Guide-RGPD-du-developpeur/">lien</a>).</p>
+<div class="conseil">
+<p>Le site <a href="https://www.toptal.com/developers/gitignore">gitignore.io</a> fournit des modèles de fichiers <code>.gitignore</code> selon le langage utilisé. Ils peuvent servir de base à enrichir en fonction des besoins.</p>
+</div>
+<p>L’un des avantages de <code>Git</code> est qu’on peut toujours revenir en arrière. Ce
+filet de sécurité permet d’oser des expérimentations, y compris au sein
+d’une branche. Il faut être prêt à aller dans la ligne de commande pour cela
+mais l’exercice suivant permettra de dédramatiser ceci.</p>
+<div class="exo">
+<p>Exercice 3 : J’ai supprimé un fichier par erreur ? Ouf, j’utilise Git !</p>
+<p>Maintenant, on va montrer que <code>Git</code> vous évitera une crise de panique
+si vous supprimez un fichier sans faire exprès.</p>
+<ol style="list-style-type: decimal">
+<li>Dans votre branche, ajouter deux fichiers <code>fichier_important.md</code> et <code>brouillon.md</code>
+contenant chacun une phrase. Faire un <code>commit</code> de ce fichier. Pusher.</li>
+<li>Revenir sur <code>master</code>. Regardez l’arborescence des fichiers (dans RStudio ou via
+Windows) : le fichier <code>modification_importante.md</code> n’est plus là: cela vous inquiète-t-il ?</li>
+<li>Retournez sur votre branche. Vous allez faire une bêtise et supprimer les deux fichiers à la fois :</li>
+</ol>
+<ul>
+<li>Avec une organisation sans <code>Git</code>, vous pouvez maintenant paniquer.</li>
+<li>Grâce à <code>Git</code>, vous pouvez rester serein. En effet, vous pouvez retourner en arrière.</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>Ouvrir le menu <code>commit</code> de <code>RStudio</code> et faites <code>Discard All</code> (fonctionne également avec <code>Revert</code>) et répondez oui à la boîte de dialogue qui s’ouvre (après l’avoir lue et comprise). Et vous retrouvez vos deux fichiers.</li>
+</ol>
+<p>Maintenant, une manipulation plus avancée mais qui permet de rassurer :</p>
+<ol style="list-style-type: decimal">
+<li>Supprimez à nouveau les deux fichiers. Cependant, cette fois vous faites un <code>commit</code> (nommer le commit “je suis étourdi”) et un <code>push</code>.</li>
+<li>Vous allez sur la branche de votre camarade et vous rendez compte que le fichier <code>fichier_important.md</code> a disparu. Vous allez essayer de le rétablir.</li>
+<li>Pour cela, aller dans l’historique des commits et identifier le <code>SHA</code> du commit responsable. Taper</li>
+</ol>
+<pre class="shell"><code>git checkout &lt;commit hash&gt; -- fichier_important.md</code></pre>
+</div>
+<p>D’autres fonctionnalités plus avancées existent et pourront être mises à profit si elles sont correctement utilisées:</p>
+<ul>
+<li><code>git tag</code> : sauvegarder une version figée, comme une “photographie” à un instant donné</li>
+<li><code>git log</code> : filtrer les contenus des différences pour rechercher le commit à l’origine d’un changement en particulier.</li>
+<li><code>git blame</code> : lister les modifications d’un fichier donné à une ligne donnée</li>
+</ul>
+<p>Le <code>git blame</code> est très pratique car il permet de filtrer sur les différences précédentes afin de régler des problèmes ou trouver un commit particulier à l’origine d’un bug ou d’une erreur. Il est facilement accessible sur <code>gitlab.com</code> en cliquant sur les fichiers (<em>files</em>) du dépôt (<em>repository</em>), en haut à droite pour chaque fichier de programme (cf. infra).</p>
+<p>D’autres commandes plus périlleuses peuvent permettre un retour en arrière dans l’historique, appelé <em>rebasage</em>. La réécriture de l’historique est un <strong>usage non recommandé</strong> pour une utilisation non approfondie comme un projet statistique en équipe. Si vous souhaitiez toutefois vous écarter des sentiers battus et tester ces commandes (telles que <code>git rebase</code><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> ou <code>git push --force</code>), appliquez le <strong>conseil de survie</strong> suivant avant toute manipulation : effectuez une sauvegarde manuelle de votre repository, par l’intermédiaire d’un copié-collé dans un autre dossier de votre ordinateur. Sans cela, vous risqueriez d’endommager votre repository et de perdre définitivement des informations.</p>
+<p>Pour aller plus loin, des ressources internes au SSP existent (plutôt destinées à des développeurs) :</p>
+<ul>
+<li><a href="https://romain-warnan.github.io/git-au-quotidien"><code>GIT</code> au quotidien</a> par Romain Warnan<br />
+</li>
+<li>des supports du SNDI sur les <a href="http://formation-git-sndi-lille.pages.innovation.insee.eu/cours/#/">bases de <code>GIT</code></a></li>
+<li>la documentation AUSV3 sur <a href="https://gitlab.insee.fr/infrastructure/lss/ausv3/documentation-utilisateurs/-/wikis/Logiciels/Git">quelques manipulations courantes avec <code>GIT</code></a></li>
+<li>utiliser <code>GIT</code> avec RStudio <a href="https://www.book.utilitr.org/git.html">par utilitR</a></li>
+</ul>
+<p>Les ressources externes très complètes sont disponibles, citons notamment un <a href="https://git-scm.com/book/fr/v2">livre en français</a> accessible en ligne et la <a href="https://git-scm.com/doc">documentation en ligne</a> de <code>GIT</code>.</p>
+<!----
+### Vocabulaire 
+
+En résumé, voilà les principaux concepts présentés et qui seront utiles pour la pratique de la gestion de version :
+
+* `repository` : le dossier partagé qui contient toutes les informations
+* `commit` : modification validée à un instant donné, par extension l'état du projet à cet instant
+* `hash` : un identifiant unique pour chaque commit, contenant notamment l'horodatage
+* `checkout` : un déplacement de votre version locale vers un commit donné
+* `branche` : une ligne de développement parallèle au sein du projet
+* `merge` : la fusion de une ou plusieurs branches
+* `remote` : un serveur distant ayant une copie de repository
+* `clone` : récupération du dossier depuis le remote (pour la première fois)
+* `pull` : récupération des nouveaux commits en local depuis le remote
+* `push` : envoi de ses nouveaux commit vers le remote
+------>
+</div>
+</div>
+<div id="gitlab" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> <code>GitLab</code> <i class="fab fa-gitlab"></i>, aperçu de la plateforme de partage de code<a href="git.html#gitlab" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><code>GitLab</code> est une plateforme facilitant l’utilisation de <code>Git</code>, qui permet de travailler de façon collaborative dans le développement informatique, par équipe ou non, pour un code qui évolue constamment. Elle comporte une dimension de réseau social du code qui permet de suivre un projet et y participer. Les utilisateurs ont par exemple un profil qui rassemble leurs différents projets.</p>
+<p>Un projet sous GitLab se présente de la manière suivante:</p>
+<div class="figure">
+<img src="pics/03_git/readme.png" alt="" />
+<p class="caption">Interface GitLab</p>
+</div>
+<p>Le fichier <code>README.md</code> s’affiche automatiquement et il est mis en forme par défaut. Il présente des informations utiles pour la compréhension de l’objectif du projet, son installation, etc. On peut naviguer dans l’arborescence d’un dépôt facilement mais certains types de fichiers s’affichent mal (ex: <code>html</code> car ils n’ont pas vocation à être partagés).</p>
+<p>Les principales fonctionnalités sont présentes dans les onglets d’un projet sous GitLab:</p>
+<ol style="list-style-type: decimal">
+<li><code>Repository</code>: le dépôt, c’est le centre du contrôle de version</li>
+<li><code>Issues</code>: espace de discussion, de suggestions ou demandes.</li>
+<li><code>Merge Requests</code>: suggestion de modifications en proposant au(x) gestionnaire(s) du dépôt de fusionner des branches</li>
+<li><code>CI/CD</code>: espace dédié à l’<abbr title="pratique consistant à vérifier de manière  automatique à chaque modification de code source que les modifications n'introduisent pas d'erreur"><b>intégration continue</b></abbr> (cf. Section avancée ** sur le sujet)</li>
+<li><code>Wiki</code>: espace de documentation collaboratif séparé des fichiers du dépôt (<a href="https://github.com/Rdatatable/data.table/wiki">exemple</a>). Cela implique que la documentation n’est pas associée à un fichier du dépôt. Il s’agit également d’un dépôt git.</li>
+<li><code>Snippets</code>: morceaux de code à conserver qui peuvent être utiles dans le futur.</li>
+</ol>
+<p>Ce sont sur les trois premiers points que reposent l’immense majorité des fonctionnalités.</p>
+<div id="repository" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> <code>Repository</code><a href="git.html#repository" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le dépôt regroupe les principales fonctionnalités reliées au contrôle de version. Il indique les fichiers du projet et liste les commits par ordre chronologique. Le navigateur de fichier permet même de modifier /commiter directement en ligne. Pour un fichier donné, il permet d’afficher l’historique des modifications (en haut à droite). Il permet également de visualiser les branches et leur trajectoire et de les comparer entre elles avant de proposer une <code>merge request</code> (cf. ci-après).</p>
+</div>
+<div id="issues" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> <code>Issues</code><a href="git.html#issues" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>C’est l’espace de discussion du projet. Un <a href="https://github.com/InseeFrLab/utilitR/issues">exemple sur le <code>GitHub</code> InseeFrLab</a>. Par l’intermédiaire de différents sujets ou tickets, cet espace permet de :</p>
+<ul>
+<li>signaler des <em>bugs</em> (à la manière d’un <em>ticket</em>)</li>
+<li>discuter des évolutions d’un projet et proposer des changements</li>
+<li>évoquer des pistes de modifications qui sont à creuser</li>
+</ul>
+<p>Ces échanges prennent la forme d’un forum où les sujets sont regroupés sous la forme d’<em>issues</em> (problèmes) qui peuvent être identifiées grâce à des labels. Un des avantages est de pouvoir intégrer des passages de code ou de faire des références croisées entre les issues.</p>
+<p><img src="pics/03_git/issues_list.png" /></p>
+<p>Pour ouvrir une nouvelle <em>issue</em>, par exemple pour discuter d’une modification avant de la proposer ou signaler un problème qu’on ne résoud pas immédiatement, on clique en haut à droite sur le bouton dédié :</p>
+<p><img src="pics/03_git/new_issue.png" /></p>
+<p>Il ne faut pas hésiter à ouvrir des <code>issues</code> pour prévoir des modifications dans le futur, signaler des points à régler ou à avancer. C’est un outil efficace pour se répartir le travail et cela évite de nombreux échanges mail, avec l’avantage d’être archivé et visible par tous les contributeurs au projet (même ceux qui ne sont pas encore arrivés).</p>
+<p>Un aspect très pratique est qu’il est possible de faire référence aux <em>issues</em> dans les messages de <code>commit</code> en utilisant le numéro de l’issue précédé du signe <code>#</code>, par exemple <code>#12</code>. Dans ce cas, automatiquement, <code>GitLab</code> affichera une référence au <code>commit</code> dans la page de l’<em>issue</em> (et le lien url cliquable associé ! ).</p>
+<div class="conseil">
+<p>Il est possible de fermer automatiquement une <em>issue</em> en faisant précéder l’appel d’une <em>issue</em> par le terme <code>Closes</code>. Cela peut être fait dans un message de commit ou dans la description d’une <em>merge request</em>. Par exemple,</p>
+<pre class="shell"><code>Le problème des données manquantes est réglé
+
+Closes #12</code></pre>
+<p>fermera automatiquement l’<em>issue 12</em> sur la page sur <code>gitlab.com</code> du projet.</p>
+<p>Il existe une astuce bien pratique pour automatiquement fermer une <code>issue</code> quand on travaille avec une branche. Si comme nom de branche, on donne <code>xx-blabla</code> où <code>xx</code> est le numéro de l’<em>issue</em>, alors au moment de la création de la <em>merge request</em>, le commentaire sera automatiquement alimenté par <code>Closes #xx</code>. Lorsque cette <em>merge request</em> sera validée, <code>#xx</code> sera automatiquement fermée.</p>
+</div>
+<p>Enfin, il est possible d’avoir un affichage en tableau en cliquant à gauche sur <code>Boards</code> ou encore d’associer des <em>issues</em> à des <code>milestones</code> (jalons) qui sont des étapes permettant de suivre l’évolution d’un projet.</p>
+<p><img src="pics/03_git/milestones.png" /></p>
+</div>
+<div id="exercice-4-ouvrir-et-organiser-les-issues" class="section level3 hasAnchor" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Exercice 4 : Ouvrir et organiser les <em>issues</em><a href="git.html#exercice-4-ouvrir-et-organiser-les-issues" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Au début d’une tâche particulière ou d’un projet, il est recommandé d’ouvrir des <em>issues</em>. Prenant la forme d’un espace de discussion, elles correpondront à la fin à des nouvelles fonctionnalités (en anglais, <em>features</em>). Les <em>issues</em> permettent également de signaler des bugs constatés, de se les répartir et d’indiquer s’ils sont réglés ou s’ils ont avancés.</p>
+<p>Ces <em>issues</em> seront fermées au fur et à mesure que les fonctionnalités seront implémentées ou bien que vous aurez abandonné vos idées. Des <em>labels</em> peuvent être utilisés pour classer les <em>issues</em>. Il est possible de les affecter à une personne en particulier, fixer une date de rendu, etc.</p>
+<p>Tout se passe sur la page du projet <code>GitLab</code> (menu déroulant à gauche) :</p>
+<p><img src="pics/03_git/new_issue.png" /></p>
+<div class="exo">
+<p>Exercice 2 : Premiers pas sur Gitlab</p>
+<p><strong>Question a.</strong> <em>Ouverture et attribution</em></p>
+<p>Ouvrir une <em>issue</em> concernant le fichier de votre voisin et indiquant qu’il faut corriger les majuscules et la ponctuation. Lui attribuer l’<em>issue</em> via <code>@idep</code>.</p>
+<p><strong>Question b.</strong> <em>Règlement</em></p>
+<p>Corriger votre fichier <code>votre-idep.md</code> par un <code>commit</code> puis un <code>push</code>.</p>
+<p><strong>Question c.</strong> <em>Clôture</em></p>
+<p>Vérifier via un <code>pull</code> que votre voisin a corrigé son texte et clôturer l’<em>issue</em> sur <code>GitLab</code>.</p>
+</div>
+</div>
+<div id="merge-requests-mr" class="section level3 hasAnchor" number="3.4.4">
+<h3><span class="header-section-number">3.4.4</span> Merge requests (MR)<a href="git.html#merge-requests-mr" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>C’est l’espace pour gérer des fusions de branches, c’est-à-dire le fait de transmettre à la branche commune des modifications en les validant. Cela peut venir à la suite :</p>
+<ul>
+<li>d’une ou plusieurs <em>issues</em> qui ont été créées et discutées</li>
+<li>d’une création de branche afin de propose de l’intégrer</li>
+</ul>
+<p><code>GitLab</code> facilite énormément le travail de fusion de branches (MR). Si les modifications proposées sont faites avec méthode, cela évite le passage fastidieux par la ligne de commande. Pour créer une nouvelle <em>merge request</em>, on clique en haut à droite sur <code>New Merge request</code>. On sélectionne ensuite la branche <code>source</code> (celle où on a fait les modifications) et la branche <code>target</code> (celle qu’on veut modifier)</p>
+<p><img src="pics/03_git/MR2.png" /></p>
+<p>On clique sur <code>Compare branches and continue</code> pour arriver sur la page permettant de décrire la <code>merge request</code>. On aide le(s) gestionnaire(s) du projet en faisant en sorte d’être explicite sur l’objectif de la <code>merge request</code>. On peut notamment faire référence à des <em>issues</em> comme <code>#19</code> dans l’exemple ci-dessous. On donne un titre explicite à la merge request en ajoutant le préfixe <code>WIP:</code> si celle-ci n’est pas encore finalisée (permet de mentionner précocément au gestionnaire qu’on avance sur le développement d’une branche)</p>
+<p>Une bonne pratique est de proposer les options suivantes:</p>
+<ul>
+<li><code>Delete source branch when merge request is accepted</code>: effacer la branche sur le dépôt commun pour éviter que quelqu’un l’édite alors qu’elle n’est plus d’actualité.</li>
+<li><code>Squash commits when merge request is accepted</code>: Regrouper tous les <code>commits</code> (potentiellement très nombreux dans l’ancienne branche) en un seul dans la branche de destination. Cela évite, sur les <strong>gros projets</strong>, des branches avec des milliers de <em>commits</em>. Pour les petites modifications, c’est-à-dire les branches avec peu de <code>commits</code>, on peut éviter cette option et laisser l’historique dans la branche fusionnée.</li>
+</ul>
+<p><img src="pics/03_git/MR3.png" /></p>
+<p>Vous pouvez voir, en dessous, les changements induits si la MR est acceptée. Lorsque la <code>MR</code> est soumise, <code>GitLab</code> inspecte les conflits entre les fichiers. S’il n’y a pas de conflit, la <code>MR</code> peut être acceptée directement depuis <code>GitLab</code> en cliquant sur le bouton vert <code>Merge</code>:</p>
+<p><img src="pics/03_git/MR4.png" /></p>
+<p>En cas de conflit, <code>GitLab</code> refuse le <code>merge</code> automatique et propose des commandes:</p>
+<p><img src="pics/03_git/MR5.png" /></p>
+<p>Il y a deux philosophies dans le domaine:</p>
+<ul>
+<li>C’est à la personne qui propose la <code>merge request</code> de proposer une copie propre</li>
+<li>C’est au(x) gestionnaire(s) de nettoyer et harmoniser</li>
+</ul>
+<p>Les gros projets <em>open-source</em> fonctionnent plutôt de la première manière. Il s’agit de la pratique la plus prudente.</p>
+<p>Dans des cas rares, vous vous devez passer par la ligne de commande pour des MR. Suivez précisément les indications du <code>merge locally</code> et n’oubliez surtout pas l’option <code>--no-ff</code> lors de l’étape de <code>merge</code> sans quoi vous réécrirez l’historique ce qui peut endommager votre dépôt.</p>
+<p>La logique générale pour les étapes de <code>merge locally</code> est la suivante :
+1. On met à jour la branche locale cible <code>origin</code> (possible aussi via les menus <code>RStudio</code> en faisant un <code>pull</code>) puis on passe sur la branche source (là où sont les changements qu’on veut transmettre).
+2. On sélectionne <strong>à la main</strong> les modifications dans les programmes par l’intermédiaire des <code>HEAD</code> qui sont apparus dans les codes.
+3. On applique les lignes de commande de l’étape 3 (en ligne de commande avec précaution).
+4. On transmet au dépôt partager avec un <code>push</code> (possible via les menus <code>RStudio</code>).</p>
+<div class="recommandation">
+<p>Le rôle de gestionnaire des <code>merge request</code> dans un projet collaboratif est important. Il faut <strong>absolument</strong> bannir les usages de <code>push force</code> qui peuvent déstabiliser les copies locales des collaborateurs. S’il est nécessaire de faire un <code>push force</code>, c’est qu’il y a un problème dans la branche, à identifier et régler <strong>sans</strong> faire <code>push force</code></p>
+<div class="figure">
+<img src="https://miro.medium.com/max/400/0*XaLzNzYkA6PZjbl9.jpg" alt="" />
+<p class="caption">Attention au –force: <a href="https://estl.tech/a-gentler-force-push-on-git-force-with-lease-fb15701218df" class="uri">https://estl.tech/a-gentler-force-push-on-git-force-with-lease-fb15701218df</a></p>
+</div>
+</div>
+</div>
+<div id="exercice-4-fusionner-les-travaux-avec-des-merge-requests" class="section level3 hasAnchor" number="3.4.5">
+<h3><span class="header-section-number">3.4.5</span> Exercice 4 : Fusionner les travaux avec des <code>Merge Requests</code><a href="git.html#exercice-4-fusionner-les-travaux-avec-des-merge-requests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les <code>merge requests</code> (MR) sont sans doute la fonctionnalité la plus pratique. En ouvrant une MR, il est crucial de :</p>
+<ul>
+<li>donner un titre explicite (comme on donne un objet à un mail);</li>
+<li>donner des détails dans le message (comme pour les <code>commit</code>).</li>
+</ul>
+<p>Le cas échéant, il est très pratique d’ajouter dans le corps du message <code>close #xx</code> où <code>xx</code> est le numéro de l’<em>issue</em> décrivant la fonctionnalité que la <code>MR</code> implémente. Lorsque la <code>MR</code> sera fusionnée, l’<em>issue</em> sera automatiquement fermée et un lien sera créé entre l’<em>issue</em> et la <code>MR</code>. Cela vous permettra de comprendre, plusieurs mois ou années plus tard, comment et pourquoi telle ou telle fonctionnalité a été implémentée.</p>
+<p>Une fois une <code>MR</code> ouverte, il est précieux de solliciter une relecture. En effet, personne (<a href="https://twitter.com/hadleywickham/status/589068687669243905">même les meilleurs!</a>) n’est à l’abri d’une erreur.</p>
+<p><strong>Les merge requests sont des espaces de discussion</strong>. Vous pouvez commenter une proposition de modification en particulier ou bien suggérer une modification.</p>
+<p>Lorsqu’elles sont acceptées, les suggestions sont appliquées au moyen d’un commit. Cela permet une parfaite traçabilité des modifications.</p>
+<div class="exo">
+<p>Exercice 4 : Merge Request</p>
+<p><strong>Question a.</strong> <em>Ouvrir une MR</em></p>
+<p>Créez une <code>merge request</code> dans GitLab. Dans cette <code>merge request</code>, vous devez proposer d’ajouter à la branche <code>master</code> du dépôt commun les modifications qui ont été développées dans la branche que vous avez créée au cours de l’exercice 2. Autrement dit, vous proposez d’ajouter au fichier <code>cadavre_exquis.md</code> les deux phrases que vous avez écrites dans votre branche, et que votre voisin a corrigées.</p>
+<p><strong>Question b.</strong> <em>Contribuer à une MR</em></p>
+<p>Dans GitLab, allez dans la <code>merge request</code> créée par votre voisin, et contribuez à la discussion par un message donnant votre avis sur les modifications proposées.
+<strong>N’acceptez pas les MR, c’est l’objet du prochain exercice</strong></p>
+<!---
+**Question c.** *Régler une MR*
+
+Dans GitLab, fusionnez la branche de votre voisin avec la branche `master`. Retournez dans Rstudio. Placez-vous sur la branche `master` de votre dépôt local, puis récupérez depuis le dépôt commun les modifications apportées à cette branche (avec `pull`). Ouvrez le fichier `cadavre_exquis.md`. Vous devez normalement constater que le fichier contient désormais les phrases que vous et votre voisin avez écrites.
+----->
+</div>
+<p>Usuellement, c’est la seule responsabilité spécifique des mainteneurs :
+seuls eux peuvent fusionner dans <code>master</code>. Il leur appartient de veiller à la
+bonne qualité des <code>merge requests</code>.</p>
+<p>Gitlab propose deux options lors du <em>merge</em> :
+* <code>Delete source branch when merge request is accepted</code>: supprimer la branche. C’est fortement recommandé car cela évite qu’un contributeur reprenne, après plusieurs mois d’inactivité d’une branche, qui aurait accumulé du retard par rapport à <code>master</code>, une branche.
+* <code>Squash commits when merge request is accepted</code>: Là, vous devrez faire preuve de discernement. L’habitude est de faire des <code>squash and merge</code> (pratique la plus largement répandue). Cependant, il peut y avoir des cas où vous préférerez conserver l’historique des commits (c’est plus rare). Très franchement, ce sujet n’est pas le plus important.</p>
+</div>
+<div id="les-groupes" class="section level3 hasAnchor" number="3.4.6">
+<h3><span class="header-section-number">3.4.6</span> Les groupes<a href="git.html#les-groupes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Quand un projet est important, on peut créer un groupe qui permet d’avoir une arborescence de dossiers:</p>
+<p><img src="pics/03_git/page_Drees_gitlab.png" style="width:100.0%" /></p>
+</div>
+</div>
+<div id="orgagit" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Organiser le travail collaboratif<a href="git.html#orgagit" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Les outils de gestion de version permettent des usages multiples afin d’organiser efficacement la collaboration. Cette section propose une synthèse des usages de <code>Git</code> dans la communauté <code>R</code>, adaptés à fois à la configuration à l’Insee et au mode de travail des statisticiens.</p>
+<div class="remarque">
+<p>Cette formation adopte le parti pris de suivre le <code>GitHub Flow</code> dont une rapide description peut être trouvée sur <a href="https://guides.github.com/introduction/flow/">cette page</a> et qui a pour mérite d’être le plus simple.</p>
+<p>En effet, des habitudes se sont imposées peu à peu dans la
+communauté R, essentiellement au travers des collaborations sur la plateforme
+<code>GitHub</code> (plateforme de gestion de code similaire à GitLab). Ces usages, semblables à des normes sociales, vous permettront d’acquérir une certaine maîtrise de <code>Git</code>. Ensuite, au fur et à mesure de l’avancée de vos projets, vous pourrez adapter plus finenement ce fonctionnement à vos besoins et exploiter les nombreuses possibilités offertes par le contrôle de version. Cela n’est absolument pas gênant, à partir du moment où vous comprenez ce que vous faites.</p>
+<p>Vous devez savoir qu’il y a plusieurs méthodes de travail avec <code>git</code> (<em>flow</em>, en anglais). Vous pourrez trouvez des dizaines d’articles en ligne et d’ouvrages sur ce sujet dont chacun prétend avoir trouvé la meilleure organisation du travail (<code>Git flow</code>, <code>GitHub flow</code>, <code>GitLab flow</code>…). Ne lisez pas trop ces livres ou articles sinon vous serez perdus (un peu comme avec les magazines destinés aux jeunes parents ou les conseils pour devenir millionnaires).</p>
+</div>
+<p>Voici la marche à suivre lors de la création d’un nouveau projet :</p>
+<ul>
+<li>Vous devez identifier les responsables de la maintenance du projet. Dans <code>GitLab</code>, c’est facile, c’est le rôle de <em>Mainteneur</em> (droits d’écriture sur <code>master</code>).</li>
+<li>Chaque mainteneur a une responsabilité identique et élevée : n’accordez pas les droits de mainteneur sur votre repository à la légère, vous pourriez le regretter.</li>
+<li>C’est au(x) mainteneur(s) du <abbr title="Dossier partagé qui contient toutes les informations"><b>repository</b></abbr> de définir les règles d’organisation du travail (ici, ce sera le <code>GitHub flow</code>).</li>
+<li>Idéalement, ces règles doivent être précisément décrites dans un fichier nommé <code>CONTRIBUTING.md</code> placé à la racine du projet. Il permettra à toute personne rejoignant le projet en cours de route de comprendre les différentes modalités de contribution.</li>
+<li>Il est essentiel que chaque personne qui contribue au projet se conformer à ces règles.</li>
+</ul>
+<p><code>Git</code> est un outil puissant et flexible, adaptable à un grand nombre d’organisation du travail.
+Dès lors, les problèmes rencontrés ne sont généralement pas liés à <code>Git</code>
+mais à une mauvaise définition en amont de l’organisation du travail ou bien
+à son non-respect par les mainteneurs.</p>
+<p>L’expérience enseigne que si vous n’avez pas réfléchi à l’organisation du travail,
+il est à peu près certain que vous rencontrerez des problèmes.
+Des difficultés peuvent en particulier apparaître dans une
+équipe dont personne n’aurait d’expérience avec <code>Git</code>. Grâce aux fonctionnalités
+de <code>Gitlab</code>, toutes les contributeurs d’un projet n’ont pas besoin de connaître
+<code>Git</code>. Néanmoins, il est mieux que ceux ayant la responsabilité la plus élevés, à savoir
+les droits d’écriture dans <code>master</code>, aient des connaissances en <code>Git</code> pour
+ne pas mettre en péril un projet par une manipulation hasardeuse
+(ça n’arrive pas souvent et il y a des filets de sécurité avant de le faire).</p>
+<p>Pour les modifications quotidiennes,
+il est possible d’effectuer un <code>commit</code> sur <code>master</code>.
+Cela est possible si dans l’organisation du travail, vous avez les droits
+de type <em>Mainteneur</em>. Le premier exercice <a href="git.html#gitlocal"><strong><code>Git</code> en local</strong></a> en
+donne un exemple. Cependant, pour des changements plus profonds ou
+avec des collaborateurs moins réguliers, il est recommandé d’organiser le
+travail selon les cinq étapes suivantes.</p>
+<div id="créer-une-branche" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Créer une branche<a href="git.html#créer-une-branche" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Une branche permet de développer “dans son coin” (seul ou à plusieurs) et d’expérimenter des modifications et des améliorations avant de les proposer au dépôt commun.</p>
+<p><img src="pics/03_git/flow1_branch.png" /></p>
+</div>
+<div id="modifier-et-valider-ces-changements" class="section level3 hasAnchor" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Modifier et valider ces changements<a href="git.html#modifier-et-valider-ces-changements" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>C’est l’étape des <code>commits</code>. Le travail se fait sur la branche en veillant à bien commenter les modifications et à bien les distinguer (il vaut mieux trop de <code>commit</code> que pas assez).</p>
+<p><img src="pics/03_git/flow2_commit.png" /></p>
+</div>
+<div id="ouvrir-une-demande-de-fusion" class="section level3 hasAnchor" number="3.5.3">
+<h3><span class="header-section-number">3.5.3</span> Ouvrir une demande de fusion<a href="git.html#ouvrir-une-demande-de-fusion" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Une fois la série de modifications terminée ou le temps venu de rassembler les différents travaux, c’est par l’intermédiaire de la fusion entre la branche et le <code>master</code> (<code>Pull Request</code> sur <code>GitHub</code> ou <code>Merge Request</code> sur <code>GitLab</code>). Il faut alors “demander” de fusionner et c’est très bien intégré dans l’environnement <code>GitLab</code> (cf. ci-après). Cela initie un échange sur les modifications apportées.</p>
+<p><img src="pics/03_git/flow3_MR.png" /></p>
+</div>
+<div id="échanger-entre-collaborateurs-et-vérifier-le-code" class="section level3 hasAnchor" number="3.5.4">
+<h3><span class="header-section-number">3.5.4</span> Échanger entre collaborateurs et vérifier le code<a href="git.html#échanger-entre-collaborateurs-et-vérifier-le-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Une fois la <code>Merge Request</code> ouverte, il est possible d’échanger des images, de commenter, de poser des questions et d’y répondre. Il est par exemple possible de mentionner un membre de l’équipe par l’intermédiaire de <code>@personne</code>.</p>
+<p><img src="pics/03_git/flow4_discuss.png" /></p>
+</div>
+<div id="fusionner-la-branche-avec-master" class="section level3 hasAnchor" number="3.5.5">
+<h3><span class="header-section-number">3.5.5</span> Fusionner la branche avec <code>master</code><a href="git.html#fusionner-la-branche-avec-master" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Une fois les vérifications faites, la fusion conserve l’historique des modifications et l’ensemble des <code>commits</code>.</p>
+<p><img src="pics/03_git/flow5_merge.png" /></p>
+</div>
+<div id="exercice-5-résoudre-les-conflits-cest-facile." class="section level3 hasAnchor" number="3.5.6">
+<h3><span class="header-section-number">3.5.6</span> Exercice 5 : Résoudre les conflits, c’est facile.<a href="git.html#exercice-5-résoudre-les-conflits-cest-facile." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Si vous adoptez les règles précédentes, <code>master</code> sera surtout modifié via des <code>merge requests</code>. Vous ne devriez donc jamais avoir de conflits sur master.</p>
+<p>Tous les conflits devraient donc survenir dans les branches. Les <code>merge requests</code> en conflit sont impossibles à merger. Il n’y a donc pas de possibilité de commettre un erreur par mégarde (c’est la raison pour laquelle il est interdit de merger dans master localement).</p>
+<p>Si votre branche est en conflit, <strong>le conflit doit être résolu dans la branche et pas dans master</strong>. Voici la marche à suivre :</p>
+<ul>
+<li>appliquez le conseil de survie : faites une copie de sauvegarde de votre clone (avec l’expérience, vous pourrez vous passer de cette étape)</li>
+<li>dans votre clone, placez vous sur la branche en question <code>git checkout nom-de-la-branche</code></li>
+<li>mergez master dans la branche <code>git merge master</code></li>
+<li>résolvez les conflits</li>
+<li>finalisez le commit de merge</li>
+<li>poussez vers GitLab</li>
+</ul>
+<p>Rappel : <strong>Il est interdit de faire l’inverse (merger localement la branche dans master)</strong></p>
+<div class="exo">
+<p>Exercice 5 : Gérer des conflits dans une branche</p>
+<p><strong>Question a.</strong> Revenez sur la branche <code>master</code>. Vous êtes subitement atteint
+d’une double personnalité 😵
+et oubliez que vous avez déjà proposé des changements.
+Vous ouvrez une branche. Refaire l’exercice 3
+(questions <code>a</code> à <code>d</code>) avec une branche nommée <code>nom-prenom-double</code> et ouvrir une
+<em>merge request</em>.</p>
+<p><strong>Question b.</strong> Vous revenez tous deux à votre état normal. Sur <code>Gitlab</code>, une première personne
+valide sa <em>merge request</em></p>
+<p><strong>Question c.</strong> En local, vous faites tous deux un <code>pull</code> pour récupérer la modification
+du dépôt:</p>
+<ul>
+<li>La personne qui n’a pas fait le <code>merge</code> de sa branche se place sur sa branche. Elle doit mettre à jour
+sa branche pour tenir compte des modifications de <code>master</code>:
+<ul>
+<li>Il faut taper dans l’invite de commande <code>git merge master</code></li>
+<li>Un conflit doit apparaître: il se résout en éditant directement le fichier. Ne pas supprimer la phrase
+de votre camarade mais accoler votre texte à celle-ci</li>
+</ul></li>
+<li>La personne qui a fait le <code>merge</code> retombe dans sa deuxième personnalité et se place dans sa branche <code>*-double</code>. Elle doit mettre à jour
+sa branche <code>*-double</code> pour tenir compte des modifications de <code>master</code>:
+<ul>
+<li>Il faut taper dans l’invite de commande <code>git merge master</code></li>
+<li>Un conflit doit apparaître: il se résout en éditant directement le fichier. Ne pas supprimer la phrase
+de votre première personnalité mais accoler votre nouveau texte à celle-ci</li>
+</ul></li>
+</ul>
+<p><strong>Question d.</strong> Sur Gitlab, valider la <em>merge request</em> de la personne qui n’a pas eu de MR validée jusqu’à présent.
+Regarder dans l’interface Gitlab, le fichier <code>cadavre_exquis.md</code></p>
+<p><strong>Question e.</strong> Retour dans la deuxième personnalité aussi pour la deuxième personne. Chacun sur sa branche <code>-double</code>, suivre
+la procédure de nettoyage du conflit pour être raccord avec <code>master</code>. La personne la plus rapide à régler le conflit valide sa
+<em>merge request</em>, la suivante devra à nouveau harmoniser sa version avec <code>master</code></p>
+</div>
+</div>
+<div id="exercice-6-contribuer-à-un-dépôt-sans-droits-sur-master" class="section level3 hasAnchor" number="3.5.7">
+<h3><span class="header-section-number">3.5.7</span> Exercice 6 : Contribuer à un dépôt sans droits sur <code>master</code><a href="git.html#exercice-6-contribuer-à-un-dépôt-sans-droits-sur-master" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>À l’issue de cet exercice, vous devriez avoir un premier cadavre exquis. Pour garder trace de ces monuments de littérature, vous allez les
+soumettre au dépôt d’exemple. Il est tout à fait possible de soumettre des modifications à un dépôt sur lequel on n’a pas le droit d’écriture
+par l’intermédiaire d’un <code>fork</code>:</p>
+<div class="exo">
+<ol style="list-style-type: decimal">
+<li>Se trouver un nom de groupe qui va servir à nommer le fichier.
+L’une des personnes du groupe crée une branche <code>finalisation</code>. Elle se place dessus et change le nom du <code>cadavre-exquis.md</code>. Par exemple, si vous avez décidé d’être l’équipe Oulipo, nommer le fichier <code>oulipo.md</code></li>
+<li>Ne pas oublier de faire add, commit, push</li>
+<li>Dans le dépôt d’<a href="https://gitlab.com/linogaliana/template-projet">exemple</a>, ouvrir une <code>merge request</code> en mettant votre dépôt et la branche <code>finalisation</code> dans la partie <code>Source branch</code> . Remplir la <em>merge request</em></li>
+</ol>
+<div class="figure">
+<img src="pics/03_git/mrfork.png" alt="" />
+<p class="caption">Interface GitLab</p>
+</div>
+</div>
+<div class="recommandation">
+<p>Faire une <em>merge request</em> via la branche <code>master</code> d’un <code>fork</code> est très mal vu. En effet,
+il faut souvent faire des contorsionnements pour réussir à faire coïncider deux histoires
+qui n’ont pas de raison de coïncider.
+<a href="https://gist.github.com/Chaser324/ce0505fbed06b947d962#submitting-a-pull-request">L’aide officielle de <code>GitHub</code></a>
+recommande de faire un <code>rebase</code>: souvenez-vous, on vous a dit que c’était mal de faire ça ! On s’évite beaucoup
+de peine (et on évite une grosse galère au mainteneur du dépôt forké) en évitant simplement de faire le
+merge depuis son propre <code>master</code>. L’astuce de le faire depuis une branche différente fonctionne très bien.</p>
+</div>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Plus précisément, chaque modification est identifiée de manière unique par un code <code>SHA</code> auquel est associé l’auteur, l’horodatage et des méta-données (par exemple le message descriptif associé)<a href="git.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Le <abbr title="Déplacement des commits d'une branche vers une autre. C'est une pratique dangereuse, à éviter !"><b>rebase</b></abbr> est un type particulier de <code>merge</code> qui réécrit l’histoire d’une branche (<a href="https://git-scm.com/book/fr/v2/Les-branches-avec-Git-Rebaser-Rebasing">plus de détails</a>). C’est donc une pratique dangereuse car elle risque de rendre obsolète les branches de vos collaborateurs sur lesquelles ils ont potentiellement déjà travaillr.<a href="git.html#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="présentation-de-r-et-de-son-environnement.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="rmd.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

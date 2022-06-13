@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 6 Programmation fonctionnelle avec R et Rstudio | Résumé des cours et TP - DU Dataviz</title>
+  <meta name="description" content="Support à destination des R-newbies" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 6 Programmation fonctionnelle avec R et Rstudio | Résumé des cours et TP - DU Dataviz" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Support à destination des R-newbies" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 6 Programmation fonctionnelle avec R et Rstudio | Résumé des cours et TP - DU Dataviz" />
+  
+  <meta name="twitter:description" content="Support à destination des R-newbies" />
+  
+
+<meta name="author" content="Romuald ZAMI" />
+<meta name="author" content="et contributeurs" />
+
+
+<meta name="date" content="2022-06-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="rmdexo.html"/>
+<link rel="next" href="package.html"/>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+<link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+<link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+<script>
+function unrolltab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Romuald ZAMI - DU Dataviz</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Préface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributeurs"><i class="fa fa-check"></i>Contributeurs <i class="far fa-user-secret"></i></a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#utilisation-des-icônes"><i class="fa fa-check"></i>Utilisation des icônes</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Objectif de la formation</a></li>
+<li class="chapter" data-level="2" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html"><i class="fa fa-check"></i><b>2</b> Présentation de R et de son environnement</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#quest-ce-que"><i class="fa fa-check"></i><b>2.1</b> Qu’est-ce que <i class="fab fa-r-project"></i> ?</a></li>
+<li class="chapter" data-level="2.2" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#prise-en-main-de-r-studio"><i class="fa fa-check"></i><b>2.2</b> Prise en main de <strong>R-studio</strong></a></li>
+<li class="chapter" data-level="2.3" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#laide-en-ligne"><i class="fa fa-check"></i><b>2.3</b> L’aide en ligne</a></li>
+<li class="chapter" data-level="2.4" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#packages"><i class="fa fa-check"></i><b>2.4</b> Packages</a></li>
+<li class="chapter" data-level="2.5" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#objectifs-du-document"><i class="fa fa-check"></i><b>2.5</b> Objectifs du document</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>3</b> Utiliser <code>GIT</code> avec <i class="fab fa-r-project"></i></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="git.html"><a href="git.html#pourquoi-utiliser-la-gestion-de-version"><i class="fa fa-check"></i><b>3.1</b> Pourquoi utiliser la gestion de version ?</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="git.html"><a href="git.html#conserver-et-archiver-du-code"><i class="fa fa-check"></i><b>3.1.1</b> Conserver et archiver du code</a></li>
+<li class="chapter" data-level="3.1.2" data-path="git.html"><a href="git.html#travailler-efficacement-en-équipe"><i class="fa fa-check"></i><b>3.1.2</b> Travailler efficacement en équipe</a></li>
+<li class="chapter" data-level="3.1.3" data-path="git.html"><a href="git.html#améliorer-la-qualité-des-codes"><i class="fa fa-check"></i><b>3.1.3</b> Améliorer la qualité des codes</a></li>
+<li class="chapter" data-level="3.1.4" data-path="git.html"><a href="git.html#usage-quotidien-un-exemple-avec-le-modèle-ines"><i class="fa fa-check"></i><b>3.1.4</b> Usage quotidien : un exemple avec le modèle Ines</a></li>
+<li class="chapter" data-level="3.1.5" data-path="git.html"><a href="git.html#avec-ou-sans-gestion-de-versions"><i class="fa fa-check"></i><b>3.1.5</b> Avec ou sans gestion de versions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="git.html"><a href="git.html#configurer-un-projet-git-avec-rstudio-à-linsee"><i class="fa fa-check"></i><b>3.2</b> Configurer un projet <code>GIT</code> avec RStudio à l’Insee</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="git.html"><a href="git.html#la-première-fois"><i class="fa fa-check"></i><b>3.2.1</b> La première fois</a></li>
+<li class="chapter" data-level="3.2.2" data-path="git.html"><a href="git.html#au-lancement-de-chaque-projet-cloner-depuis-gitlab.insee.fr"><i class="fa fa-check"></i><b>3.2.2</b> Au lancement de chaque projet, cloner depuis <code>gitlab.insee.fr</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="git.html"><a href="git.html#des-bases-de-git"><i class="fa fa-check"></i><b>3.3</b> Des bases de GIT <i class="fas fa-code-branch"></i></a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="git.html"><a href="git.html#le-b.a-ba"><i class="fa fa-check"></i><b>3.3.1</b> Le B.A-BA</a></li>
+<li class="chapter" data-level="3.3.2" data-path="git.html"><a href="git.html#gitlocal"><i class="fa fa-check"></i><b>3.3.2</b> Exercice 1: Premiers pas avec <code>git</code> en local</a></li>
+<li class="chapter" data-level="3.3.3" data-path="git.html"><a href="git.html#les-branches-principes"><i class="fa fa-check"></i><b>3.3.3</b> Les branches : principes</a></li>
+<li class="chapter" data-level="3.3.4" data-path="git.html"><a href="git.html#branches-et-lien-avec-master"><i class="fa fa-check"></i><b>3.3.4</b> Branches et lien avec <code>master</code></a></li>
+<li class="chapter" data-level="3.3.5" data-path="git.html"><a href="git.html#quelques-compléments-de-git"><i class="fa fa-check"></i><b>3.3.5</b> Quelques compléments de GIT</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="git.html"><a href="git.html#gitlab"><i class="fa fa-check"></i><b>3.4</b> <code>GitLab</code> <i class="fab fa-gitlab"></i>, aperçu de la plateforme de partage de code</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="git.html"><a href="git.html#repository"><i class="fa fa-check"></i><b>3.4.1</b> <code>Repository</code></a></li>
+<li class="chapter" data-level="3.4.2" data-path="git.html"><a href="git.html#issues"><i class="fa fa-check"></i><b>3.4.2</b> <code>Issues</code></a></li>
+<li class="chapter" data-level="3.4.3" data-path="git.html"><a href="git.html#exercice-4-ouvrir-et-organiser-les-issues"><i class="fa fa-check"></i><b>3.4.3</b> Exercice 4 : Ouvrir et organiser les <em>issues</em></a></li>
+<li class="chapter" data-level="3.4.4" data-path="git.html"><a href="git.html#merge-requests-mr"><i class="fa fa-check"></i><b>3.4.4</b> Merge requests (MR)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="git.html"><a href="git.html#exercice-4-fusionner-les-travaux-avec-des-merge-requests"><i class="fa fa-check"></i><b>3.4.5</b> Exercice 4 : Fusionner les travaux avec des <code>Merge Requests</code></a></li>
+<li class="chapter" data-level="3.4.6" data-path="git.html"><a href="git.html#les-groupes"><i class="fa fa-check"></i><b>3.4.6</b> Les groupes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="git.html"><a href="git.html#orgagit"><i class="fa fa-check"></i><b>3.5</b> Organiser le travail collaboratif</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="git.html"><a href="git.html#créer-une-branche"><i class="fa fa-check"></i><b>3.5.1</b> Créer une branche</a></li>
+<li class="chapter" data-level="3.5.2" data-path="git.html"><a href="git.html#modifier-et-valider-ces-changements"><i class="fa fa-check"></i><b>3.5.2</b> Modifier et valider ces changements</a></li>
+<li class="chapter" data-level="3.5.3" data-path="git.html"><a href="git.html#ouvrir-une-demande-de-fusion"><i class="fa fa-check"></i><b>3.5.3</b> Ouvrir une demande de fusion</a></li>
+<li class="chapter" data-level="3.5.4" data-path="git.html"><a href="git.html#échanger-entre-collaborateurs-et-vérifier-le-code"><i class="fa fa-check"></i><b>3.5.4</b> Échanger entre collaborateurs et vérifier le code</a></li>
+<li class="chapter" data-level="3.5.5" data-path="git.html"><a href="git.html#fusionner-la-branche-avec-master"><i class="fa fa-check"></i><b>3.5.5</b> Fusionner la branche avec <code>master</code></a></li>
+<li class="chapter" data-level="3.5.6" data-path="git.html"><a href="git.html#exercice-5-résoudre-les-conflits-cest-facile."><i class="fa fa-check"></i><b>3.5.6</b> Exercice 5 : Résoudre les conflits, c’est facile.</a></li>
+<li class="chapter" data-level="3.5.7" data-path="git.html"><a href="git.html#exercice-6-contribuer-à-un-dépôt-sans-droits-sur-master"><i class="fa fa-check"></i><b>3.5.7</b> Exercice 6 : Contribuer à un dépôt sans droits sur <code>master</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="rmd.html"><a href="rmd.html"><i class="fa fa-check"></i><b>4</b> <code>R Markdown</code></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="rmd.html"><a href="rmd.html#présentation-générale-de-r-markdown"><i class="fa fa-check"></i><b>4.1</b> Présentation générale de <code>R Markdown</code></a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="rmd.html"><a href="rmd.html#de-markdown-à-r-markdown"><i class="fa fa-check"></i><b>4.1.1</b> De <code>Markdown</code> à <code>R Markdown</code></a></li>
+<li class="chapter" data-level="4.1.2" data-path="rmd.html"><a href="rmd.html#que-peut-produire-r-markdown"><i class="fa fa-check"></i><b>4.1.2</b> Que peut produire <code>R Markdown</code> ?</a></li>
+<li class="chapter" data-level="4.1.3" data-path="rmd.html"><a href="rmd.html#pourquoi-utiliser-r-markdown"><i class="fa fa-check"></i><b>4.1.3</b> Pourquoi utiliser <code>R Markdown</code>?</a></li>
+<li class="chapter" data-level="4.1.4" data-path="rmd.html"><a href="rmd.html#comment-fonctionne-r-markdown"><i class="fa fa-check"></i><b>4.1.4</b> Comment fonctionne <code>R Markdown</code> ?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="rmd.html"><a href="rmd.html#avant-de-commencer"><i class="fa fa-check"></i><b>4.2</b> Avant de commencer</a></li>
+<li class="chapter" data-level="4.3" data-path="rmd.html"><a href="rmd.html#comment-construire-un-document-r-markdown"><i class="fa fa-check"></i><b>4.3</b> Comment construire un document <code>R Markdown</code>?</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="rmd.html"><a href="rmd.html#anatomie-de-la-structure-dun-document-r-markdown"><i class="fa fa-check"></i><b>4.3.1</b> Anatomie de la structure d’un document <code>R Markdown</code></a></li>
+<li class="chapter" data-level="4.3.2" data-path="rmd.html"><a href="rmd.html#ecrire-des-blocs-de-texte-en-r-markdown"><i class="fa fa-check"></i><b>4.3.2</b> Ecrire des blocs de texte en <code>R Markdown</code></a></li>
+<li class="chapter" data-level="4.3.3" data-path="rmd.html"><a href="rmd.html#insérer-un-résultat-r-dans-du-texte"><i class="fa fa-check"></i><b>4.3.3</b> Insérer un résultat <code>R</code> dans du texte</a></li>
+<li class="chapter" data-level="4.3.4" data-path="rmd.html"><a href="rmd.html#ecrire-des-blocs-de-code"><i class="fa fa-check"></i><b>4.3.4</b> Ecrire des blocs de code</a></li>
+<li class="chapter" data-level="4.3.5" data-path="rmd.html"><a href="rmd.html#insérer-de-beaux-tableaux"><i class="fa fa-check"></i><b>4.3.5</b> Insérer de beaux tableaux</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="rmd.html"><a href="rmd.html#conclusion"><i class="fa fa-check"></i><b>4.4</b> Conclusion</a></li>
+<li class="chapter" data-level="4.5" data-path="rmd.html"><a href="rmd.html#pour-aller-plus-loin"><i class="fa fa-check"></i><b>4.5</b> Pour aller plus loin</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rmdexo.html"><a href="rmdexo.html"><i class="fa fa-check"></i><b>5</b> <code>R Markdown</code>: un exercice pour créer son premier document</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rmdexo.html"><a href="rmdexo.html#quelques-éléments-dexplication"><i class="fa fa-check"></i><b>5.1</b> Quelques éléments d’explication</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="rmdexo.html"><a href="rmdexo.html#objectif"><i class="fa fa-check"></i><b>5.1.1</b> Objectif</a></li>
+<li class="chapter" data-level="5.1.2" data-path="rmdexo.html"><a href="rmdexo.html#le-produit-attendu"><i class="fa fa-check"></i><b>5.1.2</b> Le produit attendu</a></li>
+<li class="chapter" data-level="5.1.3" data-path="rmdexo.html"><a href="rmdexo.html#besoins"><i class="fa fa-check"></i><b>5.1.3</b> Expression des besoins</a></li>
+<li class="chapter" data-level="5.1.4" data-path="rmdexo.html"><a href="rmdexo.html#données-mobilisées"><i class="fa fa-check"></i><b>5.1.4</b> Données mobilisées</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="rmdexo.html"><a href="rmdexo.html#organisation-de-léquipe-projet"><i class="fa fa-check"></i><b>5.2</b> Organisation de l’équipe projet</a>
+<ul>
+<li class="chapter" data-level="" data-path="rmdexo.html"><a href="rmdexo.html#comment-sorganiser"><i class="fa fa-check"></i>Comment s’organiser ?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="rmdexo.html"><a href="rmdexo.html#demande-de-modifications"><i class="fa fa-check"></i><b>5.3</b> Demande de modifications</a>
+<ul>
+<li class="chapter" data-level="" data-path="rmdexo.html"><a href="rmdexo.html#cas-dune-demande-damélioration"><i class="fa fa-check"></i>Cas d’une demande d’amélioration</a></li>
+<li class="chapter" data-level="" data-path="rmdexo.html"><a href="rmdexo.html#cas-dune-demande-dévolution"><i class="fa fa-check"></i>Cas d’une demande d’évolution</a></li>
+<li class="chapter" data-level="" data-path="rmdexo.html"><a href="rmdexo.html#cas-dune-demande-de-modification"><i class="fa fa-check"></i>Cas d’une demande de modification</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="fonctions.html"><a href="fonctions.html"><i class="fa fa-check"></i><b>6</b> Programmation fonctionnelle avec <code>R</code> et <code>Rstudio</code></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="fonctions.html"><a href="fonctions.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="fonctions.html"><a href="fonctions.html#rappels-sur-les-objets-en-r"><i class="fa fa-check"></i><b>6.2</b> Rappels sur les objets en <code>R</code></a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="fonctions.html"><a href="fonctions.html#distinguer-noms-et-valeurs"><i class="fa fa-check"></i><b>6.2.1</b> Distinguer noms et valeurs</a></li>
+<li class="chapter" data-level="6.2.2" data-path="fonctions.html"><a href="fonctions.html#copier-des-objets-en-r"><i class="fa fa-check"></i><b>6.2.2</b> Copier des objets en <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="fonctions.html"><a href="fonctions.html#rappels-sur-les-fonctions"><i class="fa fa-check"></i><b>6.3</b> Rappels sur les fonctions</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="fonctions.html"><a href="fonctions.html#portée-scoping-dune-fonction"><i class="fa fa-check"></i><b>6.3.1</b> Portée (<em>scoping</em>) d’une fonction</a></li>
+<li class="chapter" data-level="6.3.2" data-path="fonctions.html"><a href="fonctions.html#noms-masqués"><i class="fa fa-check"></i><b>6.3.2</b> Noms masqués</a></li>
+<li class="chapter" data-level="6.3.3" data-path="fonctions.html"><a href="fonctions.html#portée-et-évaluation-paresseuse"><i class="fa fa-check"></i><b>6.3.3</b> Portée et évaluation paresseuse</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="fonctions.html"><a href="fonctions.html#définir-des-fonctions-en-r"><i class="fa fa-check"></i><b>6.4</b> Définir des fonctions en <code>R</code></a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="fonctions.html"><a href="fonctions.html#un-exemple-simple-pour-commencer"><i class="fa fa-check"></i><b>6.4.1</b> Un exemple simple pour commencer</a></li>
+<li class="chapter" data-level="6.4.2" data-path="fonctions.html"><a href="fonctions.html#créer-des-fonctions-complexes"><i class="fa fa-check"></i><b>6.4.2</b> Créer des fonctions complexes</a></li>
+<li class="chapter" data-level="6.4.3" data-path="fonctions.html"><a href="fonctions.html#créer-une-fonction-vraiment-complexe"><i class="fa fa-check"></i><b>6.4.3</b> Créer une fonction vraiment complexe</a></li>
+<li class="chapter" data-level="6.4.4" data-path="fonctions.html"><a href="fonctions.html#avancé-méthodes-alternatives"><i class="fa fa-check"></i><b>6.4.4</b> [Avancé] Méthodes alternatives</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="fonctions.html"><a href="fonctions.html#utiliser-les-outils-de-débuggage-de-rstudio"><i class="fa fa-check"></i><b>6.5</b> Utiliser les outils de débuggage de <code>Rstudio</code></a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="fonctions.html"><a href="fonctions.html#toutes-les-erreurs-ne-se-valent-pas"><i class="fa fa-check"></i><b>6.5.1</b> Toutes les erreurs ne se valent pas!</a></li>
+<li class="chapter" data-level="6.5.2" data-path="fonctions.html"><a href="fonctions.html#show-traceback"><i class="fa fa-check"></i><b>6.5.2</b> <code>Show Traceback</code></a></li>
+<li class="chapter" data-level="6.5.3" data-path="fonctions.html"><a href="fonctions.html#rerun-with-debug"><i class="fa fa-check"></i><b>6.5.3</b> <code>Rerun with debug</code></a></li>
+<li class="chapter" data-level="6.5.4" data-path="fonctions.html"><a href="fonctions.html#breakpoint"><i class="fa fa-check"></i><b>6.5.4</b> <code>Breakpoint</code></a></li>
+<li class="chapter" data-level="6.5.5" data-path="fonctions.html"><a href="fonctions.html#la-famille-des-fonctions-try"><i class="fa fa-check"></i><b>6.5.5</b> La famille des fonctions <code>try</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="fonctions.html"><a href="fonctions.html#documenter-des-fonctions"><i class="fa fa-check"></i><b>6.6</b> Documenter des fonctions</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="fonctions.html"><a href="fonctions.html#documenter-les-fonctions-avec-roxygen2"><i class="fa fa-check"></i><b>6.6.1</b> Documenter les fonctions avec <code>roxygen2</code></a></li>
+<li class="chapter" data-level="6.6.2" data-path="fonctions.html"><a href="fonctions.html#le-format-roxygen"><i class="fa fa-check"></i><b>6.6.2</b> Le format <code>roxygen</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="fonctions.html"><a href="fonctions.html#comprendre-les-environnements"><i class="fa fa-check"></i><b>6.7</b> Comprendre les environnements</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="fonctions.html"><a href="fonctions.html#notions-sur-les-environnements"><i class="fa fa-check"></i><b>6.7.1</b> Notions sur les environnements</a></li>
+<li class="chapter" data-level="6.7.2" data-path="fonctions.html"><a href="fonctions.html#lenvironnement-des-packages-et-le-chemin-de-recherche-search-path"><i class="fa fa-check"></i><b>6.7.2</b> L’environnement des packages et le chemin de recherche (<em>search path</em>)</a></li>
+<li class="chapter" data-level="6.7.3" data-path="fonctions.html"><a href="fonctions.html#un-exemple-de-problème-denvironnement-avec-les-packages"><i class="fa fa-check"></i><b>6.7.3</b> Un exemple de problème d’environnement avec les <em>packages</em></a></li>
+<li class="chapter" data-level="6.7.4" data-path="fonctions.html"><a href="fonctions.html#comment-bien-utiliser-les-packages"><i class="fa fa-check"></i><b>6.7.4</b> Comment bien utiliser les <em>packages</em>?</a></li>
+<li class="chapter" data-level="6.7.5" data-path="fonctions.html"><a href="fonctions.html#les-namespaces"><i class="fa fa-check"></i><b>6.7.5</b> Les <em>Namespaces</em></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="package.html"><a href="package.html"><i class="fa fa-check"></i><b>7</b> Créer un <em>package</em> <code>R</code> par la pratique</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="package.html"><a href="package.html#introduction-1"><i class="fa fa-check"></i><b>7.0.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.0.2" data-path="package.html"><a href="package.html#mapping"><i class="fa fa-check"></i><b>7.0.2</b> Le <em>mapping</em> et l’utilisation d’<code>aes()</code></a></li>
+<li class="chapter" data-level="7.0.3" data-path="package.html"><a href="package.html#les-formes-géométriques"><i class="fa fa-check"></i><b>7.0.3</b> Les formes géométriques</a></li>
+<li class="chapter" data-level="7.0.4" data-path="package.html"><a href="package.html#combiner-plusieurs-formes-géométriques"><i class="fa fa-check"></i><b>7.0.4</b> Combiner plusieurs formes géométriques</a></li>
+<li class="chapter" data-level="7.0.5" data-path="package.html"><a href="package.html#créer-un-graphique-par-modalité-dune-variable"><i class="fa fa-check"></i><b>7.0.5</b> Créer un graphique par modalité d’une variable</a></li>
+<li class="chapter" data-level="7.1" data-path="package.html"><a href="package.html#comment-personnaliser-un-graphique"><i class="fa fa-check"></i><b>7.1</b> Comment personnaliser un graphique</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="package.html"><a href="package.html#les-options-des-graphiques"><i class="fa fa-check"></i><b>7.1.1</b> Les options des graphiques</a></li>
+<li class="chapter" data-level="7.1.2" data-path="package.html"><a href="package.html#utiliser-un-thème"><i class="fa fa-check"></i><b>7.1.2</b> Utiliser un thème</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="package.html"><a href="package.html#exporter-un-graphique"><i class="fa fa-check"></i><b>7.2</b> Exporter un graphique</a></li>
+<li class="chapter" data-level="7.3" data-path="package.html"><a href="package.html#ggplot2Ressources"><i class="fa fa-check"></i><b>7.3</b> Pour en savoir plus</a>
+<ul>
+<li class="chapter" data-level="" data-path="package.html"><a href="package.html#feuille-de-route-pour-créer-un-package"><i class="fa fa-check"></i>Feuille de route pour créer un <em>package</em></a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="package.html"><a href="package.html#initier-un-package"><i class="fa fa-check"></i><b>7.4</b> Initier un <em>package</em></a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="package.html"><a href="package.html#choisir-un-nom"><i class="fa fa-check"></i><b>7.4.1</b> Choisir un nom</a></li>
+<li class="chapter" data-level="7.4.2" data-path="package.html"><a href="package.html#créer-un-projet-rstudio-de-type-package"><i class="fa fa-check"></i><b>7.4.2</b> Créer un projet RStudio de type “package”</a></li>
+<li class="chapter" data-level="7.4.3" data-path="package.html"><a href="package.html#renseigner-les-méta-données-du-package-le-fichier-description"><i class="fa fa-check"></i><b>7.4.3</b> Renseigner les méta-données du <em>package</em> : le fichier <code>DESCRIPTION</code></a></li>
+<li class="chapter" data-level="" data-path="package.html"><a href="package.html#champ-license"><i class="fa fa-check"></i>Champ <code>License</code></a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="package.html"><a href="package.html#configurer-les-outils-de-développement"><i class="fa fa-check"></i><b>7.5</b> Configurer les outils de développement</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="package.html"><a href="package.html#créer-un-dépôt-vide-dans-gitlab"><i class="fa fa-check"></i><b>7.5.1</b> Créer un dépôt vide dans GitLab</a></li>
+<li class="chapter" data-level="7.5.2" data-path="package.html"><a href="package.html#utiliser-git-dans-le-projet-rstudio"><i class="fa fa-check"></i><b>7.5.2</b> Utiliser git dans le projet RStudio</a></li>
+<li class="chapter" data-level="7.5.3" data-path="package.html"><a href="package.html#créer-le-lien-entre-le-dépôt-gitlab-et-le-projet-rstudio"><i class="fa fa-check"></i><b>7.5.3</b> Créer le lien entre le dépôt GitLab et le projet RStudio</a></li>
+<li class="chapter" data-level="7.5.4" data-path="package.html"><a href="package.html#utiliser-testthat-pour-les-tests"><i class="fa fa-check"></i><b>7.5.4</b> Utiliser <code>testthat</code> pour les tests</a></li>
+<li class="chapter" data-level="7.5.5" data-path="package.html"><a href="package.html#utiliser-lintégration-continue-de-gitlab"><i class="fa fa-check"></i><b>7.5.5</b> Utiliser l’intégration continue de GitLab</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="package.html"><a href="package.html#développer-un-package"><i class="fa fa-check"></i><b>7.6</b> Développer un <em>package</em></a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="package.html"><a href="package.html#inclure-du-code-le-documenter-et-le-tester"><i class="fa fa-check"></i><b>7.6.1</b> Inclure du code, le documenter et le tester</a></li>
+<li class="chapter" data-level="7.6.2" data-path="package.html"><a href="package.html#déclarer-une-dépendance"><i class="fa fa-check"></i><b>7.6.2</b> Déclarer une dépendance</a></li>
+<li class="chapter" data-level="7.6.3" data-path="package.html"><a href="package.html#charger-lensemble-des-fonctions-de-son-package"><i class="fa fa-check"></i><b>7.6.3</b> Charger l’ensemble des fonctions de son <em>package</em></a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="package.html"><a href="package.html#installer-le-package"><i class="fa fa-check"></i><b>7.7</b> Installer le <em>package</em></a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="package.html"><a href="package.html#installer-sur-sa-machine"><i class="fa fa-check"></i><b>7.7.1</b> Installer sur sa machine</a></li>
+<li class="chapter" data-level="7.7.2" data-path="package.html"><a href="package.html#générer-le-fichier-compressé"><i class="fa fa-check"></i><b>7.7.2</b> Générer le fichier compressé</a></li>
+</ul></li>
+<li class="chapter" data-level="7.8" data-path="package.html"><a href="package.html#documenter-un-package"><i class="fa fa-check"></i><b>7.8</b> Documenter un <em>package</em></a>
+<ul>
+<li class="chapter" data-level="7.8.1" data-path="package.html"><a href="package.html#créer-un-fichier-readme-obligatoire"><i class="fa fa-check"></i><b>7.8.1</b> Créer un fichier <code>README</code> (obligatoire)</a></li>
+<li class="chapter" data-level="7.8.2" data-path="package.html"><a href="package.html#créer-une-vignette-recommandé"><i class="fa fa-check"></i><b>7.8.2</b> Créer une vignette (recommandé)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="package.html"><a href="package.html#créer-un-modèle-de-document-r-markdown"><i class="fa fa-check"></i><b>7.9</b> Créer un modèle de document R Markdown</a></li>
+<li class="chapter" data-level="7.10" data-path="package.html"><a href="package.html#bonnes-pratiques"><i class="fa fa-check"></i><b>7.10</b> Bonnes pratiques</a>
+<ul>
+<li class="chapter" data-level="7.10.1" data-path="package.html"><a href="package.html#créer-un-changelog"><i class="fa fa-check"></i><b>7.10.1</b> Créer un changelog</a></li>
+<li class="chapter" data-level="7.10.2" data-path="package.html"><a href="package.html#gérer-les-numéros-de-version"><i class="fa fa-check"></i><b>7.10.2</b> Gérer les numéros de version</a></li>
+</ul></li>
+<li class="chapter" data-level="7.11" data-path="package.html"><a href="package.html#conclusion---pour-aller-plus-loin"><i class="fa fa-check"></i><b>7.11</b> Conclusion - Pour aller plus loin</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="./">Collaboration IUT Paris-rives Seine</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Résumé des cours et TP - DU Dataviz</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="fonctions" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapitre 6</span> Programmation fonctionnelle avec <code>R</code> et <code>Rstudio</code><a href="fonctions.html#fonctions" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>A ce stade, vous savez qu’il est recommandé de:</p>
+<ul>
+<li>Structurer les dossiers sous forme de projet <code>Rstudio</code>;</li>
+<li>Utiliser <code>git</code> pour le contrôle de version;</li>
+<li>Utiliser <code>Rmarkdown</code> pour rédiger des documents.</li>
+</ul>
+<p>La seconde partie du cours vise à introduire à l’utilisation des fonctions et au développement de <em>package</em>. Un <em>package</em> est une organisation particulière de l’ensemble des programmes, données et documentations constituant un projet <code>Rstudio</code>. La construction d’un projet autour d’un ou plusieurs <em>packages</em> est la meilleure manière d’assurer la reproducibilité et la transparence des traitements statistiques (sous condition d’avoir accès aux mêmes données évidemment). Il s’agit également d’une approche appropriée pour le travail collaboratif car cela rend le code plus lisible, bien documenté et plus propice à des évolutions futures.</p>
+<p>La seconde partie du cours adopte la structure suivante, tournée autour de la notion de programmation fonctionnelle:</p>
+<ol style="list-style-type: decimal">
+<li>Introduction à l’utilisation des fonctions en <code>R</code>;</li>
+<li>Présentation et constitution d’un premier <em>package</em>.</li>
+</ol>
+<p><a href="https://linogaliana.gitlab.io/bonnespratiques/">Le guide des bonnes pratiques</a> propose des règles complémentaires pour renforcer la reproductibilité des programmes. Une partie des exemples et illustration de se cours proviennent des ouvrages de <span class="citation">Wickham (<a href="#ref-wickham2019advanced" role="doc-biblioref">2019</a>)</span> et <span class="citation">Wickham (<a href="#ref-wickham2015r" role="doc-biblioref">2015</a>)</span></p>
+<div id="introduction" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Introduction<a href="fonctions.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<blockquote>
+<p>To understand computations in R, two slogans are helpful:</p>
+<ul>
+<li>Everything that exists is an object.</li>
+<li>Everything that happens is a function call.</li>
+</ul>
+<p><em>John Chambers</em></p>
+</blockquote>
+<p><code>R</code> est, dans son essence, un langage de programmation fonctionnelle. L’utilisation de fonctions est ainsi la manière privilégiée de développer un programme en <code>R</code>. C’est pourquoi il est essentiel de bien comprendre la manière dont elles fonctionnent et interagissent avec l’environnement de l’utilisateur pour développer des programmes fiables et reproductibles.</p>
+<p>Construire un projet autour d’un enchaînement de fonctions est une pratique qui permet de réduire les risques de <em>bug</em> (en identifiant mieux leur origine) et, surtout, assure un code plus flexible et reproductible. Cela renvoie au paradigme informatique du <em>“do not repeat yourself”</em>.</p>
+<blockquote>
+<p>“Every piece of knowledge must have a single, unambiguous, authoritative representation within a system”</p>
+<p>Dave Thomas and Andy Hunt, <em>The Pragmatic Programmer</em></p>
+</blockquote>
+<p>Cette approche nous intéresse particulièrement car elle rend le code plus clair, plus robuste, plus facile à répliquer et à faire évoluer. Néanmoins, adopter une approche de programmation fonctionnelle en <code>R</code> est un bon début mais ne suffit pas. Le fait qu’un code soit fonctionnel sur l’ordinateur de celui qui l’a développé n’assure pas qu’un autre utilisateur soit en mesure de le faire tourner. La source la plus commune d’erreur est que les environnements ne coïncident pas (exemple: il manque un package utilisé par le code). Pour assurer un code fonctionnel lors d’un partage, ou même lors d’un changement d’environnement de travail, il est important de comprendre la manière dont <code>R</code> gère les objets, environnements et dépendances. Cela nous amène, <em>grosso modo</em>, ainsi à structurer le chapitre de la manière suivante:</p>
+<ol style="list-style-type: decimal">
+<li>Rappels théoriques sur les objets en R</li>
+<li>Construction de premières fonctions en R avec une adoption précoce de bonnes pratiques</li>
+<li>Compréhension de la manière dont <code>R</code> gère les objets dans les différents environnements de travail disponibles</li>
+</ol>
+<p>La continuité naturelle de ce chapitre est l’initiation au développement de packages.</p>
+</div>
+<div id="rappels-sur-les-objets-en-r" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Rappels sur les objets en <code>R</code><a href="fonctions.html#rappels-sur-les-objets-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Il y a deux points essentiels à retenir sur la façon dont <code>R</code> traite les objets:</p>
+<ul>
+<li>Comment <code>R</code> associe les objets et les noms;</li>
+<li>Comment <code>R</code> modifie les objets.</li>
+</ul>
+<div id="distinguer-noms-et-valeurs" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Distinguer noms et valeurs<a href="fonctions.html#distinguer-noms-et-valeurs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La première distinction importante est celle entre un <strong>objet</strong> et son <strong>nom</strong>. A ce stade, vous devriez être habitué à l’assignation:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="fonctions.html#cb28-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span></code></pre></div>
+<p>On serait tenté de lire <em>“je crée un objet appelé ‘x’ contenant les valeurs 1,2 et 3”</em>. En réalité, R procède de la manière suivante:</p>
+<ul>
+<li><code>R</code> crée un vecteur de valeurs <code>c(1, 2, 3)</code>;</li>
+<li><code>R</code> lie (<em>binds</em>) ce vecteur à un nom, ici <code>x</code>.</li>
+</ul>
+<p>Autrement dit, l’objet/la valeur n’a pas de nom ; c’est <strong>le nom qui a une valeur</strong>. L’opérateur assignation <code>&lt;-</code> crée donc un lien entre un nom et une valeur. Un <strong>nom est une référence à une valeur</strong>: cela évite que le code ci-dessous</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="fonctions.html#cb29-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x</span></code></pre></div>
+<p>crée une copie (mobilisant de la mémoire) d’un objet déjà existant (<code>x</code>). Cette assignation crée simplement une référence supplémentaire pour accéder au vecteur <code>c(1,2,3)</code>, en liant ce vecteur au nom <code>y</code>.</p>
+<p>En revanche, <code>R</code> duplique l’objet lorsqu’on modifie un nom qui y fait référence. Le code ci-dessous lie <code>x</code> à <code>y</code> puis modifie <code>y</code>:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="fonctions.html#cb30-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb30-2"><a href="fonctions.html#cb30-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x</span>
+<span id="cb30-3"><a href="fonctions.html#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="fonctions.html#cb30-4" aria-hidden="true" tabindex="-1"></a>y[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> <span class="dv">4</span></span></code></pre></div>
+<p>On pourrait penser que cette opération a modifié <code>x</code>, mais ce n’est pas le cas:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="fonctions.html#cb31-1" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 1 2 3</code></pre>
+<p>Alors que la valeur associée à <code>y</code> a changé, l’objet original n’a pas changé. <code>R</code> a simplement créé un nouvel objet le vecteur <code>c(1,2,4)</code>, et lui a associé le nom <code>y</code>.</p>
+</div>
+<div id="copier-des-objets-en-r" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Copier des objets en <code>R</code><a href="fonctions.html#copier-des-objets-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les objets R sont en principe non-modifiables (<em>immutable</em>). Parler d’immutabilité à propos des objets <code>R</code> peut paraître surprenant puisqu’on peut <strong>apparemment</strong> ajouter des élements à un objet <code>R</code>:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="fonctions.html#cb33-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb33-2"><a href="fonctions.html#cb33-2" aria-hidden="true" tabindex="-1"></a>a[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="st">&quot;je remplis ma liste&quot;</span></span>
+<span id="cb33-3"><a href="fonctions.html#cb33-3" aria-hidden="true" tabindex="-1"></a>a</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;je remplis ma liste&quot;</code></pre>
+<p>En réalité, <code>R</code> a dupliqué temporairement <code>a</code> (<em>copy</em>) et ensuite modifié cet objet avant le ré-assigner au nom <code>a</code> (<em>modify</em>). Ce comportement est appelé <strong>copy-on-modify</strong>. Cette approche rend le langage <code>R</code> très flexible en permettant, par exemple, de faire évoluer la classe d’un objet (à partir d’une réassignation). Par exemple, le code suivant transforme l’objet lié au nom <code>a</code> de <code>vector</code> en <code>data.frame</code>:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="fonctions.html#cb35-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb35-2"><a href="fonctions.html#cb35-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;a&quot;</span> <span class="ot">=</span> a)</span>
+<span id="cb35-3"><a href="fonctions.html#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(a)</span></code></pre></div>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+</div>
+</div>
+<div id="rappels-sur-les-fonctions" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Rappels sur les fonctions<a href="fonctions.html#rappels-sur-les-fonctions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!--------------------
+-------- METTRE CA AILLEURS
+
+Changing the value of a supplied argument within a function will not affect the value of the variable in the calling frame
+
+
+```r
+f <- function(a) {
+  a
+}
+
+x <- c(1,2,3)
+f(x)
+```
+
+```
+## [1] 1 2 3
+```
+
+
+While f() is running, the a inside the function points to the same value as the x does outside the function
+--------------->
+<p>Les fonctions en R sont très bien résumées par la définition suivante, issue de <a href="https://fr.wikipedia.org/wiki/Routine_(informatique)">wikipedia</a>:</p>
+<blockquote>
+<p>En informatique, une routine est une entité informatique qui encapsule une portion de code (une séquence d’instructions) effectuant un traitement spécifique bien identifié (asservissement, tâche, calcul, etc.) relativement indépendant du reste du programme, et qui peut être réutilisé dans le même programme, ou dans un autre. Dans ce cas, on range souvent la routine dans une bibliothèque pour la rendre disponible à d’autres projets de programmation, tout en préservant l’intégrité de son implémentation.</p>
+<p>Les routines permettent de diviser un problème en décomposant le programme à réaliser en portions de code plus faciles à produire, à utiliser, à gérer et à entretenir. Les instructions réalisant la routine sont encapsulées à l’intérieur de celle-ci et le programmeur peut faire appel à la routine sans se préoccuper des détails internes à celle-ci ; la routine joue le rôle d’une boite noire dans les routines qui l’emploient.</p>
+</blockquote>
+<p>Formellement, on peut décomposer une fonction en trois parties:</p>
+<ul>
+<li><em>Arguments</em> (ex: <code>formals(lm)</code>): la liste des arguments qui contrôlent l’appel à une fonction</li>
+<li><em>Corps</em> (ex: <code>body(lm)</code>): les commandes internes à la fonction</li>
+<li><em>Environnement</em> (ex: <code>environment(lm)</code>): le contexte qui détermine comment la fonction trouve des valeurs associées aux noms évoqués. Dans le cas de <code>R</code>, ces noms peuvent renvoyer à tout type d’objet: données, variables, fonctions, packages…</li>
+</ul>
+<p>Alors que les arguments et le corps de la fonction sont définis explicitement, l’environnement est lui défini implicitement, selon le contexte dans lequel est évoqué la fonction.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="fonctions.html#cb37-1" aria-hidden="true" tabindex="-1"></a>f02 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb37-2"><a href="fonctions.html#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Un commentaire</span></span>
+<span id="cb37-3"><a href="fonctions.html#cb37-3" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> y</span>
+<span id="cb37-4"><a href="fonctions.html#cb37-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb37-5"><a href="fonctions.html#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="fonctions.html#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="fu">formals</span>(f02)</span></code></pre></div>
+<pre><code>## $x
+## 
+## 
+## $y</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="fonctions.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">body</span>(f02)</span></code></pre></div>
+<pre><code>## {
+##     x + y
+## }</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="fonctions.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(f02)</span></code></pre></div>
+<pre><code>## &lt;environment: R_GlobalEnv&gt;</code></pre>
+<!--------
+
+```r
+funs <- list(
+  half = function(x) x / 2,
+  double = function(x) x * 2
+)
+
+funs$double(10)
+```
+
+```
+## [1] 20
+```
+------->
+<div id="portée-scoping-dune-fonction" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Portée (<em>scoping</em>) d’une fonction<a href="fonctions.html#portée-scoping-dune-fonction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Comme on l’a vu, l’assignation est l’acte d’associer un nom à une valeur. Le <em>scoping</em> (portée) est l’action de trouver une valeur associée à un nom.</p>
+<p>Par exemple, que va renvoyer le code suivant: 10, 20, 25 ?</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="fonctions.html#cb43-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb43-2"><a href="fonctions.html#cb43-2" aria-hidden="true" tabindex="-1"></a>g01 <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb43-3"><a href="fonctions.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb43-4"><a href="fonctions.html#cb43-4" aria-hidden="true" tabindex="-1"></a>  x</span>
+<span id="cb43-5"><a href="fonctions.html#cb43-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb43-6"><a href="fonctions.html#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="fonctions.html#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="fu">g01</span>()</span></code></pre></div>
+<pre><code>## [1] 20</code></pre>
+<p>Une bonne compréhension de la portée des fonctions est essentiel pour écrire des fonctions réplicables.</p>
+<!---------
+R uses lexical scoping26: it looks up the values of names based on how a function is defined, not how it is called. “Lexical” here is not the English adjective that means relating to words or a vocabulary. It’s a technical CS term that tells us that the scoping rules use a parse-time, rather than a run-time structure.
+----------->
+<!----------
+La portée des objets en `R` suit 4 règles primaires:
+
+
+R’s lexical scoping follows four primary rules:
+
+    Name masking
+    Functions versus variables
+    A fresh start
+    Dynamic lookup
+
+---------->
+</div>
+<div id="noms-masqués" class="section level3 hasAnchor" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Noms masqués<a href="fonctions.html#noms-masqués" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le principe de base de la portée est que les noms définis au sein d’une fonction masquent les noms définis en dehors. Le code suivant montre un exemple de cette régle: que renvoie la fonction suivante?</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="fonctions.html#cb45-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb45-2"><a href="fonctions.html#cb45-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb45-3"><a href="fonctions.html#cb45-3" aria-hidden="true" tabindex="-1"></a>g02 <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb45-4"><a href="fonctions.html#cb45-4" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb45-5"><a href="fonctions.html#cb45-5" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb45-6"><a href="fonctions.html#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(x, y)</span>
+<span id="cb45-7"><a href="fonctions.html#cb45-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb45-8"><a href="fonctions.html#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="fu">g02</span>()</span></code></pre></div>
+<pre><code>## [1] 1 2</code></pre>
+<p>Si <code>R</code> ne trouve pas un nom dans une fonction, il cherchera celui-ci dans un environnement situé un niveau au-dessus (cf. la section sur les environnements).</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="fonctions.html#cb47-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb47-2"><a href="fonctions.html#cb47-2" aria-hidden="true" tabindex="-1"></a>g03 <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb47-3"><a href="fonctions.html#cb47-3" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb47-4"><a href="fonctions.html#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(x, y)</span>
+<span id="cb47-5"><a href="fonctions.html#cb47-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb47-6"><a href="fonctions.html#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="fu">g03</span>()</span></code></pre></div>
+<pre><code>## [1] 2 1</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="fonctions.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># La commande ci-dessous ne change pas la valeur précédente de y</span></span>
+<span id="cb49-2"><a href="fonctions.html#cb49-2" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
+<pre><code>## [1] 20</code></pre>
+<p>Cette règle s’appliquera de la même manière pour les fonctions emboîtées: <code>R</code> cherche d’abord dans l’environnement de la fonction, puis dans celui de la fonction au-dessus et ainsi de suite jusqu’à l’environnement global. S’il ne trouve toujours pas le nom recherché (par exemple une fonction <code>sum</code>), <code>R</code> finira par chercher dans la liste des packages chargés.</p>
+<p>Un bon exemple de portée d’une fonction est le suivant:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="fonctions.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On reprend le vecteur a</span></span>
+<span id="cb51-2"><a href="fonctions.html#cb51-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb51-3"><a href="fonctions.html#cb51-3" aria-hidden="true" tabindex="-1"></a>g11 <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb51-4"><a href="fonctions.html#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(<span class="st">&quot;a&quot;</span>)) {</span>
+<span id="cb51-5"><a href="fonctions.html#cb51-5" aria-hidden="true" tabindex="-1"></a>    a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb51-6"><a href="fonctions.html#cb51-6" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb51-7"><a href="fonctions.html#cb51-7" aria-hidden="true" tabindex="-1"></a>    a <span class="ot">&lt;-</span> a <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb51-8"><a href="fonctions.html#cb51-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb51-9"><a href="fonctions.html#cb51-9" aria-hidden="true" tabindex="-1"></a>  a</span>
+<span id="cb51-10"><a href="fonctions.html#cb51-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb51-11"><a href="fonctions.html#cb51-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-12"><a href="fonctions.html#cb51-12" aria-hidden="true" tabindex="-1"></a><span class="fu">g11</span>()</span></code></pre></div>
+<pre><code>## [1] 2 3 4</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="fonctions.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">g11</span>()</span></code></pre></div>
+<pre><code>## [1] 2 3 4</code></pre>
+<p>Pourquoi <code>g11()</code> retourne-t-elle toujours la même valeur ? C’est parce que chaque fois qu’une fonction est appelée, un nouvel environnement est créé pour héberger son exécution. Une fonction est donc incapable de connaître les noms qui ont pu être créés par une fonction passée sans <code>return</code>.</p>
+</div>
+<div id="portée-et-évaluation-paresseuse" class="section level3 hasAnchor" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> Portée et évaluation paresseuse<a href="fonctions.html#portée-et-évaluation-paresseuse" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La portée permet de lier logiquement des objets entre eux, mais ne permet pas de déterminer quand ce lien prendra place (on parle d’évaluation paresseuse ou <em>lazy evaluation</em>: on donne un plan à <code>R</code> pour lier les objets, on ne lui dit pas encore quand la commande sera exécutée). <code>R</code> associe les noms aux valeurs quand la fonction est exécutée, et pas à sa création.</p>
+<p>Dans le cadre de l’évaluation paresseuse, ce qui permet à <code>R</code> de lier les objets et environnements entre eux est la <code>promesse</code> (<code>promise</code>). Elle comprend trois éléments:</p>
+<ul>
+<li>Une <em>expression</em>, comme <code>x + y</code>, qui amènera à de futurs calculs;</li>
+<li>Un <em>environnement</em>, où l’expression sera évaluée, i.e. l’environnement où la fonction est évaluée;</li>
+<li>Une <em>valeur</em> qui est calculée et gardée en mémoire au sein de l’environnement (de manière à éviter de faire deux fois le même calcul si le même plan est appelé deux fois dans le même environnement).</li>
+</ul>
+<p>L’évaluation paresseuse a deux grandes conséquences sur le fonctionnement de <code>R</code>.</p>
+<p>Premièrement, l’<em>output</em> d’une fonction peut différer selon les objets hors de l’environnement de la fonction (ces objets sont parfois appelés variables globales parce qu’ils affectent l’ensemble des fonctions, par opposition aux variables locales qui sont propres à une fonction, et n’existent que dans l’environnement d’exécution de cette fonction).</p>
+<p>En voici un exemple simple:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="fonctions.html#cb55-1" aria-hidden="true" tabindex="-1"></a>g12 <span class="ot">&lt;-</span> <span class="cf">function</span>() x <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb55-2"><a href="fonctions.html#cb55-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb55-3"><a href="fonctions.html#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">g12</span>()</span></code></pre></div>
+<pre><code>## [1] 16</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="fonctions.html#cb57-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb57-2"><a href="fonctions.html#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">g12</span>()</span></code></pre></div>
+<pre><code>## [1] 21</code></pre>
+<p>La modification de <code>x</code> (variable globale) change donc l’output de la fonction. Une manière de rapidement savoir quelles sont les variables globales qui peuvent avoir un effet sur les résultats est d’utiliser la fonction <code>codetools::findGlobals()</code>. Cette fonction liste toutes les dépendances externes appelées dans une fonction:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="fonctions.html#cb59-1" aria-hidden="true" tabindex="-1"></a>codetools<span class="sc">::</span><span class="fu">findGlobals</span>(g12)</span></code></pre></div>
+<pre><code>## [1] &quot;+&quot; &quot;x&quot;</code></pre>
+<p>Deuxièmement, les arguments d’une fonction en <code>R</code> ne sont évalués qu’au moment où il est nécessaire de connaître leur valeur pour continuer l’exécution du programme. Par exemple, le code suivant ne provoquera pas d’erreur car <code>x</code> n’est jamais utilisé et n’est donc jamais évalué:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="fonctions.html#cb61-1" aria-hidden="true" tabindex="-1"></a>h01 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb61-2"><a href="fonctions.html#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">10</span></span>
+<span id="cb61-3"><a href="fonctions.html#cb61-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb61-4"><a href="fonctions.html#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="fu">h01</span>(<span class="fu">stop</span>(<span class="st">&quot;This is an error!&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<p>C’est très pratique car cela permet de créer des fonctions qui peuvent faire des opérations très différentes selon le type d’argument. Par exemple, créez une fonction <code>add(x,y)</code> qui</p>
+<ul>
+<li>ajoute <code>x</code> et <code>y</code> si <code>x</code> et <code>y</code> sont numériques;</li>
+<li>concatène <code>x</code> avec <code>y</code> si <code>x</code> et <code>y</code> sont des chaînes de caractères <a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>;</li>
+<li>renvoie l’erreur <em>“‘x’ et ‘y’ ne sont pas de même nature”</em> si <code>x</code> et <code>y</code> ne sont pas de même type.</li>
+</ul>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="fonctions.html#cb63-1" aria-hidden="true" tabindex="-1"></a>add <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y){</span>
+<span id="cb63-2"><a href="fonctions.html#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> ((<span class="fu">class</span>(x) <span class="sc">==</span> <span class="st">&quot;numeric&quot;</span>) <span class="sc">&amp;</span> (<span class="fu">class</span>(y) <span class="sc">==</span> <span class="st">&quot;numeric&quot;</span>)){</span>
+<span id="cb63-3"><a href="fonctions.html#cb63-3" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">+</span> y</span>
+<span id="cb63-4"><a href="fonctions.html#cb63-4" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> ((<span class="fu">class</span>(x) <span class="sc">==</span> <span class="st">&quot;character&quot;</span>) <span class="sc">&amp;</span> (<span class="fu">class</span>(y) <span class="sc">==</span> <span class="st">&quot;character&quot;</span>)){</span>
+<span id="cb63-5"><a href="fonctions.html#cb63-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(x,y)</span>
+<span id="cb63-6"><a href="fonctions.html#cb63-6" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span>{</span>
+<span id="cb63-7"><a href="fonctions.html#cb63-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;&#39;x&#39; et &#39;y&#39; ne sont pas de même nature&quot;</span>)</span>
+<span id="cb63-8"><a href="fonctions.html#cb63-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb63-9"><a href="fonctions.html#cb63-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb63-10"><a href="fonctions.html#cb63-10" aria-hidden="true" tabindex="-1"></a><span class="fu">add</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="fonctions.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;ab&quot;</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="fonctions.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">add</span>(<span class="dv">1</span>,<span class="st">&quot;b&quot;</span>)</span></code></pre></div>
+<pre><code>## Error in add(1, &quot;b&quot;): &#39;x&#39; et &#39;y&#39; ne sont pas de même nature</code></pre>
+<!-----------
+A value, which is computed and cached the first time a promise is accessed when the expression is evaluated in the specified environment. This ensures that the promise is evaluated at most once, and is why you only see “Calculating…” printed once in the following example.
+
+double <- function(x) { 
+  message("Calculating...")
+  x * 2
+}
+
+h03 <- function(x) {
+  c(x, x)
+}
+
+h03(double(x))
+#> Calculating...
+#> [1] 40 40
+
+
+Thanks to lazy evaluation, default values can be defined in terms of other arguments, or even in terms of variables defined later in the function:
+
+h04 <- function(x = 1, y = x * 2, z = a + b) {
+  a <- 10
+  b <- 100
+  
+  c(x, y, z)
+}
+
+h04()
+
+
+Many base R functions use this technique, but I don’t recommend it. It makes the code harder to understand: to predict what will be returned, you need to know the exact order in which default arguments are evaluated.
+
+The evaluation environment is slightly different for default and user supplied arguments, as default arguments are evaluated inside the function. This means that seemingly identical calls can yield different results. It’s easiest to see this with an extreme example:
+
+h05 <- function(x = ls()) {
+  a <- 1
+  x
+}
+
+# ls() evaluated inside h05:
+h05()
+#> [1] "a" "x"
+
+# ls() evaluated in global environment:
+h05(ls())
+#> [1] "h05"
+
+To determine if an argument’s value comes from the user or from a default, you can use missing():
+------------>
+<!-----------
+## Dot ...
+
+There are two primary uses of ...
+
+* If your function takes a function as an argument, you want some way to pass additional arguments to that function. In this example, lapply() uses ... to pass na.rm on to mean():
+
+x <- list(c(1, 3, NA), c(4, NA, 6))
+str(lapply(x, mean, na.rm = TRUE))
+#> List of 2
+#>  $ : num 2
+#>  $ : num 5
+
+* If your function is an S3 generic, you need some way to allow methods to take arbitrary extra arguments. For example, take the print() function. Because there are different options for printing depending on the type of object, there’s no way to pre-specify every possible argument and ... allows individual methods to have different arguments
+------>
+</div>
+</div>
+<div id="définir-des-fonctions-en-r" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Définir des fonctions en <code>R</code><a href="fonctions.html#définir-des-fonctions-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Après ces rappels sur les objets et les fonctions en, nous allons maintenant voir comment on définit des fonctions avec <code>R</code>.</p>
+<div id="un-exemple-simple-pour-commencer" class="section level3 hasAnchor" number="6.4.1">
+<h3><span class="header-section-number">6.4.1</span> Un exemple simple pour commencer<a href="fonctions.html#un-exemple-simple-pour-commencer" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Supposons qu’on dispose d’une table de données qui utilise le code <code>−99</code> pour représenter les valeurs manquantes. On désire remplacer l’ensemble des <code>−99</code> par des <code>NA</code>.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="fonctions.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On fixe la racine pour être sûr de tous avoir le même dataset</span></span>
+<span id="cb69-2"><a href="fonctions.html#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1014</span>)</span>
+<span id="cb69-3"><a href="fonctions.html#cb69-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-4"><a href="fonctions.html#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="co"># On créé un dataframe</span></span>
+<span id="cb69-5"><a href="fonctions.html#cb69-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">replicate</span>(<span class="dv">6</span>, <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="sc">-</span><span class="dv">99</span>), <span class="dv">6</span>, <span class="at">rep =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb69-6"><a href="fonctions.html#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df) <span class="ot">&lt;-</span> letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>]</span>
+<span id="cb69-7"><a href="fonctions.html#cb69-7" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div>
+<pre><code>##   a   b   c   d  e f
+## 1 7   5 -99   2  5 2
+## 2 5   5   5   3  6 1
+## 3 6   8   5   9  9 4
+## 4 4   2   2   6  6 8
+## 5 6   7   6 -99 10 6
+## 6 9 -99   4   7  5 1</code></pre>
+<div id="les-défauts-dun-code-sans-fonction" class="section level4 hasAnchor" number="6.4.1.1">
+<h4><span class="header-section-number">6.4.1.1</span> Les défauts d’un code sans fonction<a href="fonctions.html#les-défauts-dun-code-sans-fonction" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Un premier jet de code pourrait prendre la forme suivante:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="fonctions.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dupliquer les données</span></span>
+<span id="cb71-2"><a href="fonctions.html#cb71-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df</span>
+<span id="cb71-3"><a href="fonctions.html#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Remplacer les -99 par des NA</span></span>
+<span id="cb71-4"><a href="fonctions.html#cb71-4" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>a[df2<span class="sc">$</span>a <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb71-5"><a href="fonctions.html#cb71-5" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>b[df2<span class="sc">$</span>b <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb71-6"><a href="fonctions.html#cb71-6" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>c[df2<span class="sc">$</span>c <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb71-7"><a href="fonctions.html#cb71-7" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>d[df2<span class="sc">$</span>d <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb71-8"><a href="fonctions.html#cb71-8" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>e[df2<span class="sc">$</span>e <span class="sc">==</span> <span class="sc">-</span><span class="dv">98</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb71-9"><a href="fonctions.html#cb71-9" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>f[df2<span class="sc">$</span>g <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb71-10"><a href="fonctions.html#cb71-10" aria-hidden="true" tabindex="-1"></a>df2</span></code></pre></div>
+<pre><code>##   a  b  c  d  e f
+## 1 7  5 NA  2  5 2
+## 2 5  5  5  3  6 1
+## 3 6  8  5  9  9 4
+## 4 4  2  2  6  6 8
+## 5 6  7  6 NA 10 6
+## 6 9 NA  4  7  5 1</code></pre>
+<p>Quelles sont les choses qui vous dérangent dans le code ci-dessus? Indice: regardez précisément le code et le dataframe (indice: surveillez la colonne <code>e</code>).</p>
+<p>On peut noter au moins deux problèmes:</p>
+<ul>
+<li>Le code est long et répétitif, ce qui nuit à sa lisibilité;</li>
+<li>Le code est très dépendant de la structure des données (nom et nombre de colonnes) et doit être adapté dès que celle-ci évolue;</li>
+<li>On a introduit une erreur humaine dans le code, difficile à détecter, dans l’instruction <code>df2$e[df2$e == -98] &lt;- NA</code>.</li>
+</ul>
+</div>
+<div id="une-première-fonction" class="section level4 hasAnchor" number="6.4.1.2">
+<h4><span class="header-section-number">6.4.1.2</span> Une première fonction<a href="fonctions.html#une-première-fonction" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>La tâche ici étant identique pour toutes les colonnes, on a envie de mettre en place une structure générale, qu’on appliquerait <em>n</em> fois, qui éviterait ce problème (quitte à avoir une erreur, mieux vaut s’en rendre compte en la faisant systématiquement) et rendrait le code plus concis.</p>
+<p>Pour cela, nous allons construire une fonction avec <code>R</code>. Cette fonction prendra la forme suivante:</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="fonctions.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Définir une fonction</span></span>
+<span id="cb73-2"><a href="fonctions.html#cb73-2" aria-hidden="true" tabindex="-1"></a>nom_fonction <span class="ot">&lt;-</span> <span class="cf">function</span>(arg1,arg2,...,argN){</span>
+<span id="cb73-3"><a href="fonctions.html#cb73-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb73-4"><a href="fonctions.html#cb73-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Instructions</span></span>
+<span id="cb73-5"><a href="fonctions.html#cb73-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ...</span></span>
+<span id="cb73-6"><a href="fonctions.html#cb73-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb73-7"><a href="fonctions.html#cb73-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Retourner le resultat</span></span>
+<span id="cb73-8"><a href="fonctions.html#cb73-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(mon_output)</span>
+<span id="cb73-9"><a href="fonctions.html#cb73-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>On voit dans la première version de notre code qu’il y a une structure commune à toutes nos lignes de la forme <code>.[. == -99] &lt;- NA</code>. Cette structure va servir de base à notre fonction, en vue de généraliser le traitement que nous voulons faire.</p>
+<p>Ecrivez un exemple de fonction <code>fix_missing</code> qui généralise, simplement, ce travail de nettoyage. Elle prendra en entrée x (un vecteur) et retourne ce vecteur avec les valeurs manquantes corrigées. Voici la solution:</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="fonctions.html#cb74-1" aria-hidden="true" tabindex="-1"></a>fix_missing <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb74-2"><a href="fonctions.html#cb74-2" aria-hidden="true" tabindex="-1"></a>  x[x <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb74-3"><a href="fonctions.html#cb74-3" aria-hidden="true" tabindex="-1"></a>  x</span>
+<span id="cb74-4"><a href="fonctions.html#cb74-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>On peut l’appliquer avec le code suivant:</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="fonctions.html#cb75-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df</span>
+<span id="cb75-2"><a href="fonctions.html#cb75-2" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>a <span class="ot">&lt;-</span> <span class="fu">fix_missing</span>(df2<span class="sc">$</span>a)</span>
+<span id="cb75-3"><a href="fonctions.html#cb75-3" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>b <span class="ot">&lt;-</span> <span class="fu">fix_missing</span>(df2<span class="sc">$</span>b)</span>
+<span id="cb75-4"><a href="fonctions.html#cb75-4" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>c <span class="ot">&lt;-</span> <span class="fu">fix_missing</span>(df2<span class="sc">$</span>c)</span>
+<span id="cb75-5"><a href="fonctions.html#cb75-5" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>d <span class="ot">&lt;-</span> <span class="fu">fix_missing</span>(df2<span class="sc">$</span>d)</span>
+<span id="cb75-6"><a href="fonctions.html#cb75-6" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>e <span class="ot">&lt;-</span> <span class="fu">fix_missing</span>(df2<span class="sc">$</span>e)</span>
+<span id="cb75-7"><a href="fonctions.html#cb75-7" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>f <span class="ot">&lt;-</span> <span class="fu">fix_missing</span>(df2<span class="sc">$</span>f)</span>
+<span id="cb75-8"><a href="fonctions.html#cb75-8" aria-hidden="true" tabindex="-1"></a>df2</span></code></pre></div>
+<pre><code>##   a  b  c  d  e f
+## 1 7  5 NA  2  5 2
+## 2 5  5  5  3  6 1
+## 3 6  8  5  9  9 4
+## 4 4  2  2  6  6 8
+## 5 6  7  6 NA 10 6
+## 6 9 NA  4  7  5 1</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="fonctions.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On va comparer au resultat donc on le garde</span></span>
+<span id="cb77-2"><a href="fonctions.html#cb77-2" aria-hidden="true" tabindex="-1"></a>df2_good <span class="ot">&lt;-</span> df2</span></code></pre></div>
+<p>Cette seconde version du code est meilleure que la première version, car on a réglé le problème d’erreur humaine (il n’est plus possible de taper <code>-98</code> au lieu de <code>-99</code>). Mais le code reste long et répétitif, et n’élimine pas encore toute possibilité d’erreur, car il est toujours possible de se tromper dans le nom des variables. Par exemple, l’erreur typographique ci-dessous reste difficile à repérer:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="fonctions.html#cb78-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df</span>
+<span id="cb78-2"><a href="fonctions.html#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="co"># On se trompe à nouveau</span></span>
+<span id="cb78-3"><a href="fonctions.html#cb78-3" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>a <span class="ot">&lt;-</span> <span class="fu">fix_missing</span>(df2<span class="sc">$</span>a)</span>
+<span id="cb78-4"><a href="fonctions.html#cb78-4" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>b <span class="ot">&lt;-</span> <span class="fu">fix_missing</span>(df2<span class="sc">$</span>b)</span>
+<span id="cb78-5"><a href="fonctions.html#cb78-5" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>c <span class="ot">&lt;-</span> <span class="fu">fix_missing</span>(df2<span class="sc">$</span>c)</span>
+<span id="cb78-6"><a href="fonctions.html#cb78-6" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>d <span class="ot">&lt;-</span> <span class="fu">fix_missing</span>(df2<span class="sc">$</span>d)</span>
+<span id="cb78-7"><a href="fonctions.html#cb78-7" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>d <span class="ot">&lt;-</span> <span class="fu">fix_missing</span>(df2<span class="sc">$</span>d)</span>
+<span id="cb78-8"><a href="fonctions.html#cb78-8" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>f <span class="ot">&lt;-</span> <span class="fu">fix_missing</span>(df2<span class="sc">$</span>e)</span>
+<span id="cb78-9"><a href="fonctions.html#cb78-9" aria-hidden="true" tabindex="-1"></a>df2</span></code></pre></div>
+<pre><code>##   a  b  c  d  e  f
+## 1 7  5 NA  2  5  5
+## 2 5  5  5  3  6  6
+## 3 6  8  5  9  9  9
+## 4 4  2  2  6  6  6
+## 5 6  7  6 NA 10 10
+## 6 9 NA  4  7  5  5</code></pre>
+<p>La prochaine étape est ainsi d’éliminer ce risque d’erreur en combinant deux fonctions (ce qu’on appelle combinaison de fonctions). La première <code>fix_missing()</code> sert à régler le problème sur un vecteur. La seconde généralisera ce procédé à toutes les colonnes. Comme <code>R</code> est un langage vectoriel, c’est une approche fréquente de construire des fonctions sur des vecteurs et les appliquer ensuite à plusieurs colonnes.</p>
+</div>
+<div id="combiner-des-fonctions" class="section level4 hasAnchor" number="6.4.1.3">
+<h4><span class="header-section-number">6.4.1.3</span> Combiner des fonctions<a href="fonctions.html#combiner-des-fonctions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<!----
+CommOM: de mon expérience, il n'est pas facile de s'approprier les fonctions `apply`. Je propose une simplification du propos pour garder l'essentiel. J'ai mis les phrases coupées dans ### Chutes de texte
+---->
+<p>La famille des fonctions <code>apply</code> est conçue pour appliquer une même fonction à plusieurs objets. Ces fonctions font partie du langage <code>R</code> de base et sont ce qu’on appelle des <em>fonctionnelles</em> car elles prennent une fonction comme argument. La plus puissante des fonctions <code>apply</code> est la fonction <code>lapply</code> qui permet de stocker le résultat sous forme de liste. Il est préférable d’utiliser <code>lapply</code> plutôt que les autres fonctions <code>apply</code> (pour éviter des problèmes de conversion de type de données).</p>
+<p>Voici un exemple très simple d’utilisation de <code>lapply</code>:</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="fonctions.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Définir une fonction</span></span>
+<span id="cb80-2"><a href="fonctions.html#cb80-2" aria-hidden="true" tabindex="-1"></a>ajouter1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb80-3"><a href="fonctions.html#cb80-3" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb80-4"><a href="fonctions.html#cb80-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(y)</span>
+<span id="cb80-5"><a href="fonctions.html#cb80-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb80-6"><a href="fonctions.html#cb80-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-7"><a href="fonctions.html#cb80-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Appliquer cette fonction à une liste</span></span>
+<span id="cb80-8"><a href="fonctions.html#cb80-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb80-9"><a href="fonctions.html#cb80-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(x, ajouter1)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 2
+## 
+## [[2]]
+## [1] 3
+## 
+## [[3]]
+## [1] 4
+## 
+## [[4]]
+## [1] 5</code></pre>
+<p>Nous allons maintenant utiliser <code>lapply</code> pour améliorer notre code.</p>
+<p>Il est possible d’appliquer <code>lapply</code> à un <code>dataframe</code> car un <code>dataframe</code> est en fait une liste de vecteurs (les colonnes du <code>dataframe</code>). Toutefois, comme <code>lapply</code> renvoie une liste, on a besoin d’utiliser une petite astuce pour s’assurer que la sortie de la fonction prenne la forme d’un <code>dataframe</code> et non d’une liste. A la place d’assigner le résultat sous la forme <code>df &lt;- lapply(.....)</code> on va faire <code>df[] &lt;- lapply(...)</code>. Ecrivez la boucle <code>lapply</code> permettant d’appliquer <code>fix_missing</code> a l’ensemble des colonnes du <em>dataframe</em>:</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="fonctions.html#cb82-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df</span>
+<span id="cb82-2"><a href="fonctions.html#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Définir une fonction</span></span>
+<span id="cb82-3"><a href="fonctions.html#cb82-3" aria-hidden="true" tabindex="-1"></a>fix_missing <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb82-4"><a href="fonctions.html#cb82-4" aria-hidden="true" tabindex="-1"></a>  x[x <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb82-5"><a href="fonctions.html#cb82-5" aria-hidden="true" tabindex="-1"></a>  x</span>
+<span id="cb82-6"><a href="fonctions.html#cb82-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb82-7"><a href="fonctions.html#cb82-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Appliquer la fonction à toutes les colonnes du dataframe</span></span>
+<span id="cb82-8"><a href="fonctions.html#cb82-8" aria-hidden="true" tabindex="-1"></a>df2[] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(df2, fix_missing)</span>
+<span id="cb82-9"><a href="fonctions.html#cb82-9" aria-hidden="true" tabindex="-1"></a>df2</span></code></pre></div>
+<pre><code>##   a  b  c  d  e f
+## 1 7  5 NA  2  5 2
+## 2 5  5  5  3  6 1
+## 3 6  8  5  9  9 4
+## 4 4  2  2  6  6 8
+## 5 6  7  6 NA 10 6
+## 6 9 NA  4  7  5 1</code></pre>
+<p>Cette troisième version du code a plusieurs avantages sur les deux autres versions:</p>
+<ol style="list-style-type: decimal">
+<li>Elle est plus concise et plus lisible;</li>
+<li>Si on a un changement de code pour les valeurs manquantes, il suffit de le mettre à un seul endroit;</li>
+<li>Elle fonctionne quels que soient le nombre de colonnes et le nom des colonnes;</li>
+<li>On ne peut pas traiter une colonne différemment des autres par erreur.</li>
+</ol>
+<p>De plus, le code est facilement généralisable. Par exemple, à partir de la même structure, écrire le code qui permet de ne traiter que les colonnes <em>a</em>,<em>b</em> et <em>e</em>.</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="fonctions.html#cb84-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df</span>
+<span id="cb84-2"><a href="fonctions.html#cb84-2" aria-hidden="true" tabindex="-1"></a>df2[<span class="fu">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;e&quot;</span>)] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;e&quot;</span>), <span class="cf">function</span>(col) <span class="fu">fix_missing</span>(df2[col]))</span></code></pre></div>
+<p>Cette approche de composition de fonctions est très puissante et explique la grande flexibilité du langage <code>R</code>. Ecrire des fonctions simples et les composer dans une ou plusieurs fonctions maîtres est également très utile dans un travail collaboratif car cela permet de décomposer un traitement complexe en tâches simples et de mieux en comprendre le déroulement.</p>
+<p>Nous avons vu qu’il est facile de définir une fonction et de composer des fonctions en <code>R</code>. Toutefois, les fonctions que nous avons définies jusqu’à maintenant n’avaient qu’un seul argument. Nous allons voir maintenant qu’il est facile de généraliser cette approche, et de définir des fonctions avec de multiples arguments.</p>
+</div>
+</div>
+<div id="créer-des-fonctions-complexes" class="section level3 hasAnchor" number="6.4.2">
+<h3><span class="header-section-number">6.4.2</span> Créer des fonctions complexes<a href="fonctions.html#créer-des-fonctions-complexes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="fonctions-à-plusieurs-arguments" class="section level4 hasAnchor" number="6.4.2.1">
+<h4><span class="header-section-number">6.4.2.1</span> Fonctions à plusieurs arguments<a href="fonctions.html#fonctions-à-plusieurs-arguments" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Comment faire maintenant si on désire autoriser d’autres valeurs que <code>-99</code> ? Notre fonction précédente prenait comme donnée que la valeur <code>-99</code> désignait les valeurs manquantes. On peut maintenant en faire un paramètre d’une fonction plus générale qui serait de la forme <code>fix_missing &lt;- function(x, na.value)</code>, dans laquelle <code>x</code> désigne le <code>dataframe</code> et <code>na.value</code> la valeur codant les valeurs manquantes. Ecrire cette fonction et l’appliquer, dans un premier temps, uniquement à la colonne <code>df$a</code>:</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="fonctions.html#cb85-1" aria-hidden="true" tabindex="-1"></a>fix_missing <span class="ot">&lt;-</span> <span class="cf">function</span>(x, na.value) {</span>
+<span id="cb85-2"><a href="fonctions.html#cb85-2" aria-hidden="true" tabindex="-1"></a>  x[x <span class="sc">==</span> na.value] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb85-3"><a href="fonctions.html#cb85-3" aria-hidden="true" tabindex="-1"></a>  x</span>
+<span id="cb85-4"><a href="fonctions.html#cb85-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb85-5"><a href="fonctions.html#cb85-5" aria-hidden="true" tabindex="-1"></a><span class="fu">fix_missing</span>(<span class="at">x =</span> df<span class="sc">$</span>a, <span class="at">na.value =</span> <span class="sc">-</span><span class="dv">99</span>)</span></code></pre></div>
+<pre><code>## [1] 7 5 6 4 6 9</code></pre>
+<p>On peut omettre les noms d’arguments en <code>R</code> dans l’appel d’une fonction (<code>fix_missing(df$a,-99)</code> fonctionne). Néanmoins, il s’agit d’une pratique dangereuse qu’il vaut mieux éviter:</p>
+<ul>
+<li>En l’absence du nom des arguments, <code>R</code> détermine à quels arguments renvoient <code>df</code>, <code>-99</code> en fonction de l’ordre. Pour les fonctions qui prennent de nombreux arguments, on peut facilement inverser deux arguments ce qui provoquera une erreur ou - pire (!) - un résultat différent de celui qui est attendu sans erreur;</li>
+<li>Un appel de fonctions sans le nom des arguments est plus compliqué à débugger car il faut aller vérifier les arguments dans l’aide ou le code source pour savoir ceux dont il est question.</li>
+</ul>
+<p>Mieux vaut donc être explicite et écrire les appels de fonctions sous la forme <code>fix_missing(x = df["a"], na.value = -99)</code>. Avec l’autocomplétion de <code>Rstudio</code>, ce n’est pas vraiment plus long à écrire.</p>
+</div>
+<div id="composition-de-fonctions-à-plusieurs-arguments" class="section level4 hasAnchor" number="6.4.2.2">
+<h4><span class="header-section-number">6.4.2.2</span> Composition de fonctions à plusieurs arguments<a href="fonctions.html#composition-de-fonctions-à-plusieurs-arguments" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Comment combiner la fonction que nous venons de définir avec <code>lapply</code>? La grammaire de la fonction <code>lapply</code> est un peu déroutante lorsqu’on la combine avec une fonction à plusieurs arguments. Imaginons qu’on souhaite appliquer la fonction <code>f(x, y)</code> à la liste <code>X</code> et en donnant à l’argument <code>y</code> la valeur <code>2</code>. L’appel de fonction s’écrit: <code>lapply(X, f, y = 2)</code>.</p>
+<p>La combinaison de <code>lapply</code>avec la fonction que nous avons définie précédemment s’écrit donc:</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="fonctions.html#cb87-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df</span>
+<span id="cb87-2"><a href="fonctions.html#cb87-2" aria-hidden="true" tabindex="-1"></a>df2[] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(df2, fix_missing, <span class="at">na.value =</span> <span class="sc">-</span><span class="dv">99</span>)</span>
+<span id="cb87-3"><a href="fonctions.html#cb87-3" aria-hidden="true" tabindex="-1"></a>df2</span></code></pre></div>
+<pre><code>##   a  b  c  d  e f
+## 1 7  5 NA  2  5 2
+## 2 5  5  5  3  6 1
+## 3 6  8  5  9  9 4
+## 4 4  2  2  6  6 8
+## 5 6  7  6 NA 10 6
+## 6 9 NA  4  7  5 1</code></pre>
+<p>Imaginons maintenant qu’un code supplémentaire de valeur manquante doive être introduit. Supposons, en supplément de <code>-99</code>, que les valeurs manquantes soient aussi codées <code>10</code>. Comment feriez-vous selon le plan suivant:</p>
+<ol style="list-style-type: decimal">
+<li>Créer une nouvelle fonction <code>fix_missing2</code></li>
+<li>L’appliquer dans un premier temps à une seule colonne pour tester</li>
+<li>Utiliser <code>lapply</code> pour remplacer toutes les valeurs <code>-99</code> et <code>10</code> dans le dataframe</li>
+</ol>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="fonctions.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Définir la fonction</span></span>
+<span id="cb89-2"><a href="fonctions.html#cb89-2" aria-hidden="true" tabindex="-1"></a>fix_missing2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, na.value) {</span>
+<span id="cb89-3"><a href="fonctions.html#cb89-3" aria-hidden="true" tabindex="-1"></a>  x[x <span class="sc">%in%</span> na.value] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb89-4"><a href="fonctions.html#cb89-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
+<span id="cb89-5"><a href="fonctions.html#cb89-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb89-6"><a href="fonctions.html#cb89-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-7"><a href="fonctions.html#cb89-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Appliquer la fonction à une colonne</span></span>
+<span id="cb89-8"><a href="fonctions.html#cb89-8" aria-hidden="true" tabindex="-1"></a><span class="fu">fix_missing2</span>(<span class="at">x =</span> df<span class="sc">$</span>d, <span class="at">na.value =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">99</span>,<span class="dv">10</span>))</span></code></pre></div>
+<pre><code>## [1]  2  3  9  6 NA  7</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="fonctions.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Appliquer la fonction à toutes les colonnes avec lapply</span></span>
+<span id="cb91-2"><a href="fonctions.html#cb91-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df</span>
+<span id="cb91-3"><a href="fonctions.html#cb91-3" aria-hidden="true" tabindex="-1"></a>df2[] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(df2, fix_missing2, <span class="at">na.value =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">99</span>,<span class="dv">10</span>))</span>
+<span id="cb91-4"><a href="fonctions.html#cb91-4" aria-hidden="true" tabindex="-1"></a>df2</span></code></pre></div>
+<pre><code>##   a  b  c  d  e f
+## 1 7  5 NA  2  5 2
+## 2 5  5  5  3  6 1
+## 3 6  8  5  9  9 4
+## 4 4  2  2  6  6 8
+## 5 6  7  6 NA NA 6
+## 6 9 NA  4  7  5 1</code></pre>
+<p>Comment faire maintenant si on désire autoriser d’autres valeurs que <code>-99</code> ? Il faut utiliser une fonction plus générale, avec deux arguments. Il suffit d’une transformation mineure de la fonction <code>fix_missing2</code> pour autoriser plusieurs valeurs possibles.</p>
+</div>
+</div>
+<div id="créer-une-fonction-vraiment-complexe" class="section level3 hasAnchor" number="6.4.3">
+<h3><span class="header-section-number">6.4.3</span> Créer une fonction vraiment complexe<a href="fonctions.html#créer-une-fonction-vraiment-complexe" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<!------
+Dans le support, pas forcément à l'oral
+------->
+<p>Nous allons généraliser encore une fois le traitement. Imaginons que toutes les variables ne soient pas codées de la même manière. Pour simplifier, réduisons le problème aux variables <code>a</code>, <code>b</code> et <code>c</code>. Imaginons que les valeurs manquantes soient indiquées par les valeurs 1 à 3 pour la variable <code>a</code>, par les valeurs 4 à 6 pour la variable <code>b</code> et par les valeurs 7 à 10 pour la variable <code>c</code>. Comment utiliser notre fonction <code>fix_missing2</code> dans ce cas?</p>
+<p>Une manière appropriée de traiter ce problème est de stocker ces formats sous forme de liste. L’argument sera ainsi celui-ci:</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="fonctions.html#cb93-1" aria-hidden="true" tabindex="-1"></a>codes_na <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;a&quot;</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="st">&quot;b&quot;</span> <span class="ot">=</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>, <span class="st">&quot;c&quot;</span> <span class="ot">=</span> <span class="dv">7</span><span class="sc">:</span><span class="dv">9</span>)</span></code></pre></div>
+<p>Dans un premier temps, effectuez ceci avec un <code>lapply</code>:</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="fonctions.html#cb94-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df</span>
+<span id="cb94-2"><a href="fonctions.html#cb94-2" aria-hidden="true" tabindex="-1"></a>df2[<span class="fu">names</span>(codes_na)] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">names</span>(codes_na), <span class="cf">function</span>(variable) <span class="fu">fix_missing2</span>(df2[,variable], <span class="at">na.value =</span> codes_na[[variable]]))</span>
+<span id="cb94-3"><a href="fonctions.html#cb94-3" aria-hidden="true" tabindex="-1"></a>df2</span></code></pre></div>
+<pre><code>##   a   b   c   d  e f
+## 1 7  NA -99   2  5 2
+## 2 5  NA   5   3  6 1
+## 3 6   8   5   9  9 4
+## 4 4   2   2   6  6 8
+## 5 6   7   6 -99 10 6
+## 6 9 -99   4   7  5 1</code></pre>
+<p>Maintenant, généralisez en créant une fonction à partir de ce code</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="fonctions.html#cb96-1" aria-hidden="true" tabindex="-1"></a>fix_multiple_missing <span class="ot">&lt;-</span> <span class="cf">function</span>(data, codes_na){</span>
+<span id="cb96-2"><a href="fonctions.html#cb96-2" aria-hidden="true" tabindex="-1"></a>  data[<span class="fu">names</span>(codes_na)] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">names</span>(codes_na), <span class="cf">function</span>(variable) <span class="fu">fix_missing2</span>(data[,variable], <span class="at">na.value =</span> codes_na[[variable]]))</span>
+<span id="cb96-3"><a href="fonctions.html#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(data)</span>
+<span id="cb96-4"><a href="fonctions.html#cb96-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb96-5"><a href="fonctions.html#cb96-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb96-6"><a href="fonctions.html#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="fu">fix_multiple_missing</span>(df, <span class="at">codes_na =</span> <span class="fu">list</span>(<span class="st">&quot;a&quot;</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="st">&quot;b&quot;</span> <span class="ot">=</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">6</span>, <span class="st">&quot;c&quot;</span> <span class="ot">=</span> <span class="dv">7</span><span class="sc">:</span><span class="dv">9</span>))</span></code></pre></div>
+<pre><code>##   a   b   c   d  e f
+## 1 7  NA -99   2  5 2
+## 2 5  NA   5   3  6 1
+## 3 6   8   5   9  9 4
+## 4 4   2   2   6  6 8
+## 5 6   7   6 -99 10 6
+## 6 9 -99   4   7  5 1</code></pre>
+<!-----
+TROP COMPLIQUE JE PENSE
+
+## Closures
+
+
+
+    “An object is data with functions. A closure is a function with data.” — John D. Cook
+
+
+closures are functions that make other functions.
+
+
+```r
+add_x <- function(x) {
+    function(y) { x + y }
+}
+```
+
+Closures enclose access to the environment in which they were created – so you can nest functions within other functions.
+
+Closures get their name because they enclose the environment of the parent function and can access all its variables. This is useful because it allows us to have two levels of parameters: a parent level that controls operation and a child level that does the work.
+
+
+Are you repeating code, but instead of variables or data that’s changing – it’s the function instead? That’s a good case for a closure. Especially as your code gets more complex, closures are a good way of modularising and containing concepts.
+What are the steps for creating a closure?
+
+Building a closure happens in several steps:
+
+    Create the output function you’re aiming for. This function’s input is the same as what you’ll give it when you call it. It will return the final output. Let’s call this the enclosed function.
+    Enclose that function within a constructor function. This constructor’s input will be the parameters by which you’re varying the enclosed function in Step 1. It will output the enclosed function. Let’s call this the enclosing function.
+    Realise you’ve got it all wrong, go back to step 1. Repeat this multiple times. (Ask me how I know..)
+    Next you need to create the enclosed function(s) (the ones from Step 1) by calling the enclosing function (the one from Step 2).
+    Lastly, call and use your enclosed functions.
+
+An example
+
+Say I want to calculate the mean, SD and median of a data set. I could write:
+x <- c(1, 2, 3)
+mean(x)
+median(x)
+sd(x)
+
+stat <- function(stat_name){
+
+function(x){
+stat_name(x)
+}
+
+}
+
+This is made up of two parts: function(x){} which is the enclosed function and stat() which is the enclosing function.
+---->
+</div>
+<div id="avancé-méthodes-alternatives" class="section level3 hasAnchor" number="6.4.4">
+<h3><span class="header-section-number">6.4.4</span> [Avancé] Méthodes alternatives<a href="fonctions.html#avancé-méthodes-alternatives" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Nous avons présenté la manière dont la fonction <code>lapply</code> permet de généraliser l’application d’une fonction. On présente ici deux manières alternatives de résoudre ce même problème, l’une basée sur le tidyverse, l’autre qui restructure les données pour exploiter la vectorisation:</p>
+<ul>
+<li><code>purrr::map</code> se comporte de manière très proche de <code>lapply</code></li>
+<li>On transforme les données avec <code>reshape2</code> et applique une fonction par groupe.</li>
+</ul>
+<p>Un peu plus bas, vous trouverez une approche alternative qui évite le <code>lapply</code> mais qui implique d’utiliser le package <code>reshape2</code>.
+Comme <code>R</code> est un langage vectoriel, de manière générale, les <em>dataframes</em> sous format <em>long</em> sont plus maniables que les <em>dataframes</em> sous format <em>wide</em> lorsqu’on veut leur imposer des opérations vectorielles.</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="fonctions.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># METHODE 2</span></span>
+<span id="cb98-2"><a href="fonctions.html#cb98-2" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> df</span>
+<span id="cb98-3"><a href="fonctions.html#cb98-3" aria-hidden="true" tabindex="-1"></a>df3[] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(df3, <span class="cf">function</span>(x) ({</span>
+<span id="cb98-4"><a href="fonctions.html#cb98-4" aria-hidden="true" tabindex="-1"></a>  x[x <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb98-5"><a href="fonctions.html#cb98-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(x)</span>
+<span id="cb98-6"><a href="fonctions.html#cb98-6" aria-hidden="true" tabindex="-1"></a>  }))</span>
+<span id="cb98-7"><a href="fonctions.html#cb98-7" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(df2,df3)</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="fonctions.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Approche équivalente avec purrr::map</span></span>
+<span id="cb100-2"><a href="fonctions.html#cb100-2" aria-hidden="true" tabindex="-1"></a>df2_map <span class="ot">&lt;-</span> df2</span>
+<span id="cb100-3"><a href="fonctions.html#cb100-3" aria-hidden="true" tabindex="-1"></a><span class="co"># CommOM: je commente la ligne suivante car elle plante depuis que je l&#39;ai déplacée</span></span>
+<span id="cb100-4"><a href="fonctions.html#cb100-4" aria-hidden="true" tabindex="-1"></a>df2_map[] <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(df2_map,fix_missing, <span class="at">na.value =</span> <span class="sc">-</span><span class="dv">99</span>)</span>
+<span id="cb100-5"><a href="fonctions.html#cb100-5" aria-hidden="true" tabindex="-1"></a>df2_map</span></code></pre></div>
+<pre><code>##   a  b  c  d  e f
+## 1 7 NA NA  2  5 2
+## 2 5 NA  5  3  6 1
+## 3 6  8  5  9  9 4
+## 4 4  2  2  6  6 8
+## 5 6  7  6 NA 10 6
+## 6 9 NA  4  7  5 1</code></pre>
+<p>Le dernier bloc de code montre une manière équivalente de procéder dans le cadre du <code>tidyverse</code> à partir de la fonction <code>purrr::map</code> à la place de <code>lapply</code><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="fonctions.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ou approche équivalente avec purrr::map</span></span>
+<span id="cb102-2"><a href="fonctions.html#cb102-2" aria-hidden="true" tabindex="-1"></a>df2_map <span class="ot">&lt;-</span> df</span>
+<span id="cb102-3"><a href="fonctions.html#cb102-3" aria-hidden="true" tabindex="-1"></a><span class="co"># CommOM: je commente la ligne suivante car elle plante depuis que je l&#39;ai déplacée</span></span>
+<span id="cb102-4"><a href="fonctions.html#cb102-4" aria-hidden="true" tabindex="-1"></a><span class="co"># df2_map[c(&quot;a&quot;,&quot;b&quot;,&quot;e&quot;)] &lt;- purrr::map(c(&quot;a&quot;,&quot;b&quot;,&quot;e&quot;), function(col) fix_missing(df2_map[col]))</span></span>
+<span id="cb102-5"><a href="fonctions.html#cb102-5" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(df2,df2_map)</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>A noter qu’il n’est pas obligatoire d’associer un nom à une fonction: on appelle cela une fonction <em>anonyme</em> (équivalent des fonctions <em>lambda</em> en <code>python</code>). C’est une démarche fréquente dans les commandes <code>lapply</code>, par exemple <code>lapply(mtcars, function(x) length(unique(x)))</code>.<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></p>
+</div>
+</div>
+<div id="utiliser-les-outils-de-débuggage-de-rstudio" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Utiliser les outils de débuggage de <code>Rstudio</code><a href="fonctions.html#utiliser-les-outils-de-débuggage-de-rstudio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Comme on l’a vu, les fonctions sont précieuses car elles permettent de fiabiliser, d’automatiser et de documenter les traitements, mais il est parfois difficile de comprendre pourquoi une fonction bute sur une erreur. C’est là que <code>Rstudio</code> propose des outils de débuggage très utiles.</p>
+<!----
+CommOM: pourquoi ne pas parler des outils try tryCatch warning? Je peux éventuellement rédiger une partie sur la programmation défensive.
+----->
+<div id="toutes-les-erreurs-ne-se-valent-pas" class="section level3 hasAnchor" number="6.5.1">
+<h3><span class="header-section-number">6.5.1</span> Toutes les erreurs ne se valent pas!<a href="fonctions.html#toutes-les-erreurs-ne-se-valent-pas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Une fonction peut renvoyer une erreur pour deux raisons, avec des interprétations différentes.</p>
+<ol style="list-style-type: decimal">
+<li><strong>L’erreur est prévue par la fonction (<code>bug by design</code>)</strong>: il est possible d’introduire dans une fonction des conditions logiques qui renvoient une erreur si les conditions d’exécution de la fonction ne sont pas vérifiées (instruction <code>stop</code>). Cette méthode est très utilisée en <em>programmation défensive</em>, paradigme de programmation où on essaie d’assurer le fonctionnement continu d’un programme, en faisant en sorte qu’un code échoue d’une manière pré-determinée même si l’origine de l’erreur ne pouvait pas être anticipée lors de la conception. Un des principes-clés de ce paradigme est “l’erreur rapide”: dès qu’on remarque une potentielle erreur, on la signale.</li>
+</ol>
+<p>Par exemple, si on ne connaît pas le fonctionnement de la fonction <code>log</code>, et donc ne sait pas qu’elle fonctionne (mais renvoie un <code>NaN</code>) avec des nombres négatifs, on peut adopter une approche de <em>programmation défensive</em> et écrire une condition qui renvoie une erreur si l’argument fourni est négatif:</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="fonctions.html#cb104-1" aria-hidden="true" tabindex="-1"></a>lance_erreur <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb104-2"><a href="fonctions.html#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x<span class="sc">&lt;=</span><span class="dv">0</span>) <span class="fu">stop</span>(<span class="st">&quot;J&#39;ai peur que les nombres négatifs provoquent une erreur&quot;</span>)</span>
+<span id="cb104-3"><a href="fonctions.html#cb104-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb104-4"><a href="fonctions.html#cb104-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">log</span>(x))</span>
+<span id="cb104-5"><a href="fonctions.html#cb104-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb104-6"><a href="fonctions.html#cb104-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lance_erreur</span>(<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.6931472</code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="fonctions.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lance_erreur</span>(<span class="sc">-</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## Error in lance_erreur(-2): J&#39;ai peur que les nombres négatifs provoquent une erreur</code></pre>
+<p>La programmation défensive n’est pas une pratique obligatoire en équipe, il s’agit plutôt d’un principe de prudence. Cette approche implique plus de travail pour le programmeur mais rend le débuggage et la collaboration plus efficace car les utilisateurs peuvent identifier et isoler l’origine de l’erreur et ainsi la corriger plus rapidement.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>L’erreur est involontaire</strong>: un comportement non anticipé d’une fonction, une erreur de type de variable… Il s’agit de cas fréquents. Dans ce cas, le principe général est d’essayer d’identifier l’erreur à partir de cas types (les tests d’un package visent à automatiser cette recherche) pour être en mesure d’améliorer progressivement une fonction.</li>
+</ol>
+<p>On peut utiliser trois outils pour débugger:</p>
+<ol style="list-style-type: decimal">
+<li>Inspecteur l’erreur <code>Rstudio</code> et utiliser <strong><code>Show Traceback()</code></strong> lister la séquence des appels de fonctions qui a amené une erreur;</li>
+<li>Utiliser <strong><code>Rerun with Debug</code></strong> et la commande <code>options(error = browser)</code> pour exécuter pas à pas le code qui génère l’erreur et analyser l’environnement d’exécution du code;</li>
+<li>Introduire dans une fonction un point de débuggage (<strong><code>breakpoint</code></strong>) ou la commande <code>browser()</code> qui ouvre une session sur un point déterminé par le créateur de la fonction.</li>
+</ol>
+</div>
+<div id="show-traceback" class="section level3 hasAnchor" number="6.5.2">
+<h3><span class="header-section-number">6.5.2</span> <code>Show Traceback</code><a href="fonctions.html#show-traceback" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Cet outil est parfois appelé <em>call stack</em>. Il permet de voir l’empilement d’appels de fonctions ayant généré l’erreur.</p>
+<p>Par exemple, voici une séquence ayant générant une erreur:</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="fonctions.html#cb108-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(a) <span class="fu">g</span>(a)</span>
+<span id="cb108-2"><a href="fonctions.html#cb108-2" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="cf">function</span>(b) <span class="fu">h</span>(b)</span>
+<span id="cb108-3"><a href="fonctions.html#cb108-3" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="cf">function</span>(c) <span class="fu">i</span>(c)</span>
+<span id="cb108-4"><a href="fonctions.html#cb108-4" aria-hidden="true" tabindex="-1"></a>i <span class="ot">&lt;-</span> <span class="cf">function</span>(d) <span class="st">&quot;a&quot;</span> <span class="sc">+</span> d</span>
+<span id="cb108-5"><a href="fonctions.html#cb108-5" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(<span class="dv">10</span>)</span></code></pre></div>
+<p><img src="pics/05_rstudio_avance/08_bug1.png" /></p>
+<p>En cliquant sur le bouton <code>Show Traceback</code>, on voit la séquence de fonctions exécutées par la commande <code>f(10)</code>. Cette séquence se lit de bas en haut: on part de l’appel de fonction le plus élevé (<code>f(10)</code>) et on remonte la suite de fonctions appelées. La dernière fonction appelée avant l’erreur est la fonction <code>i(.)</code>. Cela permet d’identifier que l’origine de l’erreur provient de la fonction <code>i(.)</code>:</p>
+<p><img src="pics/05_rstudio_avance/08_bug2.png" /></p>
+<p>S’il s’agit d’un code qui a été lu à partir de la commande <code>source()</code>, le <em>traceback</em> affichera également la localisation de la fonction dans le fichier sous la forme <em>filename.r#linenumber</em>. On peut cliquer dessus et <code>Rstudio</code> amènera à la localisation du fichier dans l’éditeur.</p>
+</div>
+<div id="rerun-with-debug" class="section level3 hasAnchor" number="6.5.3">
+<h3><span class="header-section-number">6.5.3</span> <code>Rerun with debug</code><a href="fonctions.html#rerun-with-debug" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>traceback()</code> montre à quel moment et dans quelle fonction l’erreur s’est produite, mais n’explique pas pourquoi l’erreur a eu lieu. Cliquer sur le bouton <em>“Rerun with debug”</em> ouvre une fenêtre interactive qui permet de mettre en pause l’exécution d’une fonction et explorer interactivement l’état de celle-ci.</p>
+<p>C’est particulièrement utile car les erreurs proviennent fréquemment de problèmes d’environnement: généralement lorsqu’on développe un code, on interagit avec l’<em>environnement global</em>, alors que les fonctions exécutent leur code interne dans un environnement séparé. L’erreur provient alors souvent du fait que dans l’environnement d’exécution de la fonction, un objet (paramètre, variable, données…) n’est pas celui attendu par le développeur. Le debuggeur permet d’analyser les différents environnements, de s’assurer que l’environnement d’exécution de la fonction accède bien aux objets désirés (packages, paramètres, dataframe, functions…), et que les environnements emboîtés accèdent bien aux objets attendus.</p>
+<p>Vous verrez apparaître le code correspondant dans l’éditeur, avec la prochaine commande mise en lumière. Les objets présents dans les environnements d’exécution des différentes fonctions emboîtées sont disponibles: on peut naviguer à l’intérieur de ces environnements.</p>
+<p>CommOM: je mettrais bien une capture d’écran qui montre le détail de l’erreur du code précédent (montrer qu’on finit par comprendre qu’on a une string au lieu d’un nombre).</p>
+<p>On dispose également d’une barre dans la console:
+<img src="pics/05_rstudio_avance/08_bug3.png" /></p>
+<ul>
+<li><em>Next</em>: exécuter la prochaine étape de la fonction. Attention, si vous disposez, dans la fonction, d’une variable nommée <em>n</em>: pour l’afficher, vous devrez utiliser <code>print(n)</code> (dans le debuggeur, <em>n</em> est un raccourci pour <em>next</em>);</li>
+<li><em>Step into</em>: fonctionne comme <em>next</em> mais si la prochaine ligne est une fonction, cela vous enverra dans la fonction afin de progresser ligne par ligne;</li>
+<li><em>Finish</em>: finit l’exécution de la boucle ou fonction actuelle;</li>
+<li><em>Continue</em>: retour à l’environnement supérieur. C’est utile si le problème sur la fonction a été réglé et qu’on veut tester s’il est bien corrigé;</li>
+<li><em>Stop</em>: sortir du debuggeur.</li>
+</ul>
+</div>
+<div id="breakpoint" class="section level3 hasAnchor" number="6.5.4">
+<h3><span class="header-section-number">6.5.4</span> <code>Breakpoint</code><a href="fonctions.html#breakpoint" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il est possible d’introduire un point d’arrêt (<code>breakpoint</code>) dans une fonction. Quand <code>R</code> arrivera au point d’arrêt, l’exécution de la fonction sera stoppée et le même debuggeur que celui de <code>Rerun with debug</code> s’ouvrira à cet endroit. L’intérêt d’un <code>breakpoint</code> est qu’il permet au développeur de faire le point sur l’exécution d’une fonction à un moment précis (par exemple: juste avant, ou juste l’après l’appel d’une sous-fonction). On peut introduire un point d’arrêt de deux façons:</p>
+<ul>
+<li>cliquer sur la gauche du numéro de ligne d’un script (ou <code>Shift</code> + <code>F9</code> quand on a le curseur sur la ligne); un point rouge apparaît;</li>
+<li>introduire la commande <code>browser()</code> dans le code de la fonction à l’endroit où on désire l’arrêter.</li>
+</ul>
+</div>
+<div id="la-famille-des-fonctions-try" class="section level3 hasAnchor" number="6.5.5">
+<h3><span class="header-section-number">6.5.5</span> La famille des fonctions <code>try</code><a href="fonctions.html#la-famille-des-fonctions-try" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>TO DO</strong></p>
+</div>
+</div>
+<div id="documenter-des-fonctions" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Documenter des fonctions<a href="fonctions.html#documenter-des-fonctions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Décrire l’objectif d’une fonction, ses arguments (le type d’objet, une petite description de ceux-ci…) est fondamental pour la compréhension d’un programme, de sa structure et de sa finalité, et pour faciliter la compréhension du code par d’autres développeurs. Une documentation de fonction a une architecture standard: un titre, la description de ce que fait la fonction, le nom et la description des arguments… Les exemples ne manquant pas, par exemple en tapant <code>?sum</code>, <code>?gsub</code>.</p>
+<div id="documenter-les-fonctions-avec-roxygen2" class="section level3 hasAnchor" number="6.6.1">
+<h3><span class="header-section-number">6.6.1</span> Documenter les fonctions avec <code>roxygen2</code><a href="fonctions.html#documenter-les-fonctions-avec-roxygen2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le package <code>roxygen2</code> propose un standard qui facilite la structuration de la documentation d’une fonction, pour trois raisons:</p>
+<ul>
+<li>La documentation écrite sous format <code>roxygen</code> peut être facilement compilée pour produire des pages d’aide similaires aux pages d’aide de <code>R</code> (exemple: <code>?sum</code>);</li>
+<li>Documenter une fonction sous format <code>roxygen</code> dès son développement permet de gagner beaucoup de temps lors du passage d’un ensemble de fonctions en <em>package</em>. Comme on le verra dans la leçon sur les <em>packages</em>, ce <em>package</em> permet en fait de structurer l’ensemble de la documentation d’un package;</li>
+<li>Même sans passage sous forme de <em>package</em>, la documentation <code>roxygen</code> rend intelligible l’objet d’une fonction et les arguments qu’elle prend.</li>
+</ul>
+<p>Pour ce qui est du fonctionnement interne, on peut toujours laisser des commentaires standards à l’intérieur de celle-ci.</p>
+<p><img src="pics/06_fonctions/04_help_example.png" /></p>
+</div>
+<div id="le-format-roxygen" class="section level3 hasAnchor" number="6.6.2">
+<h3><span class="header-section-number">6.6.2</span> Le format <code>roxygen</code><a href="fonctions.html#le-format-roxygen" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La documentation au format <code>roxygen</code> prend la forme de commentaires ajoutés dans le code qui définit les fonctions. Un commentaire <code>roxygen</code> commence par la balise <code>#'</code>, à distinguer d’un commentaire standard qui commence par <code>#</code>. Les commentaires <code>roxygen</code> sont placés juste avant la définition de la fonction à laquelle ils se rapportent.</p>
+<p>Voici un exemple simple:</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="fonctions.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Add together two numbers</span></span>
+<span id="cb109-2"><a href="fonctions.html#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; </span></span>
+<span id="cb109-3"><a href="fonctions.html#cb109-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; An example of function documentation</span></span>
+<span id="cb109-4"><a href="fonctions.html#cb109-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb109-5"><a href="fonctions.html#cb109-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; This is a very useful function.</span></span>
+<span id="cb109-6"><a href="fonctions.html#cb109-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb109-7"><a href="fonctions.html#cb109-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param x A number.</span></span>
+<span id="cb109-8"><a href="fonctions.html#cb109-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param y A number.</span></span>
+<span id="cb109-9"><a href="fonctions.html#cb109-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @return The sum of \code{x} and \code{y}.</span></span>
+<span id="cb109-10"><a href="fonctions.html#cb109-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @examples</span></span>
+<span id="cb109-11"><a href="fonctions.html#cb109-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; add(1, 1)</span></span>
+<span id="cb109-12"><a href="fonctions.html#cb109-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; add(10, 1)</span></span>
+<span id="cb109-13"><a href="fonctions.html#cb109-13" aria-hidden="true" tabindex="-1"></a>add <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb109-14"><a href="fonctions.html#cb109-14" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> y</span>
+<span id="cb109-15"><a href="fonctions.html#cb109-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Les commentaires <code>roxygen</code> sont structurés sous forme de tags <code>@****</code>. Le texte avant le premier tag est l’introduction qui se décompose de la manière suivante:</p>
+<ol style="list-style-type: decimal">
+<li><p>La première phrase est le titre de la documentation. C’est cette phrase qu’on retrouve en tête de chaque fichier d’aide <code>?myfunc</code>. Cette phrase doit être écrite sur une ligne et ne pas se terminer par un point. Ici le titre est <em>Add together two numbers</em>;</p></li>
+<li><p>Le second paragraphe est la section <em>description</em>. C’est le premier élément d’une documentation de fonction qui explique de manière succincte l’objet d’une fonction. Ici, la description est <em>An example of function documentation</em>;</p></li>
+<li><p>Le troisième paragraphe, s’il a lieu d’être, et les suivants avant le premier tag, constituent la section <em>details</em>. Ici, la description est <em>This is a very useful function</em>. C’est une partie plus longue de documentation qui permet d’approfondir l’objet, ou les subtilités, d’une fonction.</p></li>
+</ol>
+<p>Toutes les fonctions doivent avoir un titre et une description. Les détails sont optionnels. En supplément du bloc introductif, la plupart des fonctions nécessitent les trois tags <code>@param</code>, <code>@return</code> et <code>@examples</code>.</p>
+<ul>
+<li><p><code>@param name description</code>: décrit les arguments d’une fonction. Par exemple, <code>@param data Un dataframe duquel on veut extraire les années</code>. Il est souvent judicieux de préciser le type des objets autorisés (un vecteur numérique, de caractère, un dataframe…). Il est possible de décrire plusieurs <em>inputs</em> à la fois en séparant les noms par des virgules: <code>@param x,y Numeric vectors</code>. Si la fonction hérite d’arguments d’une autre fonction, on peut éviter de réécrire les paramètres concernés en mettant le tag <code>@inheritParams</code>;</p></li>
+<li><p><code>@return description</code>: description de l’<em>output</em> d’une fonction. Ce n’est pas toujours nécessaire, si la description de la fonction est suffisamment claire;</p></li>
+<li><p><code>@examples</code>: code d’exemple. Attention, si la fonction documentée est incorporée dans un package, ce code est exécuté. Pour éviter cela, il convient d’encapsuler les exemples dans une commande <code>\dontrun</code>.</p></li>
+</ul>
+<p>Enfin, on peut ajouter autant de sections que nécessaire à la documentation d’une fonction avec le tag <code>@section</code>, par exemple <code>@section Warning:</code>.</p>
+<p>Par exemple, la documentation de la fonction précédente peut être enrichie:</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="fonctions.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Sum of vector elements.</span></span>
+<span id="cb110-2"><a href="fonctions.html#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb110-3"><a href="fonctions.html#cb110-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; \code{sum} returns the sum of all the values present in its arguments.</span></span>
+<span id="cb110-4"><a href="fonctions.html#cb110-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb110-5"><a href="fonctions.html#cb110-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; This is a generic function: methods can be defined for it directly</span></span>
+<span id="cb110-6"><a href="fonctions.html#cb110-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; or via the \code{\link{Summary}} group generic. For this to work properly,</span></span>
+<span id="cb110-7"><a href="fonctions.html#cb110-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; the arguments \code{...} should be unnamed, and dispatch is on the</span></span>
+<span id="cb110-8"><a href="fonctions.html#cb110-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; first argument.</span></span>
+<span id="cb110-9"><a href="fonctions.html#cb110-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb110-10"><a href="fonctions.html#cb110-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param ... Numeric, complex, or logical vectors.</span></span>
+<span id="cb110-11"><a href="fonctions.html#cb110-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @param na.rm A logical scalar. Should missing values (including NaN)</span></span>
+<span id="cb110-12"><a href="fonctions.html#cb110-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;   be removed?</span></span>
+<span id="cb110-13"><a href="fonctions.html#cb110-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @return If all inputs are integer and logical, then the output</span></span>
+<span id="cb110-14"><a href="fonctions.html#cb110-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;   will be an integer. If integer overflow</span></span>
+<span id="cb110-15"><a href="fonctions.html#cb110-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;   \url{http://en.wikipedia.org/wiki/Integer_overflow} occurs, the output</span></span>
+<span id="cb110-16"><a href="fonctions.html#cb110-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;   will be NA with a warning. Otherwise it will be a length-one numeric or</span></span>
+<span id="cb110-17"><a href="fonctions.html#cb110-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;   complex vector.</span></span>
+<span id="cb110-18"><a href="fonctions.html#cb110-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb110-19"><a href="fonctions.html#cb110-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;   Zero-length vectors have sum 0 by definition. See</span></span>
+<span id="cb110-20"><a href="fonctions.html#cb110-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;   \url{http://en.wikipedia.org/wiki/Empty_sum} for more details.</span></span>
+<span id="cb110-21"><a href="fonctions.html#cb110-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; @examples</span></span>
+<span id="cb110-22"><a href="fonctions.html#cb110-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; sum(1:10)</span></span>
+<span id="cb110-23"><a href="fonctions.html#cb110-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; sum(1:5, 6:10)</span></span>
+<span id="cb110-24"><a href="fonctions.html#cb110-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; sum(F, F, F, T, T)</span></span>
+<span id="cb110-25"><a href="fonctions.html#cb110-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb110-26"><a href="fonctions.html#cb110-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; sum(.Machine$integer.max, 1L)</span></span>
+<span id="cb110-27"><a href="fonctions.html#cb110-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; sum(.Machine$integer.max, 1)</span></span>
+<span id="cb110-28"><a href="fonctions.html#cb110-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39;</span></span>
+<span id="cb110-29"><a href="fonctions.html#cb110-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; \dontrun{</span></span>
+<span id="cb110-30"><a href="fonctions.html#cb110-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; sum(&quot;a&quot;)</span></span>
+<span id="cb110-31"><a href="fonctions.html#cb110-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; }</span></span>
+<span id="cb110-32"><a href="fonctions.html#cb110-32" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">na.rm =</span> <span class="cn">TRUE</span>) {}</span></code></pre></div>
+</div>
+</div>
+<div id="comprendre-les-environnements" class="section level2 hasAnchor" number="6.7">
+<h2><span class="header-section-number">6.7</span> Comprendre les environnements<a href="fonctions.html#comprendre-les-environnements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="notions-sur-les-environnements" class="section level3 hasAnchor" number="6.7.1">
+<h3><span class="header-section-number">6.7.1</span> Notions sur les environnements<a href="fonctions.html#notions-sur-les-environnements" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>L’environnement est la structure qui assure la portée. Un environnement est en fait une liste nommée d’objets avec des règles un peu plus restrictive qu’une liste classique:</p>
+<ol style="list-style-type: decimal">
+<li>Chaque nom doit être unique;</li>
+<li>Les noms dans un environnement n’ont pas d’ordre;</li>
+<li>Un environnement a un <em>parent</em>;</li>
+<li>La copie d’environnements ne suit pas le principe de <em>copy-on-modify</em>.</li>
+</ol>
+<p>Un environnement sert à lier un ensemble de noms à un ensemble de valeurs. On peut dessiner un environnement de cette manière:</p>
+<p><img src="pics/06_fonctions/01_environment.png" /></p>
+<p>Quelques fonctions du <em>package</em> <code>rlang</code> sont dédiées aux environnements. Par exemple, créons un nouvel environnement <code>e1</code> contenant 4 objets:</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="fonctions.html#cb111-1" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">env</span>(</span>
+<span id="cb111-2"><a href="fonctions.html#cb111-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb111-3"><a href="fonctions.html#cb111-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="st">&quot;a&quot;</span>,</span>
+<span id="cb111-4"><a href="fonctions.html#cb111-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">c =</span> <span class="fl">2.3</span>,</span>
+<span id="cb111-5"><a href="fonctions.html#cb111-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb111-6"><a href="fonctions.html#cb111-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb111-7"><a href="fonctions.html#cb111-7" aria-hidden="true" tabindex="-1"></a>e1</span></code></pre></div>
+<pre><code>## &lt;environment: 0x7f9b525aca28&gt;</code></pre>
+<p>Si on désire connaître les caractéristiques de celui-ci, on peut utiliser la fonction <code>rlang::env_print</code>. A noter que la fonction <code>names</code> renvoie les noms des objets internes à <code>e1</code> de la même manière qu’avec une liste normale.</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="fonctions.html#cb113-1" aria-hidden="true" tabindex="-1"></a>rlang<span class="sc">::</span><span class="fu">env_print</span>(e1)</span></code></pre></div>
+<pre><code>## &lt;environment: 0x7f9b525aca28&gt;
+## Parent: &lt;environment: global&gt;
+## Bindings:
+## • a: &lt;lgl&gt;
+## • b: &lt;chr&gt;
+## • c: &lt;dbl&gt;
+## • d: &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="fonctions.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(e1)</span></code></pre></div>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;</code></pre>
+<p>On a plusieurs environnements en <code>R</code> qui communiquent entre eux avec des relations de hiérarchie.</p>
+<p>Le <em>current environment</em> ou environnement d’exécution, qu’on peut afficher avec <code>rlang::current_env()</code> est l’environnement dans lequel les commandes sont actuellement exécutées. Quand vous expérimentez avec <code>R</code>, l’environnement d’exécution est l’environnement global (<code>.GlobalEnv</code>). L’environnement global est l’espace de travail (<em>workspace</em>) car c’est là où tous les objets sont stockés.</p>
+<p>Comme toute fonction est appelée avec un nouvel environnement, l’environnement d’exécution se distingue de l’environnement global dès qu’on appelle une fonction. Dans l’exécution du code suivant, on voit que les deux appels de la fonction <code>a()</code> génèrent deux environnements différents.</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="fonctions.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rlang<span class="sc">::</span><span class="fu">current_env</span>())</span></code></pre></div>
+<pre><code>## &lt;environment: R_GlobalEnv&gt;</code></pre>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="fonctions.html#cb119-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="cf">function</span>() <span class="fu">print</span>(rlang<span class="sc">::</span><span class="fu">current_env</span>())</span>
+<span id="cb119-2"><a href="fonctions.html#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="fu">a</span>()</span></code></pre></div>
+<pre><code>## &lt;environment: 0x7f9b4fd68620&gt;</code></pre>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="fonctions.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">a</span>()</span></code></pre></div>
+<pre><code>## &lt;environment: 0x7f9b4fdbf110&gt;</code></pre>
+<!-------
+To compare environments, you need to use identical() and not ==. This is because == is a vectorised operator, and environments are not vectors.
+
+
+```r
+identical(globalenv(), environment())
+```
+
+```
+## [1] TRUE
+```
+------>
+<p>Tout environnement a un <em>parent</em>, qui est lui-même un environnement. Le <em>parent</em> sert à définir la portée: si un nom n’est pas trouvé dans le <em>current environment</em>, <code>R</code> cherchera dans son <em>parent</em> puis dans le <em>parent</em> de celui-ci et ainsi de suite.</p>
+<p>On peut afficher le <em>parent</em> d’un environnement avec la fonction <code>rlang::env_parent</code> ou la fonction de base <code>parent.env</code>:</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="fonctions.html#cb123-1" aria-hidden="true" tabindex="-1"></a>rlang<span class="sc">::</span><span class="fu">env_parent</span>(e1)</span></code></pre></div>
+<pre><code>## &lt;environment: R_GlobalEnv&gt;</code></pre>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="fonctions.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parent.env</span>(e1)</span></code></pre></div>
+<pre><code>## &lt;environment: R_GlobalEnv&gt;</code></pre>
+<p>On appelle <em>ancêtres</em> l’ensemble des environnements <em>parents</em> d’un environnement. Le principe du masquage de nom qu’on a évoqué fait que le nom d’un objet pris en compte par le <code>current_env</code> est toujours le premier trouvé dans les environnements ancêtres.</p>
+<p>L’assignation traditionnelle, <code>&lt;-</code>, crée toujours une variable dans l’environnement actuel. La <em>super assignation</em>, <code>&lt;&lt;-</code>, ne crée jamais la variable dans l’environnement courant mais, à la place, modifie la variable trouvée dans l’ancêtre le plus récent.</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="fonctions.html#cb127-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb127-2"><a href="fonctions.html#cb127-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb127-3"><a href="fonctions.html#cb127-3" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;&lt;-</span> <span class="dv">1</span></span>
+<span id="cb127-4"><a href="fonctions.html#cb127-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="dv">2</span>)</span>
+<span id="cb127-5"><a href="fonctions.html#cb127-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb127-6"><a href="fonctions.html#cb127-6" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>()</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="fonctions.html#cb129-1" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>Si <code>&lt;&lt;-</code> ne trouve pas de variable existant sous ce nom, elle sera créée dans l’environnement global. Cela implique de manier <code>&lt;&lt;-</code> avec précaution car les variables globales créent des risques de non reproducibilité du code.</p>
+<!----
+You can get and set elements of an environment with $ and [[ in the same way as a list:
+
+e3 <- env(x = 1, y = 2)
+e3$x
+#> [1] 1
+e3$z <- 3
+e3[["z"]]
+---------->
+</div>
+<div id="lenvironnement-des-packages-et-le-chemin-de-recherche-search-path" class="section level3 hasAnchor" number="6.7.2">
+<h3><span class="header-section-number">6.7.2</span> L’environnement des packages et le chemin de recherche (<em>search path</em>)<a href="fonctions.html#lenvironnement-des-packages-et-le-chemin-de-recherche-search-path" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Tous les <em>packages</em> attachés par la commande <code>library()</code> ou <code>require()</code> deviennent un environnement parent de l’environnement global. Le parent immédiat de l’environnement global est le dernier environnement attaché, le parent suivant est celui attaché avant, etc.</p>
+<p>Le principe de l’héritage des fonctions s’applique de la même manière qu’expliqué précédemment pour les environnements. Si un nom de fonction n’est pas trouvé dans l’environnement global, <code>R</code> va donc chercher ce nom jusqu’au premier parent où ce nom fera référence à un objet. C’est une source commune d’erreur lors d’un partage de code.</p>
+<p>En effet, en cas de conflits entre noms de fonctions, la priorité sera <code>Environnement Global &gt; Dernier package chargé &gt; Avant dernier package chargé &gt; ...</code> Donc, si deux personnes ont chargé les mêmes <em>packages</em> mais dans un ordre différent, elles peuvent ne pas obtenir le même résultat (une erreur vs un output). Un cas typique est la fonction <code>select</code>.</p>
+</div>
+<div id="un-exemple-de-problème-denvironnement-avec-les-packages" class="section level3 hasAnchor" number="6.7.3">
+<h3><span class="header-section-number">6.7.3</span> Un exemple de problème d’environnement avec les <em>packages</em><a href="fonctions.html#un-exemple-de-problème-denvironnement-avec-les-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Les <em>packages</em> <code>MASS</code> et <code>dplyr</code> proposent une fonction ayant le même nom mais dont l’objet est différent (la fonction de <code>dplyr</code> sélectionne des colonnes, la fonction de <code>MASS</code> a vocation à entraîner un modèle <em>ridge</em> pour faire de la sélection de variable).</p>
+<p>Voyons comment fonctionne le code dans un sens: imaginons que nous ayons d’abord attaché <code>MASS</code>, puis <code>dplyr</code>:</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="fonctions.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(iris)</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="fonctions.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb132-2"><a href="fonctions.html#cb132-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<pre><code>## 
+## Attachement du package : &#39;dplyr&#39;</code></pre>
+<pre><code>## L&#39;objet suivant est masqué depuis &#39;package:MASS&#39;:
+## 
+##     select</code></pre>
+<pre><code>## Les objets suivants sont masqués depuis &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## Les objets suivants sont masqués depuis &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="fonctions.html#cb137-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> <span class="fu">select</span>(Sepal.Length) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>##   Sepal.Length
+## 1          5.1
+## 2          4.9
+## 3          4.7
+## 4          4.6
+## 5          5.0
+## 6          5.4</code></pre>
+<p>le code fonctionne bien. On a un indice d’un possible conflit entre noms de fonctions lorsqu’on attache un deuxième <em>package</em> quand <code>R</code> nous signale qu’un objet est masqué du <code>package:***</code>. Détachons d’abord les packages (remettre à jour les <em>parents</em> de l’environnement global)</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="fonctions.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On detache les packages du search path pour les charger dans l&#39;ordre inverse</span></span>
+<span id="cb139-2"><a href="fonctions.html#cb139-2" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(<span class="st">&quot;package:dplyr&quot;</span>)</span>
+<span id="cb139-3"><a href="fonctions.html#cb139-3" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(<span class="st">&quot;package:MASS&quot;</span>)</span></code></pre></div>
+<p>Maintenant, attachons les packages dans le sens inverse et essayons de lancer la même commande</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="fonctions.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<pre><code>## 
+## Attachement du package : &#39;dplyr&#39;</code></pre>
+<pre><code>## Les objets suivants sont masqués depuis &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## Les objets suivants sont masqués depuis &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="fonctions.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code></pre></div>
+<pre><code>## 
+## Attachement du package : &#39;MASS&#39;</code></pre>
+<pre><code>## L&#39;objet suivant est masqué depuis &#39;package:dplyr&#39;:
+## 
+##     select</code></pre>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="fonctions.html#cb147-1" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> <span class="fu">select</span>(Sepal.Length) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## Error in select(., Sepal.Length): argument inutilisé (Sepal.Length)</code></pre>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="fonctions.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(<span class="st">&quot;package:dplyr&quot;</span>)</span>
+<span id="cb149-2"><a href="fonctions.html#cb149-2" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(<span class="st">&quot;package:MASS&quot;</span>)</span></code></pre></div>
+<p>Cette fois on a une erreur. Pourquoi ? Parce que la fonction <code>select</code> renvoie maintenant à celle du package <code>MASS</code> (le dernier chargé). Celle-ci n’admet pas une colonne comme paramètre, source de l’erreur.</p>
+</div>
+<div id="comment-bien-utiliser-les-packages" class="section level3 hasAnchor" number="6.7.4">
+<h3><span class="header-section-number">6.7.4</span> Comment bien utiliser les <em>packages</em>?<a href="fonctions.html#comment-bien-utiliser-les-packages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Si on pense régulièrement à nettoyer notre environnement, voire à repartir d’un environnement propre avec la commande <code>lm(list = ls())</code>, on ne pense pas nécessairement à nettoyer les <em>packages</em> chargés. C’est un vrai enjeu de réplicabilité et de robustesse du code. La bonne pratique à adopter est de systématiquement utiliser les fonctions issues de <em>packages</em> sous la forme <code>pkg::function</code>, par exemple <code>dplyr::select</code>. Cela enlève toute ambiguïté à la fonction: <code>R</code> sait qu’il est nécessaire d’aller chercher la fonction select dans l’espace de noms (<em>namespace</em>) <code>dplyr</code>. Quels que soient les packages chargés ou les fonctions dans l’environnement, la commande <code>dplyr::select</code> répondra toujours à l’intention du développeur<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>. Cette syntaxe, <em>a priori</em> plus lourde, rend néanmoins moins ambigues les fonctions utilisées.</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="fonctions.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb150-2"><a href="fonctions.html#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb150-3"><a href="fonctions.html#cb150-3" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Sepal.Length) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>##   Sepal.Length
+## 1          5.1
+## 2          4.9
+## 3          4.7
+## 4          4.6
+## 5          5.0
+## 6          5.4</code></pre>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="fonctions.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(<span class="st">&quot;package:MASS&quot;</span>)</span>
+<span id="cb152-2"><a href="fonctions.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(<span class="st">&quot;package:dplyr&quot;</span>)</span></code></pre></div>
+<p>Notez la différence entre un package <em>attaché</em> et <em>chargé</em>:</p>
+<ul>
+<li>Un package est chargé automatiquement dès qu’on accède à une de ses fonctions avec <code>::</code>. Le chargement est une dépendance souple: elle n’amène pas le package à devenir un <em>parent</em> mais permet quand même de trouver l’aide d’une fonction facilement (une fois que vous avez appelé une fonction <code>dplyr</code>, par exemple <code>dplyr::select</code>, vous pouvez trouver l’aide de <code>dplyr::filter</code> avec tapant <code>?filter</code>);</li>
+<li>Un package est attaché quand on fait <code>library(pkg)</code> ou <code>require(pkg)</code>. Dans ce cas, <code>pkg</code> devient un parent de l’environnement global. En fait, <code>pkg</code> est attaché au chemin de recherche (<em>search path</em>) de <code>R</code>.</li>
+</ul>
+<p><img src="pics/06_fonctions/02_searchPath.png" /></p>
+<p>En suivant à rebours l’ensemble des environnements parents (le <em>search path</em>), on voit l’ordre dans lequel les packages ont été attachés. On peut afficher le nom de tous les environnements présents dans le <em>search path</em> avec la fonction <code>base::search()</code></p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="fonctions.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">search</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;.GlobalEnv&quot;        &quot;package:stats&quot;     &quot;package:graphics&quot; 
+## [4] &quot;package:grDevices&quot; &quot;package:utils&quot;     &quot;package:datasets&quot; 
+## [7] &quot;package:methods&quot;   &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="fonctions.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rlang)</span>
+<span id="cb155-2"><a href="fonctions.html#cb155-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<pre><code>## 
+## Attachement du package : &#39;dplyr&#39;</code></pre>
+<pre><code>## Les objets suivants sont masqués depuis &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## Les objets suivants sont masqués depuis &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="fonctions.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">search</span>()</span></code></pre></div>
+<pre><code>##  [1] &quot;.GlobalEnv&quot;        &quot;package:dplyr&quot;     &quot;package:rlang&quot;    
+##  [4] &quot;package:stats&quot;     &quot;package:graphics&quot;  &quot;package:grDevices&quot;
+##  [7] &quot;package:utils&quot;     &quot;package:datasets&quot;  &quot;package:methods&quot;  
+## [10] &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="fonctions.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(<span class="st">&quot;package:rlang&quot;</span>)</span>
+<span id="cb161-2"><a href="fonctions.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(<span class="st">&quot;package:dplyr&quot;</span>)</span></code></pre></div>
+<p>Quand vous attachez un nouveau package avec <code>library()</code>, l’environnement parent du global environnement change</p>
+<p><img src="pics/06_fonctions/02_searchPath2.png" /></p>
+</div>
+<div id="les-namespaces" class="section level3 hasAnchor" number="6.7.5">
+<h3><span class="header-section-number">6.7.5</span> Les <em>Namespaces</em><a href="fonctions.html#les-namespaces" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>L’objectif des espaces de noms (<em>namespaces</em>) est d’assurer que chaque <em>package</em> fonctionne de la même manière quels que soient les autres <em>packages</em> attachés par l’utilisateur.</p>
+<p>Prenons un exemple à partir de la fonction <code>sd()</code> pour calculer des écarts-types. <code>sd()</code> est calculée à partir de la fonction <code>var()</code> (variance). <code>sd</code> est-elle affectée si une fonction s’appelle <code>var</code> dans l’environnement global ou dans les packages attachés ?</p>
+<p><code>R</code> évite ce problème en prenant avantage de la différence entre l’environnement d’une fonction et les environnements liés à cette fonction. Chaque fonction intégrée dans un package est associée à deux environnements:</p>
+<ul>
+<li>environnement du package (<em>package environment</em>): interface externe d’un package. C’est la manière dont <code>R</code> trouve une fonction dans un package attaché ou avec <code>::</code>. Ce package a comme parent le <em>search path</em>;</li>
+<li>environnement de l’espace de nom (<em>namespace environment</em>): interface interne du package. Il contrôle la manière dont une fonction trouve les objets internes (fonctions, variables…).</li>
+</ul>
+<p>Chaque environnement de noms a le même ensemble d’ancêtres:</p>
+<ul>
+<li>Chaque package contient un fichier <em>NAMESPACE</em> qui contient le lien entre le package et ses dépendances</li>
+<li>Parce qu’importer toutes les fonctions de base <code>R</code> serait pénible, l’espace de noms des fonctions de base est un parent de tout espace de noms.</li>
+<li>Le dernier parent, i.e. le premier dans la lignée des ancêtres, est l’environnement global. Donc, si un package nécessite une variable <code>myvar</code> et ne la trouve dans aucun parent, il considérera qu’il s’agit d’une variable globale et donc ira chercher dans l’environnement global.</li>
+</ul>
+<!-----------
+
+```r
+import(ggplot2)
+import(lest)
+import(scales)
+import(stringr)
+importFrom(Rcpp,evalCpp)
+importFrom(data.table,"%between%")
+importFrom(data.table,melt)
+```
+------>
+<!--------
+### Function environments
+
+
+Most environments are not created by you with new.env() but are created as a consequence of using functions. This section discusses the four types of environments associated with a function: enclosing, binding, execution, and calling.
+
+The enclosing environment is the environment where the function was created. Every function has one and only one enclosing environment. For the three other types of environment, there may be 0, 1, or many environments associated with each function:
+
+    Binding a function to a name with <- defines a binding environment.
+
+    Calling a function creates an ephemeral execution environment that stores variables created during execution.
+
+    Every execution environment is associated with a calling environment, which tells you where the function was called.
+
+The enclosing environment belongs to the function, and never changes, even if the function is moved to a different environment. The enclosing environment determines how the function finds values; the binding environments determine how we find the function.
+
+The distinction between the binding environment and the enclosing environment is important for package namespaces. Package namespaces keep packages independent. For example, if package A uses the base mean() function, what happens if package B creates its own mean() function? Namespaces ensure that package A continues to use the base mean() function, and that package A is not affected by package B (unless explicitly asked for). 
+
+Namespaces are implemented using environments, taking advantage of the fact that functions don’t have to live in their enclosing environments. For example, take the base function sd(). Its binding and enclosing environments are different:
+
+---->
+<p>Reprenons l’exemple de <code>sd</code>. On peut vérifier l’environnement dans lequel on trouve <code>sd</code>:</p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="fonctions.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="fu">environment</span>(sd)</span></code></pre></div>
+<pre><code>## &lt;environment: namespace:stats&gt;</code></pre>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="fonctions.html#cb164-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pryr::where(&quot;sd&quot;)</span></span>
+<span id="cb164-2"><a href="fonctions.html#cb164-2" aria-hidden="true" tabindex="-1"></a><span class="fu">body</span>(sd)</span></code></pre></div>
+<pre><code>## sqrt(var(if (is.vector(x) || is.factor(x)) x else as.double(x), 
+##     na.rm = na.rm))</code></pre>
+<p>La définition de <code>sd()</code> utilise donc <code>var()</code>. Qu’arrive-t-il lorsqu’on crée notre propre version de <code>var</code> ?</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="fonctions.html#cb166-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq_len</span>(<span class="dv">10</span>)</span>
+<span id="cb166-2"><a href="fonctions.html#cb166-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span></code></pre></div>
+<pre><code>## [1] 3.02765</code></pre>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="fonctions.html#cb168-1" aria-hidden="true" tabindex="-1"></a>var <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="st">&quot;I do something really different&quot;</span></span>
+<span id="cb168-2"><a href="fonctions.html#cb168-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span></code></pre></div>
+<pre><code>## [1] 3.02765</code></pre>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="fonctions.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x)</span></code></pre></div>
+<pre><code>## [1] &quot;I do something really different&quot;</code></pre>
+<p>Cela n’affecte pas <code>sd</code>.</p>
+<!----
+![](./pics/03_path.png)
+
+When we type var into the console, it’s found first in the global environment. When sd() looks for var() it finds it first in its namespace environment so never looks in the globalenv().
+
+---->
+
+</div>
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-wickham2015r" class="csl-entry">
+Wickham, Hadley. 2015. <em>R Packages: Organize, Test, Document, and Share Your Code</em>. " O’Reilly Media, Inc.".
+</div>
+<div id="ref-wickham2019advanced" class="csl-entry">
+———. 2019. <em>Advanced r</em>. CRC press.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="3">
+<li id="fn3"><p>Notez qu’en Python, la distinction de type ne devrait pas être nécessaire car la concaténation de <em>string</em> passe directement par l’opérateur <code>+</code><a href="fonctions.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Si la structuration de données choisie est le <em>tibble</em> (approche <code>tidyverse</code>), <code>purrr::map</code> est probablement à privilégier car <code>purrr</code> est conçu pour fonctionner en conjonction avec <code>dplyr</code>. <code>lapply</code>, parce qu’il s’agit d’une fonction de base, est mobilisable pour une très grande variété de problèmes. Parce que <code>R</code> est un langage de programmation où les fonctions sont centrales et où les listes sont une structure de données très riche, <code>lapply</code> reste très malléable et s’intègre très bien avec une grande variété d’objets <code>R</code><a href="fonctions.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>Les <em>closures</em>, qui sont des listes qui capturent l’environnement d’une fonction, fonctionnent aussi sur ce modèle<a href="fonctions.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>Les utilisateurs de <code>Python</code> sont plus habitués à ce formalisme qui est appréciable. Les habitués de <code>Python</code> devraient reconnaître dans le code suivant une syntaxe habituelle <code>import numpy as np ; np.array([1, 2, 3])</code><a href="fonctions.html#fnref6" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="rmdexo.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="package.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

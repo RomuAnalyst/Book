@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 4 R Markdown | Résumé des cours et TP - DU Dataviz</title>
+  <meta name="description" content="Support à destination des R-newbies" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 4 R Markdown | Résumé des cours et TP - DU Dataviz" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Support à destination des R-newbies" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 4 R Markdown | Résumé des cours et TP - DU Dataviz" />
+  
+  <meta name="twitter:description" content="Support à destination des R-newbies" />
+  
+
+<meta name="author" content="Romuald ZAMI" />
+<meta name="author" content="et contributeurs" />
+
+
+<meta name="date" content="2022-06-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="git.html"/>
+<link rel="next" href="rmdexo.html"/>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+<link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+<link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+<script>
+function unrolltab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Romuald ZAMI - DU Dataviz</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Préface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#contributeurs"><i class="fa fa-check"></i>Contributeurs <i class="far fa-user-secret"></i></a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#utilisation-des-icônes"><i class="fa fa-check"></i>Utilisation des icônes</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Objectif de la formation</a></li>
+<li class="chapter" data-level="2" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html"><i class="fa fa-check"></i><b>2</b> Présentation de R et de son environnement</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#quest-ce-que"><i class="fa fa-check"></i><b>2.1</b> Qu’est-ce que <i class="fab fa-r-project"></i> ?</a></li>
+<li class="chapter" data-level="2.2" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#prise-en-main-de-r-studio"><i class="fa fa-check"></i><b>2.2</b> Prise en main de <strong>R-studio</strong></a></li>
+<li class="chapter" data-level="2.3" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#laide-en-ligne"><i class="fa fa-check"></i><b>2.3</b> L’aide en ligne</a></li>
+<li class="chapter" data-level="2.4" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#packages"><i class="fa fa-check"></i><b>2.4</b> Packages</a></li>
+<li class="chapter" data-level="2.5" data-path="présentation-de-r-et-de-son-environnement.html"><a href="présentation-de-r-et-de-son-environnement.html#objectifs-du-document"><i class="fa fa-check"></i><b>2.5</b> Objectifs du document</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="git.html"><a href="git.html"><i class="fa fa-check"></i><b>3</b> Utiliser <code>GIT</code> avec <i class="fab fa-r-project"></i></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="git.html"><a href="git.html#pourquoi-utiliser-la-gestion-de-version"><i class="fa fa-check"></i><b>3.1</b> Pourquoi utiliser la gestion de version ?</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="git.html"><a href="git.html#conserver-et-archiver-du-code"><i class="fa fa-check"></i><b>3.1.1</b> Conserver et archiver du code</a></li>
+<li class="chapter" data-level="3.1.2" data-path="git.html"><a href="git.html#travailler-efficacement-en-équipe"><i class="fa fa-check"></i><b>3.1.2</b> Travailler efficacement en équipe</a></li>
+<li class="chapter" data-level="3.1.3" data-path="git.html"><a href="git.html#améliorer-la-qualité-des-codes"><i class="fa fa-check"></i><b>3.1.3</b> Améliorer la qualité des codes</a></li>
+<li class="chapter" data-level="3.1.4" data-path="git.html"><a href="git.html#usage-quotidien-un-exemple-avec-le-modèle-ines"><i class="fa fa-check"></i><b>3.1.4</b> Usage quotidien : un exemple avec le modèle Ines</a></li>
+<li class="chapter" data-level="3.1.5" data-path="git.html"><a href="git.html#avec-ou-sans-gestion-de-versions"><i class="fa fa-check"></i><b>3.1.5</b> Avec ou sans gestion de versions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="git.html"><a href="git.html#configurer-un-projet-git-avec-rstudio-à-linsee"><i class="fa fa-check"></i><b>3.2</b> Configurer un projet <code>GIT</code> avec RStudio à l’Insee</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="git.html"><a href="git.html#la-première-fois"><i class="fa fa-check"></i><b>3.2.1</b> La première fois</a></li>
+<li class="chapter" data-level="3.2.2" data-path="git.html"><a href="git.html#au-lancement-de-chaque-projet-cloner-depuis-gitlab.insee.fr"><i class="fa fa-check"></i><b>3.2.2</b> Au lancement de chaque projet, cloner depuis <code>gitlab.insee.fr</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="git.html"><a href="git.html#des-bases-de-git"><i class="fa fa-check"></i><b>3.3</b> Des bases de GIT <i class="fas fa-code-branch"></i></a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="git.html"><a href="git.html#le-b.a-ba"><i class="fa fa-check"></i><b>3.3.1</b> Le B.A-BA</a></li>
+<li class="chapter" data-level="3.3.2" data-path="git.html"><a href="git.html#gitlocal"><i class="fa fa-check"></i><b>3.3.2</b> Exercice 1: Premiers pas avec <code>git</code> en local</a></li>
+<li class="chapter" data-level="3.3.3" data-path="git.html"><a href="git.html#les-branches-principes"><i class="fa fa-check"></i><b>3.3.3</b> Les branches : principes</a></li>
+<li class="chapter" data-level="3.3.4" data-path="git.html"><a href="git.html#branches-et-lien-avec-master"><i class="fa fa-check"></i><b>3.3.4</b> Branches et lien avec <code>master</code></a></li>
+<li class="chapter" data-level="3.3.5" data-path="git.html"><a href="git.html#quelques-compléments-de-git"><i class="fa fa-check"></i><b>3.3.5</b> Quelques compléments de GIT</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="git.html"><a href="git.html#gitlab"><i class="fa fa-check"></i><b>3.4</b> <code>GitLab</code> <i class="fab fa-gitlab"></i>, aperçu de la plateforme de partage de code</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="git.html"><a href="git.html#repository"><i class="fa fa-check"></i><b>3.4.1</b> <code>Repository</code></a></li>
+<li class="chapter" data-level="3.4.2" data-path="git.html"><a href="git.html#issues"><i class="fa fa-check"></i><b>3.4.2</b> <code>Issues</code></a></li>
+<li class="chapter" data-level="3.4.3" data-path="git.html"><a href="git.html#exercice-4-ouvrir-et-organiser-les-issues"><i class="fa fa-check"></i><b>3.4.3</b> Exercice 4 : Ouvrir et organiser les <em>issues</em></a></li>
+<li class="chapter" data-level="3.4.4" data-path="git.html"><a href="git.html#merge-requests-mr"><i class="fa fa-check"></i><b>3.4.4</b> Merge requests (MR)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="git.html"><a href="git.html#exercice-4-fusionner-les-travaux-avec-des-merge-requests"><i class="fa fa-check"></i><b>3.4.5</b> Exercice 4 : Fusionner les travaux avec des <code>Merge Requests</code></a></li>
+<li class="chapter" data-level="3.4.6" data-path="git.html"><a href="git.html#les-groupes"><i class="fa fa-check"></i><b>3.4.6</b> Les groupes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="git.html"><a href="git.html#orgagit"><i class="fa fa-check"></i><b>3.5</b> Organiser le travail collaboratif</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="git.html"><a href="git.html#créer-une-branche"><i class="fa fa-check"></i><b>3.5.1</b> Créer une branche</a></li>
+<li class="chapter" data-level="3.5.2" data-path="git.html"><a href="git.html#modifier-et-valider-ces-changements"><i class="fa fa-check"></i><b>3.5.2</b> Modifier et valider ces changements</a></li>
+<li class="chapter" data-level="3.5.3" data-path="git.html"><a href="git.html#ouvrir-une-demande-de-fusion"><i class="fa fa-check"></i><b>3.5.3</b> Ouvrir une demande de fusion</a></li>
+<li class="chapter" data-level="3.5.4" data-path="git.html"><a href="git.html#échanger-entre-collaborateurs-et-vérifier-le-code"><i class="fa fa-check"></i><b>3.5.4</b> Échanger entre collaborateurs et vérifier le code</a></li>
+<li class="chapter" data-level="3.5.5" data-path="git.html"><a href="git.html#fusionner-la-branche-avec-master"><i class="fa fa-check"></i><b>3.5.5</b> Fusionner la branche avec <code>master</code></a></li>
+<li class="chapter" data-level="3.5.6" data-path="git.html"><a href="git.html#exercice-5-résoudre-les-conflits-cest-facile."><i class="fa fa-check"></i><b>3.5.6</b> Exercice 5 : Résoudre les conflits, c’est facile.</a></li>
+<li class="chapter" data-level="3.5.7" data-path="git.html"><a href="git.html#exercice-6-contribuer-à-un-dépôt-sans-droits-sur-master"><i class="fa fa-check"></i><b>3.5.7</b> Exercice 6 : Contribuer à un dépôt sans droits sur <code>master</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="rmd.html"><a href="rmd.html"><i class="fa fa-check"></i><b>4</b> <code>R Markdown</code></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="rmd.html"><a href="rmd.html#présentation-générale-de-r-markdown"><i class="fa fa-check"></i><b>4.1</b> Présentation générale de <code>R Markdown</code></a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="rmd.html"><a href="rmd.html#de-markdown-à-r-markdown"><i class="fa fa-check"></i><b>4.1.1</b> De <code>Markdown</code> à <code>R Markdown</code></a></li>
+<li class="chapter" data-level="4.1.2" data-path="rmd.html"><a href="rmd.html#que-peut-produire-r-markdown"><i class="fa fa-check"></i><b>4.1.2</b> Que peut produire <code>R Markdown</code> ?</a></li>
+<li class="chapter" data-level="4.1.3" data-path="rmd.html"><a href="rmd.html#pourquoi-utiliser-r-markdown"><i class="fa fa-check"></i><b>4.1.3</b> Pourquoi utiliser <code>R Markdown</code>?</a></li>
+<li class="chapter" data-level="4.1.4" data-path="rmd.html"><a href="rmd.html#comment-fonctionne-r-markdown"><i class="fa fa-check"></i><b>4.1.4</b> Comment fonctionne <code>R Markdown</code> ?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="rmd.html"><a href="rmd.html#avant-de-commencer"><i class="fa fa-check"></i><b>4.2</b> Avant de commencer</a></li>
+<li class="chapter" data-level="4.3" data-path="rmd.html"><a href="rmd.html#comment-construire-un-document-r-markdown"><i class="fa fa-check"></i><b>4.3</b> Comment construire un document <code>R Markdown</code>?</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="rmd.html"><a href="rmd.html#anatomie-de-la-structure-dun-document-r-markdown"><i class="fa fa-check"></i><b>4.3.1</b> Anatomie de la structure d’un document <code>R Markdown</code></a></li>
+<li class="chapter" data-level="4.3.2" data-path="rmd.html"><a href="rmd.html#ecrire-des-blocs-de-texte-en-r-markdown"><i class="fa fa-check"></i><b>4.3.2</b> Ecrire des blocs de texte en <code>R Markdown</code></a></li>
+<li class="chapter" data-level="4.3.3" data-path="rmd.html"><a href="rmd.html#insérer-un-résultat-r-dans-du-texte"><i class="fa fa-check"></i><b>4.3.3</b> Insérer un résultat <code>R</code> dans du texte</a></li>
+<li class="chapter" data-level="4.3.4" data-path="rmd.html"><a href="rmd.html#ecrire-des-blocs-de-code"><i class="fa fa-check"></i><b>4.3.4</b> Ecrire des blocs de code</a></li>
+<li class="chapter" data-level="4.3.5" data-path="rmd.html"><a href="rmd.html#insérer-de-beaux-tableaux"><i class="fa fa-check"></i><b>4.3.5</b> Insérer de beaux tableaux</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="rmd.html"><a href="rmd.html#conclusion"><i class="fa fa-check"></i><b>4.4</b> Conclusion</a></li>
+<li class="chapter" data-level="4.5" data-path="rmd.html"><a href="rmd.html#pour-aller-plus-loin"><i class="fa fa-check"></i><b>4.5</b> Pour aller plus loin</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="rmdexo.html"><a href="rmdexo.html"><i class="fa fa-check"></i><b>5</b> <code>R Markdown</code>: un exercice pour créer son premier document</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="rmdexo.html"><a href="rmdexo.html#quelques-éléments-dexplication"><i class="fa fa-check"></i><b>5.1</b> Quelques éléments d’explication</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="rmdexo.html"><a href="rmdexo.html#objectif"><i class="fa fa-check"></i><b>5.1.1</b> Objectif</a></li>
+<li class="chapter" data-level="5.1.2" data-path="rmdexo.html"><a href="rmdexo.html#le-produit-attendu"><i class="fa fa-check"></i><b>5.1.2</b> Le produit attendu</a></li>
+<li class="chapter" data-level="5.1.3" data-path="rmdexo.html"><a href="rmdexo.html#besoins"><i class="fa fa-check"></i><b>5.1.3</b> Expression des besoins</a></li>
+<li class="chapter" data-level="5.1.4" data-path="rmdexo.html"><a href="rmdexo.html#données-mobilisées"><i class="fa fa-check"></i><b>5.1.4</b> Données mobilisées</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="rmdexo.html"><a href="rmdexo.html#organisation-de-léquipe-projet"><i class="fa fa-check"></i><b>5.2</b> Organisation de l’équipe projet</a>
+<ul>
+<li class="chapter" data-level="" data-path="rmdexo.html"><a href="rmdexo.html#comment-sorganiser"><i class="fa fa-check"></i>Comment s’organiser ?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="rmdexo.html"><a href="rmdexo.html#demande-de-modifications"><i class="fa fa-check"></i><b>5.3</b> Demande de modifications</a>
+<ul>
+<li class="chapter" data-level="" data-path="rmdexo.html"><a href="rmdexo.html#cas-dune-demande-damélioration"><i class="fa fa-check"></i>Cas d’une demande d’amélioration</a></li>
+<li class="chapter" data-level="" data-path="rmdexo.html"><a href="rmdexo.html#cas-dune-demande-dévolution"><i class="fa fa-check"></i>Cas d’une demande d’évolution</a></li>
+<li class="chapter" data-level="" data-path="rmdexo.html"><a href="rmdexo.html#cas-dune-demande-de-modification"><i class="fa fa-check"></i>Cas d’une demande de modification</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="fonctions.html"><a href="fonctions.html"><i class="fa fa-check"></i><b>6</b> Programmation fonctionnelle avec <code>R</code> et <code>Rstudio</code></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="fonctions.html"><a href="fonctions.html#introduction"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="fonctions.html"><a href="fonctions.html#rappels-sur-les-objets-en-r"><i class="fa fa-check"></i><b>6.2</b> Rappels sur les objets en <code>R</code></a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="fonctions.html"><a href="fonctions.html#distinguer-noms-et-valeurs"><i class="fa fa-check"></i><b>6.2.1</b> Distinguer noms et valeurs</a></li>
+<li class="chapter" data-level="6.2.2" data-path="fonctions.html"><a href="fonctions.html#copier-des-objets-en-r"><i class="fa fa-check"></i><b>6.2.2</b> Copier des objets en <code>R</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="fonctions.html"><a href="fonctions.html#rappels-sur-les-fonctions"><i class="fa fa-check"></i><b>6.3</b> Rappels sur les fonctions</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="fonctions.html"><a href="fonctions.html#portée-scoping-dune-fonction"><i class="fa fa-check"></i><b>6.3.1</b> Portée (<em>scoping</em>) d’une fonction</a></li>
+<li class="chapter" data-level="6.3.2" data-path="fonctions.html"><a href="fonctions.html#noms-masqués"><i class="fa fa-check"></i><b>6.3.2</b> Noms masqués</a></li>
+<li class="chapter" data-level="6.3.3" data-path="fonctions.html"><a href="fonctions.html#portée-et-évaluation-paresseuse"><i class="fa fa-check"></i><b>6.3.3</b> Portée et évaluation paresseuse</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="fonctions.html"><a href="fonctions.html#définir-des-fonctions-en-r"><i class="fa fa-check"></i><b>6.4</b> Définir des fonctions en <code>R</code></a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="fonctions.html"><a href="fonctions.html#un-exemple-simple-pour-commencer"><i class="fa fa-check"></i><b>6.4.1</b> Un exemple simple pour commencer</a></li>
+<li class="chapter" data-level="6.4.2" data-path="fonctions.html"><a href="fonctions.html#créer-des-fonctions-complexes"><i class="fa fa-check"></i><b>6.4.2</b> Créer des fonctions complexes</a></li>
+<li class="chapter" data-level="6.4.3" data-path="fonctions.html"><a href="fonctions.html#créer-une-fonction-vraiment-complexe"><i class="fa fa-check"></i><b>6.4.3</b> Créer une fonction vraiment complexe</a></li>
+<li class="chapter" data-level="6.4.4" data-path="fonctions.html"><a href="fonctions.html#avancé-méthodes-alternatives"><i class="fa fa-check"></i><b>6.4.4</b> [Avancé] Méthodes alternatives</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="fonctions.html"><a href="fonctions.html#utiliser-les-outils-de-débuggage-de-rstudio"><i class="fa fa-check"></i><b>6.5</b> Utiliser les outils de débuggage de <code>Rstudio</code></a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="fonctions.html"><a href="fonctions.html#toutes-les-erreurs-ne-se-valent-pas"><i class="fa fa-check"></i><b>6.5.1</b> Toutes les erreurs ne se valent pas!</a></li>
+<li class="chapter" data-level="6.5.2" data-path="fonctions.html"><a href="fonctions.html#show-traceback"><i class="fa fa-check"></i><b>6.5.2</b> <code>Show Traceback</code></a></li>
+<li class="chapter" data-level="6.5.3" data-path="fonctions.html"><a href="fonctions.html#rerun-with-debug"><i class="fa fa-check"></i><b>6.5.3</b> <code>Rerun with debug</code></a></li>
+<li class="chapter" data-level="6.5.4" data-path="fonctions.html"><a href="fonctions.html#breakpoint"><i class="fa fa-check"></i><b>6.5.4</b> <code>Breakpoint</code></a></li>
+<li class="chapter" data-level="6.5.5" data-path="fonctions.html"><a href="fonctions.html#la-famille-des-fonctions-try"><i class="fa fa-check"></i><b>6.5.5</b> La famille des fonctions <code>try</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="fonctions.html"><a href="fonctions.html#documenter-des-fonctions"><i class="fa fa-check"></i><b>6.6</b> Documenter des fonctions</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="fonctions.html"><a href="fonctions.html#documenter-les-fonctions-avec-roxygen2"><i class="fa fa-check"></i><b>6.6.1</b> Documenter les fonctions avec <code>roxygen2</code></a></li>
+<li class="chapter" data-level="6.6.2" data-path="fonctions.html"><a href="fonctions.html#le-format-roxygen"><i class="fa fa-check"></i><b>6.6.2</b> Le format <code>roxygen</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="fonctions.html"><a href="fonctions.html#comprendre-les-environnements"><i class="fa fa-check"></i><b>6.7</b> Comprendre les environnements</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="fonctions.html"><a href="fonctions.html#notions-sur-les-environnements"><i class="fa fa-check"></i><b>6.7.1</b> Notions sur les environnements</a></li>
+<li class="chapter" data-level="6.7.2" data-path="fonctions.html"><a href="fonctions.html#lenvironnement-des-packages-et-le-chemin-de-recherche-search-path"><i class="fa fa-check"></i><b>6.7.2</b> L’environnement des packages et le chemin de recherche (<em>search path</em>)</a></li>
+<li class="chapter" data-level="6.7.3" data-path="fonctions.html"><a href="fonctions.html#un-exemple-de-problème-denvironnement-avec-les-packages"><i class="fa fa-check"></i><b>6.7.3</b> Un exemple de problème d’environnement avec les <em>packages</em></a></li>
+<li class="chapter" data-level="6.7.4" data-path="fonctions.html"><a href="fonctions.html#comment-bien-utiliser-les-packages"><i class="fa fa-check"></i><b>6.7.4</b> Comment bien utiliser les <em>packages</em>?</a></li>
+<li class="chapter" data-level="6.7.5" data-path="fonctions.html"><a href="fonctions.html#les-namespaces"><i class="fa fa-check"></i><b>6.7.5</b> Les <em>Namespaces</em></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="package.html"><a href="package.html"><i class="fa fa-check"></i><b>7</b> Créer un <em>package</em> <code>R</code> par la pratique</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="package.html"><a href="package.html#introduction-1"><i class="fa fa-check"></i><b>7.0.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.0.2" data-path="package.html"><a href="package.html#mapping"><i class="fa fa-check"></i><b>7.0.2</b> Le <em>mapping</em> et l’utilisation d’<code>aes()</code></a></li>
+<li class="chapter" data-level="7.0.3" data-path="package.html"><a href="package.html#les-formes-géométriques"><i class="fa fa-check"></i><b>7.0.3</b> Les formes géométriques</a></li>
+<li class="chapter" data-level="7.0.4" data-path="package.html"><a href="package.html#combiner-plusieurs-formes-géométriques"><i class="fa fa-check"></i><b>7.0.4</b> Combiner plusieurs formes géométriques</a></li>
+<li class="chapter" data-level="7.0.5" data-path="package.html"><a href="package.html#créer-un-graphique-par-modalité-dune-variable"><i class="fa fa-check"></i><b>7.0.5</b> Créer un graphique par modalité d’une variable</a></li>
+<li class="chapter" data-level="7.1" data-path="package.html"><a href="package.html#comment-personnaliser-un-graphique"><i class="fa fa-check"></i><b>7.1</b> Comment personnaliser un graphique</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="package.html"><a href="package.html#les-options-des-graphiques"><i class="fa fa-check"></i><b>7.1.1</b> Les options des graphiques</a></li>
+<li class="chapter" data-level="7.1.2" data-path="package.html"><a href="package.html#utiliser-un-thème"><i class="fa fa-check"></i><b>7.1.2</b> Utiliser un thème</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="package.html"><a href="package.html#exporter-un-graphique"><i class="fa fa-check"></i><b>7.2</b> Exporter un graphique</a></li>
+<li class="chapter" data-level="7.3" data-path="package.html"><a href="package.html#ggplot2Ressources"><i class="fa fa-check"></i><b>7.3</b> Pour en savoir plus</a>
+<ul>
+<li class="chapter" data-level="" data-path="package.html"><a href="package.html#feuille-de-route-pour-créer-un-package"><i class="fa fa-check"></i>Feuille de route pour créer un <em>package</em></a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="package.html"><a href="package.html#initier-un-package"><i class="fa fa-check"></i><b>7.4</b> Initier un <em>package</em></a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="package.html"><a href="package.html#choisir-un-nom"><i class="fa fa-check"></i><b>7.4.1</b> Choisir un nom</a></li>
+<li class="chapter" data-level="7.4.2" data-path="package.html"><a href="package.html#créer-un-projet-rstudio-de-type-package"><i class="fa fa-check"></i><b>7.4.2</b> Créer un projet RStudio de type “package”</a></li>
+<li class="chapter" data-level="7.4.3" data-path="package.html"><a href="package.html#renseigner-les-méta-données-du-package-le-fichier-description"><i class="fa fa-check"></i><b>7.4.3</b> Renseigner les méta-données du <em>package</em> : le fichier <code>DESCRIPTION</code></a></li>
+<li class="chapter" data-level="" data-path="package.html"><a href="package.html#champ-license"><i class="fa fa-check"></i>Champ <code>License</code></a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="package.html"><a href="package.html#configurer-les-outils-de-développement"><i class="fa fa-check"></i><b>7.5</b> Configurer les outils de développement</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="package.html"><a href="package.html#créer-un-dépôt-vide-dans-gitlab"><i class="fa fa-check"></i><b>7.5.1</b> Créer un dépôt vide dans GitLab</a></li>
+<li class="chapter" data-level="7.5.2" data-path="package.html"><a href="package.html#utiliser-git-dans-le-projet-rstudio"><i class="fa fa-check"></i><b>7.5.2</b> Utiliser git dans le projet RStudio</a></li>
+<li class="chapter" data-level="7.5.3" data-path="package.html"><a href="package.html#créer-le-lien-entre-le-dépôt-gitlab-et-le-projet-rstudio"><i class="fa fa-check"></i><b>7.5.3</b> Créer le lien entre le dépôt GitLab et le projet RStudio</a></li>
+<li class="chapter" data-level="7.5.4" data-path="package.html"><a href="package.html#utiliser-testthat-pour-les-tests"><i class="fa fa-check"></i><b>7.5.4</b> Utiliser <code>testthat</code> pour les tests</a></li>
+<li class="chapter" data-level="7.5.5" data-path="package.html"><a href="package.html#utiliser-lintégration-continue-de-gitlab"><i class="fa fa-check"></i><b>7.5.5</b> Utiliser l’intégration continue de GitLab</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="package.html"><a href="package.html#développer-un-package"><i class="fa fa-check"></i><b>7.6</b> Développer un <em>package</em></a>
+<ul>
+<li class="chapter" data-level="7.6.1" data-path="package.html"><a href="package.html#inclure-du-code-le-documenter-et-le-tester"><i class="fa fa-check"></i><b>7.6.1</b> Inclure du code, le documenter et le tester</a></li>
+<li class="chapter" data-level="7.6.2" data-path="package.html"><a href="package.html#déclarer-une-dépendance"><i class="fa fa-check"></i><b>7.6.2</b> Déclarer une dépendance</a></li>
+<li class="chapter" data-level="7.6.3" data-path="package.html"><a href="package.html#charger-lensemble-des-fonctions-de-son-package"><i class="fa fa-check"></i><b>7.6.3</b> Charger l’ensemble des fonctions de son <em>package</em></a></li>
+</ul></li>
+<li class="chapter" data-level="7.7" data-path="package.html"><a href="package.html#installer-le-package"><i class="fa fa-check"></i><b>7.7</b> Installer le <em>package</em></a>
+<ul>
+<li class="chapter" data-level="7.7.1" data-path="package.html"><a href="package.html#installer-sur-sa-machine"><i class="fa fa-check"></i><b>7.7.1</b> Installer sur sa machine</a></li>
+<li class="chapter" data-level="7.7.2" data-path="package.html"><a href="package.html#générer-le-fichier-compressé"><i class="fa fa-check"></i><b>7.7.2</b> Générer le fichier compressé</a></li>
+</ul></li>
+<li class="chapter" data-level="7.8" data-path="package.html"><a href="package.html#documenter-un-package"><i class="fa fa-check"></i><b>7.8</b> Documenter un <em>package</em></a>
+<ul>
+<li class="chapter" data-level="7.8.1" data-path="package.html"><a href="package.html#créer-un-fichier-readme-obligatoire"><i class="fa fa-check"></i><b>7.8.1</b> Créer un fichier <code>README</code> (obligatoire)</a></li>
+<li class="chapter" data-level="7.8.2" data-path="package.html"><a href="package.html#créer-une-vignette-recommandé"><i class="fa fa-check"></i><b>7.8.2</b> Créer une vignette (recommandé)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="package.html"><a href="package.html#créer-un-modèle-de-document-r-markdown"><i class="fa fa-check"></i><b>7.9</b> Créer un modèle de document R Markdown</a></li>
+<li class="chapter" data-level="7.10" data-path="package.html"><a href="package.html#bonnes-pratiques"><i class="fa fa-check"></i><b>7.10</b> Bonnes pratiques</a>
+<ul>
+<li class="chapter" data-level="7.10.1" data-path="package.html"><a href="package.html#créer-un-changelog"><i class="fa fa-check"></i><b>7.10.1</b> Créer un changelog</a></li>
+<li class="chapter" data-level="7.10.2" data-path="package.html"><a href="package.html#gérer-les-numéros-de-version"><i class="fa fa-check"></i><b>7.10.2</b> Gérer les numéros de version</a></li>
+</ul></li>
+<li class="chapter" data-level="7.11" data-path="package.html"><a href="package.html#conclusion---pour-aller-plus-loin"><i class="fa fa-check"></i><b>7.11</b> Conclusion - Pour aller plus loin</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="./">Collaboration IUT Paris-rives Seine</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Résumé des cours et TP - DU Dataviz</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="rmd" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapitre 4</span> <code>R Markdown</code><a href="rmd.html#rmd" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="présentation-générale-de-r-markdown" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Présentation générale de <code>R Markdown</code><a href="rmd.html#présentation-générale-de-r-markdown" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Grâce au cadavre exquis du chapitre précédent, vous avez découvert le format <code>Markdown</code>. Le présent chapitre vise à aller plus loin dans cet apprentissage en présentant les <code>R markdown</code> qui sont, comme le nom l’indique, une manière de lier du texte avec du code <code>R</code> (permettant de produire des sorties, d’expliciter du code…)</p>
+<p><code>R Markdown</code> est une extension de <code>R</code> qui se présente sous la forme d’un <em>package</em>. <code>R Markdown</code> permet de produire des documents texte en y intégrant nativement des morceaux de code <code>R</code> (pour le rendre public, pour générer des sorties…). <code>R Markdown</code> permet de fluidifier le processus de rédaction d’une publication, en réduisant fortement le nombre de gestes manuels nécessaires pour inclure des graphiques ou du code dans un document: plutôt qu’avoir un code <code>SAS</code> ou <code>Stata</code> ayant généré des sorties <code>Excel</code>/<code>Calc</code> intégrées dans un document <code>Word</code> ou transformées en table <code>LaTeX</code>, on dispose d’un unique document-source qui contient à la fois le texte et les codes qui produisent les sorties du document final. L’utilisation de <code>R Markdown</code> facilite la production de publications reproductibles.</p>
+<div id="de-markdown-à-r-markdown" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> De <code>Markdown</code> à <code>R Markdown</code><a href="rmd.html#de-markdown-à-r-markdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong><code>Markdown</code> est un système d’édition doté d’une syntaxe simplifiée souvent utilisé pour faire de la documentation de projet.</strong> Le format est utilisé sur de nombreux sites internet, notamment <code>Wikipedia</code>, <code>Gitlab</code> et <code>Stackoverflow</code>. L’extension de ce type de fichier est <code>.md</code>. <code>Markdown</code> présente deux avantages. D’une part, il est facile d’inclure des blocs de code informatique et des équations mathématiques dans un document <code>Markdown</code>. D’autre part, le formatage de blocs de code est simple et très bien fait (et beaucoup plus léger qu’en LaTeX par exemple).</p>
+<p><strong>Comme son nom l’indique, <code>R Markdown</code> permet de lier du texte (<code>Markdown</code>) avec du code <code>R</code>.</strong> A la différence d’un fichier <code>Markdown</code> classique, un document <code>R Markdown</code> peut à la fois présenter <strong>et</strong> exécuter du code <code>R</code>, et peut donc intégrer facilement les sorties de ce code (graphiques, tableaux, cartes…). La présente documentation est ainsi entièrement rédigée avec <code>R Markdown</code>, comme on peut le voir en jetant un coup d’oeil au <a href="https://gitlab.com/linogaliana/documentationR/-/tree/master/03_Fiches_thematiques">code source de cette fiche</a>.</p>
+<p>Voici une liste de quelques unes des options disponibles :</p>
+<table>
+<colgroup>
+<col width="13%" />
+<col width="22%" />
+<col width="64%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Valeurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>echo</td>
+<td>TRUE/FALSE</td>
+<td>Afficher ou non le code R dans le document</td>
+</tr>
+<tr class="even">
+<td>eval</td>
+<td>TRUE/FALSE</td>
+<td>Exécuter ou non le code R à la compilation</td>
+</tr>
+<tr class="odd">
+<td>include</td>
+<td>TRUE/FALSE</td>
+<td>Inclure ou non le code R et ses résultats dans le document</td>
+</tr>
+<tr class="even">
+<td>results</td>
+<td>“hide”/“asis”/“markup”/“hold”</td>
+<td>Type de résultats renvoyés par le bloc de code</td>
+</tr>
+<tr class="odd">
+<td>warning</td>
+<td>TRUE/FALSE</td>
+<td>Afficher ou non les avertissements générés par le bloc</td>
+</tr>
+<tr class="even">
+<td>message</td>
+<td>TRUE/FALSE</td>
+<td>Afficher ou non les messages générés par le bloc</td>
+</tr>
+</tbody>
+</table>
+<p>Il existe de nombreuses autres options décrites notamment dans <a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">guide de référence R Markdown</a> (PDF en anglais).</p>
+<p><strong>Il est toutefois possible de produire un document <code>R Markdown</code> sans exécuter les codes <code>R</code> qu’il contient</strong> (comme dans un <code>Markdown</code> classique). En outre, <code>R Markdown</code> propose de <a href="https://bookdown.org/yihui/rmarkdown/language-engines.html#shell-scripts">plus en plus de langages</a> pour aller au-delà de <code>R</code>, parmi lesquels <code>Python</code>, <code>SQL</code>, <code>C++</code>…</p>
+<div class="remarque">
+<p><code>R Markdown</code> est une alternative aux <a href="https://jupyter.org/">notebooks Jupyter</a> qui permettent de lier du code et du texte. Du point de vue de la reproductibilité des résultats, les fichiers <code>R Markdown</code> sont préférables car l’exécution du code dans le document est linéaire alors que les blocs de code des <code>notebook jupyter</code> peuvent être exécutés dans le désordre.</p>
+</div>
+</div>
+<div id="que-peut-produire-r-markdown" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Que peut produire <code>R Markdown</code> ?<a href="rmd.html#que-peut-produire-r-markdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il y a une grande liberté dans les formats de sortie disponibles pour un fichier <code>Markdown</code>. Parmi les principaux types de sorties :</p>
+<ul>
+<li>Des rapports ou articles en <code>pdf</code>, <code>html</code>, <code>doc</code>, <code>odt</code>, etc. ;</li>
+<li>Des présentations sous forme de slides <code>pdf</code> ou <code>html</code> ;</li>
+<li>Des sites <em>web</em> (comme celui associé à <a href="https://linogaliana.gitlab.io/documentationR/index.html">cet ouvrage</a> ou comme <a href="https://www.utilitr.org">la page d’accueil d’utilitR</a>).</li>
+</ul>
+<div class="remarque">
+<p>Pour la génération d’un document au format <code>pdf</code>, vous devez avoir une installation fonctionnelle de LaTeX sur votre système. Si ça n’est pas le cas, le <em>package</em> <code>tinytex</code> de Yihui Xie vise à faciliter l’installation d’une distribution LaTeX minimale quel que soit le système d’exploitation de votre machine. Pour l’utiliser il vous faut d’abord installer le <em>package</em> <code>tinytex</code>, puis lancer l”installation de LaTeX (prévoir un téléchargement d’environ 200Mo). Voici les instructions à exécuter:</p>
+</div>
+</div>
+<div id="pourquoi-utiliser-r-markdown" class="section level3 hasAnchor" number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Pourquoi utiliser <code>R Markdown</code>?<a href="rmd.html#pourquoi-utiliser-r-markdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><code>R Markdown</code> présente plusieurs avantages pour la production de documents statistiques:</p>
+<ol style="list-style-type: decimal">
+<li>L’utilisation de <code>R Markdown</code> amène l’utilisateur à se préoccuper de la reproductibilité des productions statistiques.</li>
+<li>La dissociation du fond et de la forme du document permise par <code>R Markdown</code> a de nombreuses vertus, parmi lesquelles:
+<ul>
+<li>elle allège les mises à jour ou correctifs du texte ou du code générant des sorties;</li>
+<li>elle donne de la visibilité au code ayant généré les résultats et illustrations ;</li>
+<li>il est facile de changer le format du document final (par exemple produire un fichier <code>html</code> plutôt que <code>pdf</code>), et la gestion de multiples formats de publication est peu coûteuse (puisque le document source reste le même pour tous les formats).</li>
+</ul></li>
+<li>Il est possible de mettre des commentaires partout dans le document, ce qui permet de détailler les résultats et les choix de méthode, et facilite le suivi de l’analyse ou l’appropriation par une personne extérieure.</li>
+<li>La syntaxe <code>R Markdown</code> a été pensée pour avoir deux grandes qualités:
+<ul>
+<li>Elle est simple et rapide à prendre en main; elle est notamment beaucoup plus simple que la syntaxe <code>html</code>;</li>
+<li>Elle est très légère visuellement, ce qui fait qu’un code brut <code>R Markdown</code> reste lisible même pour des personnes qui ne connaissent pas la syntaxe (contrairement à <code>LaTeX</code>…).</li>
+</ul></li>
+<li>Lorsqu’on associe <code>R Markdown</code> et un outil de <em>versioning</em> tel que Git, les modifications successives apportées au document sont facilement traçables, ce qui permet de:
+<ul>
+<li>maîtriser l’évolution du document, par exemple sur la succession de corrections, apportées tout au long d’un circuit de relecture;</li>
+<li>ne pas multiplier les versions d’un même document;</li>
+<li>combiner facilement les modifications apportées par plusieurs utilisateurs.</li>
+</ul></li>
+<li><code>R Markdown</code> est bien intégré à <code>Rstudio</code>. Les extensions <code>.Rmd</code> sont reconnues automatiquement par <code>Rstudio</code> ce qui permet d’avoir de l’autocomplétion également lors de la rédaction de blocs de texte, la possibilité d’exécuter des bouts de code uniquement lors d’une phase d’exploration…</li>
+</ol>
+</div>
+<div id="comment-fonctionne-r-markdown" class="section level3 hasAnchor" number="4.1.4">
+<h3><span class="header-section-number">4.1.4</span> Comment fonctionne <code>R Markdown</code> ?<a href="rmd.html#comment-fonctionne-r-markdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="dissociation-du-fond-et-de-la-forme" class="section level4 hasAnchor" number="4.1.4.1">
+<h4><span class="header-section-number">4.1.4.1</span> Dissociation du fond et de la forme<a href="rmd.html#dissociation-du-fond-et-de-la-forme" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><strong><code>R Markdown</code> dissocie le fond et la forme du document, contrairement aux logiciels de type Office qui fonctionnent selon le principe du <em>WYSIWYG</em> </strong> (<em>What you see is what you get</em>). Le fichier <code>.Rmd</code> contient donc à la fois le texte brut et des commandes de mise en forme. On parle de <em>WYSIWYW</em> (<em>What you see is what you want</em>). Le fichier est composé de texte brut et éventuellement de code informatique, et doit être compilé pour produire le fichier de sortie. <strong>Le document final ne peut être visualisé qu’après compilation.</strong> A noter que les illustrations (graphiques, tableaux, cartes) peuvent être générées dynamiquement à partir des blocs de code <code>R</code> intégrés dans le document <code>Rmd</code>, ou insérées par des liens.</p>
+<p>Les connaisseurs du format <code>LaTeX</code> reconnaîtront une grande proximité entre <code>LaTeX</code> et <code>Markdown</code>. En effet, dans les deux cas, la mise en forme est appelée par des commandes spéciales. Toutefois, <code>Markdown</code> se distingue de <code>LaTeX</code> par des commandes de mise en forme beaucoup plus légères. Par exemple, il faut utiliser la fonction <code>\textit{italique}</code> en <code>LaTeX</code> pour mettre du texte en italique, alors qu’en <code>Markdown</code> il suffit de mettre le texte entre deux astériques <code>*italique*</code>.</p>
+</div>
+<div id="comment-r-markdown-produit-il-un-document" class="section level4 hasAnchor" number="4.1.4.2">
+<h4><span class="header-section-number">4.1.4.2</span> Comment <code>R Markdown</code> produit-il un document?<a href="rmd.html#comment-r-markdown-produit-il-un-document" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><strong>La compilation d’un document <code>R Markdown</code> se déroule en deux étapes qui sont gérées de manière interne par le package <code>rmarkdown</code></strong>:</p>
+<ul>
+<li>Transformation du <code>.Rmd</code> (<code>R Markdown</code>) en <code>.md</code> (<code>Markdown</code>): le <em>package</em> <code>knitr</code> se charge de transformer le texte et les sorties <code>R</code> en un document <code>markdown</code> standard.</li>
+<li>Transformation du <code>.md</code> en un format de sortie standard (<code>html</code>, <code>pdf</code>, etc.): tâche effectuée par le logiciel nommé <code>pandoc</code>. Ce dernier est automatiquement installé lorsqu’on a installé le package <code>rmarkdown</code>, il n’y a donc pas à le télécharger.</li>
+</ul>
+<div class="figure">
+<img src="https://www.book.utilitr.org/pics/rmarkdown/schema_rmd.png" alt="" />
+<p class="caption">Interaction entre rmarkdown et ses dépendances, emprunté à <a href="https://www.book.utilitr.org/produire-des-documents-avec-r-markdown.html">utilitR</a></p>
+</div>
+<p>Pour obtenir la sortie désirée d’un document <code>R Markdown</code> on peut utiliser deux méthodes:</p>
+<ul>
+<li>Pour les usages courants, le bouton <code>Knit</code> de Rstudio convient bien:</li>
+</ul>
+<p><img src="pics/04_markdown/knit.png" /></p>
+<ul>
+<li>Pour des processus de production des fichiers plus complexes, il est possible d’exécuter la commande <code>rmarkdown::render</code> pour générer de manière automatique un fichier <code>R Markdown</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="avant-de-commencer" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Avant de commencer<a href="rmd.html#avant-de-commencer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="conseil">
+<p>Les points de vigilance lorsqu’on débute :</p>
+<ul>
+<li><code>R Markdown</code> est un outil collaboratif en plus dont l’utilisation nécessite l’adhésion de l’ensemble de l’équipe.</li>
+<li>L’ensemble des contributeurs doit donc s’approprier à la fois ses principes et sa syntaxe (hors contexte collaboratif, ses avantages demeurent pour un document réalisé seul).</li>
+<li>Il faut paramétrer le correcteur automatique de document. Pour le paramétrer en français, aller dans le menu <code>Tools &gt; Global Options &gt; Spelling</code> et dans le menu déroulant <em>Main dictionary language</em>, sélectionner <em>Français</em>.</li>
+<li>les outils ne remplacent pas la communication dans l’équipe projet. La production collaborative d’un document R Markdown nécessite de se mettre d’accord sur sa structure. Il est donc nécessaire de faire des points d’équipe. Pour vous aider, il existe un [chat Insee] (<a href="https://rocket-chat.stable.innovation.insee.eu" class="uri">https://rocket-chat.stable.innovation.insee.eu</a>)</li>
+</ul>
+</div>
+<div class="conseil">
+<p>Pour assurer la <strong>reproductibilité</strong> des résultats, le document doit pouvoir être généré par chacun des membres de l’équipe projet. Voici quelques bonnes pratiques pour y parvenir:</p>
+<ul>
+<li>Tout comme pour un script <code>R</code>, les ressources (images, données…) doivent être appelées via des chemins d’accès relatifs au dossier du projet. Il faut donc utiliser des chemins relatifs, et non absolus:
+<ul>
+<li><strong>A ne pas faire:</strong> inclure un lien vers <code>D:/projets_Gitlab/my_project/donnees/mesdonnees.csv</code>;</li>
+<li><strong>mais faire plutôt:</strong> inclure un lien vers <code>./donnees/mesdonnees.csv</code>;</li>
+</ul></li>
+<li>L’emplacement de ces ressources doit respecter une arborescence connue et utilisée par tous.</li>
+</ul>
+</div>
+<div class="conseil">
+<p>Les fichiers <code>.Rmd</code> s’intègrent bien avec <code>git</code> car il s’agit de fichiers texte. En revanche, il faut éviter de mettre sous contrôle de version les fichiers de sortie (<code>pdf</code>, <code>html</code>). Pour ce faire, on peut ajouter au fichier <code>.gitignore</code> les extensions associées, par exemple <code>*.pdf</code> ou <code>*.html</code></p>
+</div>
+<!---- Le bloc suivant n'est pas dans utilitR ----->
+<div class="remarque">
+<p>Pour le moment, il n’existe pas d’outil pour intégrer automatiquement la charte graphique Insee dans un document <code>Markdown</code>. Des thèmes <code>ggplot</code> et des feuilles de style (<em>template</em>) adaptées aux différents formats de publication Insee permettraient de rédiger des publications en <code>R Markdown</code>. Elles seraient plus faciles à faire évoluer au fil des relectures et plus reproductibles que les publications actuellement construites sur LibreOffice.</p>
+</div>
+</div>
+<div id="comment-construire-un-document-r-markdown" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Comment construire un document <code>R Markdown</code>?<a href="rmd.html#comment-construire-un-document-r-markdown" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="anatomie-de-la-structure-dun-document-r-markdown" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Anatomie de la structure d’un document <code>R Markdown</code><a href="rmd.html#anatomie-de-la-structure-dun-document-r-markdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Un document <code>R Markdown</code> comprend deux parties principales:</p>
+<ul>
+<li>L’en-tête (<em>YAML header</em>) qui gère les éléments de style;</li>
+<li>Le contenu qui gère le fond et permet d’alterner librement texte et code.</li>
+</ul>
+<div id="len-tête" class="section level4 hasAnchor" number="4.3.1.1">
+<h4><span class="header-section-number">4.3.1.1</span> L’en-tête<a href="rmd.html#len-tête" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>L’en-tête d’un document <code>R Markdown</code> (arfois appelé <code>YAML header</code>) est délimité par deux lignes de pointillés et contient les métadonnées du document (titre, auteurs, options générales de mise en page…). Il contient au minimum le titre du document et le format de sortie. Il peut être enrichi d’autres champs pour modifier certaines métadonnées (par exemple la date) ou le style du document compilé. Voici un exemple d’en-tête:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb10-1"><a href="rmd.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="pp">--- </span></span>
+<span id="cb10-2"><a href="rmd.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Produire des documents avec R Markdown&quot;</span></span>
+<span id="cb10-3"><a href="rmd.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Daffy Duck&quot;</span></span>
+<span id="cb10-4"><a href="rmd.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;2022-06-13&quot;</span></span>
+<span id="cb10-5"><a href="rmd.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb10-6"><a href="rmd.html#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span></span>
+<span id="cb10-7"><a href="rmd.html#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">keep_md</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb10-8"><a href="rmd.html#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">self_contained</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb10-9"><a href="rmd.html#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> book.bib</span></span>
+<span id="cb10-10"><a href="rmd.html#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Un document où je révèle que je ne suis pas un canard&quot;</span></span>
+<span id="cb10-11"><a href="rmd.html#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>Les éléments obligatoires sont présents (titres et format de sortie, dans le cas un livre) mais de nombreux champs supplémentaires peuvent être ajoutés. Par exemple, les références bibliograhiques sont listées dans un fichier séparé et c’est <code>R Markdown</code> lui-même qui se charge de la mettre en forme et de la lier à des références dans le texte.</p>
+</div>
+<div id="corps-dun-document-r-markdown" class="section level4 hasAnchor" number="4.3.1.2">
+<h4><span class="header-section-number">4.3.1.2</span> Corps d’un document <code>R Markdown</code><a href="rmd.html#corps-dun-document-r-markdown" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Le corps d’un document <code>R Markdown</code> comprend deux types de <strong>blocs</strong>, qu’on peut alterner librement:</p>
+<ul>
+<li>Des <strong>blocs de texte brut</strong> mis en forme selon la syntaxe <em>markdown</em>;</li>
+<li>Des <strong>blocs de code <code>R</code></strong> (appelés <em>chunks</em>) encadrés par les balises ```:
+<ul>
+<li>ces <em>chunks</em> peuvent être nommés (il est même recommandé de le faire);</li>
+<li>des options peuvent être spécifiées. Ces options (détaillées plus bas) permettent par exemple de ne pas faire figurer l’<em>output</em> du code dans le document final ou inversement de ne montrer que l’<em>output</em> du code et non le code l’ayant généré.</li>
+</ul></li>
+</ul>
+<div class="remarque">
+<p>Il est possible d’ajouter en dessous de l’en-tête un tout premier <em>chunk</em> nommé <em>setup</em>, qui permet de définir des options par défaut pour tous les <em>chunks</em> du document. Par exemple, on peut souhaiter par défaut ne pas afficher le code <code>R</code> de chaque bloc dans le document final.</p>
+<pre><code>```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```</code></pre>
+</div>
+</div>
+</div>
+<div id="ecrire-des-blocs-de-texte-en-r-markdown" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Ecrire des blocs de texte en <code>R Markdown</code><a href="rmd.html#ecrire-des-blocs-de-texte-en-r-markdown" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Le corps d’un document contient presque toujours des blocs de texte
+qui suivent la syntaxe <code>Markdown</code>. Voici un exemple:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb12-1"><a href="rmd.html#cb12-1" aria-hidden="true" tabindex="-1"></a>Ceci est du texte avec *de l&#39;italique* et **du gras**.</span>
+<span id="cb12-2"><a href="rmd.html#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="rmd.html#cb12-3" aria-hidden="true" tabindex="-1"></a>On peut définir des listes à puces :</span>
+<span id="cb12-4"><a href="rmd.html#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="rmd.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>premier élément</span>
+<span id="cb12-6"><a href="rmd.html#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>deuxième élément</span></code></pre></div>
+<p>Ce code génèrera le texte mis en forme suivant :</p>
+<blockquote>
+<p>Ceci est du texte avec de l’<em>italique</em> et du <strong>gras</strong>.</p>
+<p>On peut définir des listes à puces :</p>
+<ul>
+<li>premier élément</li>
+<li>deuxième élément</li>
+</ul>
+</blockquote>
+<p>On peut définir des titres de différents niveaux en faisant débuter une ligne par un ou plusieurs <code>#</code> :</p>
+<pre><code># Titre de niveau 1
+
+## Titre de niveau 2
+
+### Titre de niveau 3</code></pre>
+<p>Quand des titres ont été définis, si vous cliquez sur l’icône <code>Show document outline</code> totalement à droite de la barre d’outils associée au fichier <code>R Markdown</code>, une table des matières générée automatiquement à partir des titres s’affiche et vous permet de naviguer facilement dans le document :</p>
+<p><img src="pics/04_markdown/toc.png" /></p>
+<p>La syntaxe Markdown permet d’autres mises en forme, comme la possibilité d’insérer des liens ou des images. Par exemple, le code suivant :</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb14-1"><a href="rmd.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Exemple de lien</span><span class="co">](https://example.com)</span></span></code></pre></div>
+<p>Prendra la forme suivante, une fois compilé :</p>
+<blockquote>
+<p><a href="https://example.com">Exemple de lien</a></p>
+</blockquote>
+<p>Dans RStudio, le menu <code>Help &gt; Markdown quick reference</code> donne un aperçu plus complet de la syntaxe.</p>
+<div class="conseil">
+<p>La version 1.4 de <code>Rstudio</code> qui devrait devenir version officielle d’ici peu,
+propose de nombreux outils pour faciliter l’édition de fichiers <code>R Markdown</code>.
+La principale innovation est
+<a href="https://rstudio.github.io/visual-markdown-editing/#/">l’éditeur visuel de Markdown</a>
+qui propose une pré-visualisation du document compilé en <em>live</em> mais aussi
+des fonctionnalités qui facilitent l’écriture de <code>Markdown</code>
+(correcteur orthographique amélioré, ajout de citations bibliographiques
+facilité, plus de raccourcis claviers, etc.).</p>
+<p>En attendant l’officialisation de cette version,
+l’<em>addin</em> <code>Remedy</code> facilite l’écriture de fichiers <code>R Markdown</code> grâce à un
+menu qui permet de cliquer directement sur le type de balise désiré:</p>
+<div class="figure">
+<img src="https://raw.githubusercontent.com/ThinkR-open/remedy/master/reference/figures/remedy_example.gif" alt="" />
+<p class="caption">Présentation de l’addin disponible sur github</p>
+</div>
+<p>Pour l’installer</p>
+<p>Pour compter le nombre de mots dans un fichier <code>.Rmd</code>, on peut utiliser le
+très pratique <em>addin</em> nommé <code>Wordcountaddin</code>:</p>
+</div>
+</div>
+<div id="insérer-un-résultat-r-dans-du-texte" class="section level3 hasAnchor" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Insérer un résultat <code>R</code> dans du texte<a href="rmd.html#insérer-un-résultat-r-dans-du-texte" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Pour renforcer la reproductibilité d’un document <code>R Markdown</code>, il est possible de faire appel à <code>R</code> pour insérer des résultats dans du texte. C’est le principe du <em>inline code</em> dans <code>R Markdown</code>.</p>
+<p>Il suffit, pour cela, d’adopter la structure suivante: <code>r 2+2</code>. Le résultat sera automatiquement inséré par <code>R</code> en substitution de l’expression. <code>r</code></p>
+<blockquote>
+<p>2 + 2 = <code>`r 2+2`</code></p>
+</blockquote>
+<p>deviendra ainsi</p>
+<blockquote>
+<p>2 + 2 = 4</p>
+</blockquote>
+</div>
+<div id="ecrire-des-blocs-de-code" class="section level3 hasAnchor" number="4.3.4">
+<h3><span class="header-section-number">4.3.4</span> Ecrire des blocs de code<a href="rmd.html#ecrire-des-blocs-de-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="insérer-un-bloc-de-code" class="section level4 hasAnchor" number="4.3.4.1">
+<h4><span class="header-section-number">4.3.4.1</span> Insérer un bloc de code<a href="rmd.html#insérer-un-bloc-de-code" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Outre du texte libre au format <code>Markdown</code>, un document <code>R Markdown</code> peut également contenir du code <code>R</code>. Celui-ci est inclus dans des blocs (<em>chunks</em>) délimités par la syntaxe suivante :</p>
+<pre><code>```{r}
+x &lt;- 1:5
+```</code></pre>
+<p>Vous pouvez utiliser le menu <code>Code &gt; Insert Chunk</code> de Rstudio ou utiliser le raccourci clavier <code>Ctrl+Alt+I</code> pour automatiquement insérer un bloc <code>R</code> à remplir. Quand votre curseur se trouve dans un bloc, vous pouvez saisir le code <code>R</code> que vous souhaitez, l’exécuter, utiliser l’autocomplétion, etc… exactement comme si vous vous trouviez dans un script <code>R</code>. Vous pouvez également exécuter l’ensemble du code contenu dans un bloc à l’aide du raccourci clavier <code>Ctrl+Maj+Entrée</code>.</p>
+</div>
+<div id="exécuter-des-blocs-de-code" class="section level4 hasAnchor" number="4.3.4.2">
+<h4><span class="header-section-number">4.3.4.2</span> Exécuter des blocs de code<a href="rmd.html#exécuter-des-blocs-de-code" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Dans <code>RStudio</code> les blocs de code <code>R</code> sont en général affichés avec une couleur de fond légèrement différente pour les distinguer du reste du document. En haut à droite du bloc, des boutons sont disponibles si on désire:</p>
+<ol style="list-style-type: decimal">
+<li>ajouter des options au bloc;</li>
+<li>exécuter tous les blocs avant celui-ci;</li>
+<li>exécuter ce bloc exclusivement.</li>
+</ol>
+<p><img src="pics/04_markdown/chunk.png" /></p>
+<p>Lorsque le document est compilé au format HTML, PDF ou docx, chaque bloc est exécuté tour à tour, et le résultat inclus dans le document final, qu’il s’agisse de texte, d’un tableau ou d’un graphique. Les blocs sont liés entre eux, dans le sens où les données importées ou calculées dans un bloc sont accessibles aux blocs suivants. On peut donc aussi concevoir un document <code>R Markdown</code> comme un script <code>R</code> dans lequel on aurait intercalé des blocs de texte au format <code>Markdown</code>.</p>
+<div class="remarque">
+<p>Le bouton <code>Knit</code> ou le raccourci clavier <code>CTRL+SHIFT+K</code> lancent automatiquement l’exécution du code <code>R</code> dans une nouvelle session. Cela signifie que les objets appartenant à l’environnement global de l’utilisateur sont ignorés, par défaut. C’est une bonne pratique parce qu’elle aboutit à des documents plus reproductibles.</p>
+<p>Par défaut, la commande <code>rmarkdown::render</code> n’utilise pas cette option. Si le fichier <code>R Markdown</code> est compilé en utilisant <code>rmarkdown::render</code>, il est recommandé d’utiliser la syntaxe <code>rmarkdown::render(..., envir = new.env())</code></p>
+</div>
+<div class="conseil">
+<p>Par défaut, dans <code>Rstudio</code>, le résultat du bloc de code ne s’affiche pas dans la console mais sous le bloc, dans l’interface visuelle du document. Si vous n’appréciez pas ce fonctionnement, vous pouvez le modifier de la façon suivante: aller dans le panneau <code>Tools &gt; Global Options...</code>, onglet <code>R Markdown</code>, puis décocher l’option <code>Show output inline for all R Markdown documents</code>.</p>
+</div>
+</div>
+<div id="définir-les-options-des-blocs-de-code" class="section level4 hasAnchor" number="4.3.4.3">
+<h4><span class="header-section-number">4.3.4.3</span> Définir les options des blocs de code<a href="rmd.html#définir-les-options-des-blocs-de-code" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><strong>Il est possible (et recommandé) de nommer un bloc en utilisant un <em>label</em> avant les options.</strong> Le nom du bloc se place dans la première ligne du bloc, juste après la lettre <code>r</code>: <code>{r nom_du_bloc}</code>.</p>
+<p>Un point important est que deux blocs ne peuvent pas porter le même nom, il faut donc être rigoureux dans le choix du nom. Nommer les blocs de code présente plusieurs avantages :</p>
+<ul>
+<li>en cas d’erreur lors de la compilation du document, <code>R</code> donne le nom du bloc qui provoque l’erreur. Avec des blocs non nommés, on a pour seule information <code>unnamed-chunk-XX</code> ce qui rend difficile d’identifier la source de l’erreur dans un document très long;</li>
+<li>le bloc peut facilement être retrouvé dans l’arborescence Rstudio (voir capture d’écran).</li>
+</ul>
+<div class="figure">
+<img src="./pics/rmarkdown/namedbloc.png" alt="" />
+<p class="caption">Le nom des blocs figure dans l’arboresence Rstudio</p>
+</div>
+<p><strong>Outre un nom, on peut passer à un bloc une série d’options sous la forme <code>option = valeur</code>.</strong> Ces options permettent de contrôler le comportement du bloc lors de la compilation du document. Les blocs de code acceptent de nombreuses options. Les principales options sont les suivantes:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Valeurs possibles</th>
+<th>Valeur par défaut</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>echo</td>
+<td><code>TRUE/FALSE</code></td>
+<td><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td>eval</td>
+<td><code>TRUE/FALSE</code></td>
+<td><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td>include</td>
+<td><code>TRUE/FALSE</code></td>
+<td><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td>results</td>
+<td><em><code>'hide'/'asis'/'markup'/'hold'</code></em></td>
+<td><code>'markup'</code></td>
+</tr>
+<tr class="odd">
+<td>error</td>
+<td><code>TRUE/FALSE</code></td>
+<td><code>TRUE</code></td>
+</tr>
+<tr class="even">
+<td>warning</td>
+<td><code>TRUE/FALSE</code></td>
+<td><code>TRUE</code></td>
+</tr>
+<tr class="odd">
+<td>message</td>
+<td><code>TRUE/FALSE</code></td>
+<td><code>TRUE</code></td>
+</tr>
+</tbody>
+</table>
+<div class="remarque">
+<p><strong>cache</strong> mis à <code>TRUE</code> permet de mettre le résultat du <em>chunk</em> en cache. En effet, il est à la fois coûteux et inutile d’exécuter certaines instructions <code>R</code> à chaque fois (l’importation de grosses tables par exemple). Dans ce cas, au moment d’une première exécution, le résultat d’un <em>chunk</em> peut être mis en cache, c’est-à-dire en mémoire grâce à l’option <strong>cache = TRUE</strong>. Attention si vous utilisez le cache : vous ne devez jamais le <em>pusher</em> sur GitLab et donc ajouter la ligne <code>*_cache/</code> au fichier <code>.gitignore</code> de votre projet.</p>
+</div>
+<p>Voici un exemple de bloc avec un nom et des options :</p>
+<pre><code>```{r mon_bloc, echo = FALSE, warning = TRUE}
+x &lt;- 1:5
+```</code></pre>
+<p>Dans ce bloc, l’option <code>echo = FALSE</code> implique que le code <code>R</code> n’est pas inséré dans le document compilé, et que seul le résultat du code est visible; l’option <code>warning = TRUE</code> implique que les éventuels avertissements générés par l’exécution du code sont insérés dans le document compilé.</p>
+<p><strong>Les options permettent également de contrôler la nature de la sortie <code>R</code>.</strong> En particulier, les options <code>fig.height</code> et <code>fig.width</code> permettent de définir la taille de la sortie. Par exemple, le bloc suivant génèrera un graphique plus large que haut:</p>
+<pre><code>```{r, fig.width=12, fig.height=8}
+hist(iris$Sepal.Length)
+```</code></pre>
+<p><img src="04-rmarkdown_files/figure-html/unnamed-chunk-10-1.png" width="576" /></p>
+<p>alors que le bloc suivant génèrera une figure aux dimensions différentes:</p>
+<pre><code>```{r, fig.width=6, fig.height=12}
+hist(iris$Sepal.Length)
+```</code></pre>
+<p><img src="04-rmarkdown_files/figure-html/unnamed-chunk-12-1.png" width="288" /></p>
+<div class="exo">
+<p><strong>Exercice 1: Créer un fichier <code>R Markdown</code> produisant la sortie suivante :</strong></p>
+<p>⚠️ Ne pas écrire la date avec du texte mais utiliser une mise en forme appropriée avec du code <em>inline</em> de la date détectée par <code>R</code> (<code>Sys.Date()</code>) avec la fonction <code>format</code></p>
+<p><embed src="resources/rmarkdown/_rmarkdown_exo1.html" /></p>
+</div>
+</div>
+<div id="appeler-un-script" class="section level4 hasAnchor" number="4.3.4.4">
+<h4><span class="header-section-number">4.3.4.4</span> Appeler un script<a href="rmd.html#appeler-un-script" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Afin de mieux organiser son code, un même projet peut avoir plusieurs scripts. Même s’il est possible d’utiliser la fonction <code>source()</code> dans un document R Markdown, cette pratique n’est pas recommandée. Dans ce cadre, il est préférable d’utiliser l’option <code>code</code> pour le chunk.</p>
+<p>Voici un exemple qui appelle un script <code>R</code> qui installe et charge des <em>packages</em>:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb19-1"><a href="rmd.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=TRUE, echo=TRUE, code=readLines(&quot;./pgm/librairies.R&quot;, encoding=&quot;UTF-8&quot;)}</span></span>
+<span id="cb19-2"><a href="rmd.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="rmd.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># on charge les librairies</span></span>
+<span id="cb20-2"><a href="rmd.html#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="rmd.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------------------------------------------</span></span>
+<span id="cb20-4"><a href="rmd.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;questionr&quot;)</span></span>
+<span id="cb20-5"><a href="rmd.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;datasets&quot;)</span></span>
+<span id="cb20-6"><a href="rmd.html#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;gmodels&quot;)</span></span>
+<span id="cb20-7"><a href="rmd.html#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;tidyverse&quot;)</span></span>
+<span id="cb20-8"><a href="rmd.html#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;rio&quot;)</span></span>
+<span id="cb20-9"><a href="rmd.html#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="rmd.html#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># library(&quot;rio&quot;)</span></span>
+<span id="cb20-11"><a href="rmd.html#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># library(&quot;questionr&quot;)</span></span>
+<span id="cb20-12"><a href="rmd.html#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co"># library(&quot;datasets&quot;)</span></span>
+<span id="cb20-13"><a href="rmd.html#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># library(&quot;gmodels&quot;)</span></span>
+<span id="cb20-14"><a href="rmd.html#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co"># library(&quot;tidyverse&quot;)</span></span>
+<span id="cb20-15"><a href="rmd.html#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co"># library(&quot;knitr&quot;)</span></span></code></pre></div>
+</div>
+</div>
+<div id="insérer-de-beaux-tableaux" class="section level3 hasAnchor" number="4.3.5">
+<h3><span class="header-section-number">4.3.5</span> Insérer de beaux tableaux<a href="rmd.html#insérer-de-beaux-tableaux" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Avec la fonction <strong>kable</strong> du package <code>knitr</code> on peut produire de beaux graphiques. On peut aussi utiliser le package <code>kableExtra</code> qui permet d’aller plus loin dans la <em>customisation</em> du tableau.</p>
+<p>Exemple avec le jeu de données Insee <code>histoires de vie 2003 (hdv2003)</code> inclus directement dans le <em>package</em> <strong>questionr</strong>. Avant de commencer, on va utiliser le <code>pipe</code> du package <code>magrittr</code>, plutôt que d’attacher le package (cf. Section <a href="#functions"><strong>??</strong></a>, on va uniquement importer la fonction <code>%&gt;%</code> grâce au <em>package</em> <code>import</code>:</p>
+<ol style="list-style-type: decimal">
+<li>Sans fonction <code>kable</code>:</li>
+</ol>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="rmd.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(hdv2003, <span class="at">package =</span> <span class="st">&quot;questionr&quot;</span>)</span>
+<span id="cb21-2"><a href="rmd.html#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="rmd.html#cb21-3" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> hdv2003 <span class="sc">%&gt;%</span> </span>
+<span id="cb21-4"><a href="rmd.html#cb21-4" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">group_by</span>(bricol, cuisine) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-5"><a href="rmd.html#cb21-5" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">sum =</span> <span class="fu">round</span>(<span class="fu">sum</span>(poids)))</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;bricol&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="rmd.html#cb23-1" aria-hidden="true" tabindex="-1"></a>res</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 3
+## # Groups:   bricol [2]
+##   bricol cuisine     sum
+##   &lt;fct&gt;  &lt;fct&gt;     &lt;dbl&gt;
+## 1 Non    Non     4052227
+## 2 Non    Oui     2491878
+## 3 Oui    Non     2304623
+## 4 Oui    Oui     2222498</code></pre>
+<ul>
+<li>Avec l’instruction <code>knitr::kable</code>:</li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="rmd.html#cb25-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(res, <span class="at">caption =</span> <span class="st">&quot;hdv2003 - bricol x cuisine - affichage avec la fonction kable&quot;</span>)</span></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-16">Table 4.1: </span>hdv2003 - bricol x cuisine - affichage avec la fonction kable</caption>
+<thead>
+<tr class="header">
+<th align="left">bricol</th>
+<th align="left">cuisine</th>
+<th align="right">sum</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Non</td>
+<td align="left">Non</td>
+<td align="right">4052227</td>
+</tr>
+<tr class="even">
+<td align="left">Non</td>
+<td align="left">Oui</td>
+<td align="right">2491878</td>
+</tr>
+<tr class="odd">
+<td align="left">Oui</td>
+<td align="left">Non</td>
+<td align="right">2304623</td>
+</tr>
+<tr class="even">
+<td align="left">Oui</td>
+<td align="left">Oui</td>
+<td align="right">2222498</td>
+</tr>
+</tbody>
+</table>
+<div class="exo">
+<p><strong>Exercice 2</strong></p>
+<p>Modifier le fichier précédent en ajoutant une instruction R pour ajouter un tableau de votre choix.
+Vous pourrez par exemple utiliser les données <code>mtcars</code>.</p>
+</div>
+</div>
+</div>
+<div id="conclusion" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Conclusion<a href="rmd.html#conclusion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<blockquote>
+<ul>
+<li>Réaliser un document <code>R Mardown</code> est simple, mais la visualisation du résultat final requiert une étape de compilation du fichier <code>.Rmd</code>;</li>
+<li>Un fichier <code>.Rmd</code> mélange :
+<ul>
+<li>du texte balisé selon la syntaxe <code>Markdown</code>;</li>
+<li>des bouts de code <code>R</code>;</li>
+</ul></li>
+<li>Le résultat d’une instruction <code>R</code> peut soit s’insérer directement dans le texte, soit être contenu dans un bloc de code appelé <em>chunk</em>.</li>
+</ul>
+</blockquote>
+<p>Pour aller plus loin sur certains aspects, notamment sur la question des
+modèles de documents, vous pouvez vous référer à la fiche sur
+<code>R Markdown</code> dans la <a href="www.book.utilitr.org">documentation utilitR</a>.</p>
+<ul>
+<li>Il existe un éditeur de <code>Markdown</code> (pas de <code>R Markdown</code>) sur la plateforme innovation: <a href="https://hackmd.beta.innovation.insee.eu"><code>CodiMD</code></a>. L’avantage de <code>CodiMD</code>, permet de visualiser immédiatement le résultat sur le même écran.</li>
+</ul>
+<p><img src="pics/04_markdown/CodiMD.png" /></p>
+<p>Vous pouvez consulter la <strong>Cheat sheet</strong> <code>R Markdown</code> disponible sur le site de <a href="https://rstudio.com">R Studio</a>.</p>
+<p><img src="pics/04_markdown/cheat_sheet_Rmarkdown.png" /></p>
+</div>
+<div id="pour-aller-plus-loin" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Pour aller plus loin<a href="rmd.html#pour-aller-plus-loin" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Les ouvrages <a href="https://bookdown.org/yihui/rmarkdown-cookbook/">Cookbook R Markdown</a> et
+<a href="https://bookdown.org/yihui/rmarkdown/">R Markdown Definitive Guide</a>;</li>
+<li>Le <a href="https://bookdown.org/">manuel de référence bookdown</a>;</li>
+<li>La partie <code>R Markdown</code> de la formation <a href="https://linogaliana.gitlab.io/collaboratif/rmd.html">Travail collaboratif avec <code>R</code></a>;</li>
+<li><a href="https://rmarkdown.rstudio.com/authoring_basics.html">Guide de la syntaxe <code>R Markdown</code></a>;</li>
+<li><a href="https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"><code>R Markdown Cheatsheet</code></a></li>
+<li><a href="https://juba.github.io/tidyverse/13-rmarkdown.html">Cours de Julien Barnier sur le sujet</a>;</li>
+<li><a href="https://r4ds.had.co.nz/r-markdown.html">Chapitre sur le sujet dans le livre <em><code>R</code> For Data Science</em></a>;</li>
+<li><a href="https://thinkr.fr/les-tableaux-statiques-pour-vos-rapports-en-r/">Tutoriel de ThinkR sur les tableaux</a></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="git.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="rmdexo.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

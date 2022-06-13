@@ -1,0 +1,226 @@
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}
+
+
+
+.rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  background: #f5f5f5 5px center/3em no-repeat;
+}
+.rmdcaution {
+  background-image: url("../pics/images/caution.png");
+}
+.rmdimportant {
+  background-image: url("../pics/images/important.png");
+}
+.rmdnote {
+  background-image: url("../pics/images/note.png");
+}
+.rmdtip {
+  background-image: url("../pics/images/tip.png");
+}
+.rmdwarning {
+  background-image: url("../pics/images/warning.png");
+}
+
+.titreexo {
+  margin: 0;
+  padding: 2px 0 0 12px;
+  top: -1px;
+  text-transform: uppercase;
+  font-weight:700;
+  text-align: center;
+}
+
+
+/*.exercice {
+  padding: 1em;
+  border: 2px solid #4169e1;
+  border-radius: 10px;
+  scrollbar-base-color:gold;
+  height:300px;
+  overflow:auto;
+}
+*/
+
+.recommandation,
+.exo,
+.conseil,
+.remarque {
+  margin:20px;
+  padding:0 .6rem .8rem!important;overflow:hidden;
+  page-break-inside:avoid;
+  /*border-left:.2rem solid #dc3545;*/
+  border-radius:.1rem;
+  box-shadow:0 .2rem .5rem rgba(0,0,0,.05),0 0 .05rem rgba(0,0,0,.1);
+  transition:color .25s,background-color .25s,border-color .25s
+}
+
+.exo{
+  scrollbar-base-color:gold;
+  max-height: 300px;
+  overflow:auto;
+}
+
+.recommandation {
+  border-left:.2rem solid #dc3545;
+  /*background: #ffbaba;*/
+  /*border: 5px solid #ff0000;*/
+}
+.auteurs {
+  border-left:.5rem solid #006600;
+  background: #f1ffdc;
+  background-color: #f1ffdc;
+  margin-top:50px;
+  margin-bottom:50px;
+  padding:0 .6rem .8rem!important;overflow:hidden;
+  page-break-inside:avoid;
+  border-radius:.1rem;
+  box-shadow:0 .2rem .5rem rgba(0,0,0,.05),0 0 .05rem rgba(0,0,0,.1);
+  transition:color .25s,border-color .25s
+}
+.conseil {
+  border-left:.2rem solid #ffc107;
+  /*background: #ffbaba;*/
+  /*border: 5px solid #ff0000;*/
+}
+.remarque {
+  border-left:.2rem solid #007bff;
+  /*background: #ffbaba;*/
+  /*border: 5px solid #ff0000;*/
+}
+.exo {
+  border-left:.2rem solid #008000;
+  /*background: #ffbaba;*/
+  /*border: 5px solid #ff0000;*/
+}
+
+.recommandation::before {
+  position: relative;
+  display: inline-block;  
+  margin:0 -.6rem!important;
+  padding:.4rem .6rem .4rem 2rem;
+  width: 100%;
+  font-weight:700;
+  /*font-size: large;
+  font-family: sans-serif;
+  font-weight: bold;*/
+  content: "\f071 " " Recommandation";
+  font-family: "FontAwesome", sans-serif;
+  font-weight: 900;
+  background-color:#ffbaba;
+}
+.conseil::before {
+  position: relative;
+  display: inline-block;
+  margin:0 -.6rem!important;
+  padding:.4rem .6rem .4rem 2rem;
+  width: 100%;
+  font-weight:700;
+  /*font-size: large;
+  font-family: sans-serif;
+  font-weight: bold;*/
+  content: "\f0eb " " Conseil";
+  font-family: "FontAwesome", sans-serif;
+  font-weight: 900;  
+  background-color:#fff6dd
+}
+.remarque::before {
+  position: relative;
+  display: inline-block;
+  margin:0 -.6rem!important;
+  padding:.4rem .6rem .4rem 2rem;
+  width: 100%;
+  font-weight:700;
+  /*font-size: large;
+  font-family: sans-serif;
+  font-weight: bold;*/
+  content: "\f075 " " Remarque";
+  font-family: "FontAwesome", sans-serif;
+  font-weight: 900;  
+  background-color:#e7f2fa
+}
+.auteurs::before {
+  position: relative;
+  display: inline-block;
+  margin:0 -.6rem!important;
+  padding:0 .6rem .8rem!important;overflow:hidden;
+  width: 100%;
+  font-weight:700;
+  /*font-size: large;
+  font-family: sans-serif;
+  font-weight: bold;*/
+  content: "Rédacteurs: ";
+  background-color:#f1ffdc
+}
+.exo::before {
+  position: relative;
+  display: inline-block;
+  margin:0 -.6rem!important;
+  padding:.4rem .6rem .4rem 2rem;
+  width: 100%;
+  /*font-size: large;
+  font-family: sans-serif;
+  font-weight: bold;*/
+  font-family: "FontAwesome", sans-serif;
+  font-weight: 900;
+  content: "\f040" " Exercice";
+  background-color:#98fb98
+}
+
+
+.center {
+  text-align: center;
+}
+
+
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
